@@ -1,3 +1,24 @@
-//
-   Created by Vladi on 6/24/2017.
+extends _layout
+
+block content
+    .main.container
+        .row
+            .col-md-6.col-md-offset-3
+                h1.display-4.m-b-2 Sign Up
+
+                // register form
+                form(method='POST' action='/register')
+                    div.form-group
+                        label(for='name') Username:
+                        input#name.form-control(type='text', placeholder='Username' name='name')
+                    div.form-group
+                        label(for='email') Email:
+                        input#email.form-control(type='email', placeholder='Email' name='email')
+                    div.form-group
+                        label(for='pw') Password:
+                        input#pw.form-control(type='password' placeholder='Password' name='password')
+                    div.form-group
+                        label(for='pw2') Confirm Password:
+                        input#pw2.form-control(type='password' placeholder='Confirm Password' name='confirmPassword')
+                    button.btn.btn-primary(type='submit') Sign up
 
