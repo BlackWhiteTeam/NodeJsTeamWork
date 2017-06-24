@@ -1,7 +1,7 @@
 var express = require('express');
 var path = require('path');
 var bodyParser = require('body-parser');
-
+var db = require('./data/user-data');
 var index = require('./routes/index');
 var users = require('./routes/users');
 
