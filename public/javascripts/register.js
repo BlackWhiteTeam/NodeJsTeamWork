@@ -4,6 +4,7 @@ $("#register-submit").on("click", function () {
     const password = $("#pw").val().trim();
     const confirmPassword = $("#pw2").val().trim();
 
+    console.log(username);
     //TODO: validations
 
     register(username, emailAddress, password)
@@ -12,26 +13,26 @@ $("#register-submit").on("click", function () {
         }, function () {
             toastr.error("User with that name already exists");
         });
+
+    function register(username, emailAddress, password) {
+        const userData = {
+            username: username,
+            emailAddress: emailAddress,
+            passHash: CryptoJS.SHA1(password).toString(),
+        };
+
+        const promise = new Promise((resolve, reject) => {
+            $.ajax({
+                url: '/register',
+                type: 'POST',
+                contentType: 'application/json',
+                data: JSON.stringify(userData),
+            });
+        });
+
+        return promise;
+    }
 });
 
-function register(username, emailAddress, password) {
-    const userData = {
-        username: username,
-        emailAddress: emailAddress,
-        passHash: CryptoJS.SHA1(password).toString(),
-    };
 
-    const promise = new Promise((resolve, reject) => {
-        $.ajax({
-            url: '/register',
-            type: 'POST',
-            contentType: 'application/json',
-            data: JSON.stringify(userData),
-            success: response => resolve(response),
-            error: response => reject(response)
-        });
-    });
-
-    return promise;
-}
 
