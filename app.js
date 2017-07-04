@@ -1,21 +1,20 @@
-var express = require('express');
-var path = require('path');
-var bodyParser = require('body-parser');
-var db = require('./data/user-data');
-var index = require('./routes/index');
-var userRouter = require('./routes/user');
+var express = require('express'),
+    config = require('./config/config'),
+    glob = require('glob'),
+    browser = require('openurl');
+
+// TODO: connect mongodb
+
+var models = glob.sync(config.root + '/app/Models/*.js');
+models.forEach(function (model) {
+    require(model);
+});
 
 var app = express();
 
-// view engine setup
-app.set('views', path.join(__dirname, 'views'));
-app.set('view engine', 'pug');
+module.exports = require('./config/express')(app, config);
 
-app.use(bodyParser.json());
-app.use(express.static(path.join(__dirname, 'public')));
-
-app.use('/libs', express.static(__dirname + '/node_modules'));
-
-app.use('/', index);
-app.use('/register', userRouter);
-module.exports = app;
+app.listen(config.port, function () {
+    console.log('Express server listening on port ' + config.port);
+    browser.open("http://localhost:" + config.port);
+});
