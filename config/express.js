@@ -10,6 +10,7 @@ module.exports = function(app, config) {
     app.set('view engine', 'pug');
 
     app.use(express.static(config.root + '/public'));
+    app.use('/libs', express.static(config.root + '/node_modules'));
 
     const controllers = glob.sync(config.root + '/app/Controllers/*.js');
     controllers.forEach(
