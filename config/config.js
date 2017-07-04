@@ -1,16 +1,19 @@
-var path = require('path'),
-    rootPath = path.normalize(__dirname + '/..'),
-    env = process.env.NODE_ENV || 'development';
+/* global __dirname */
 
-var config = {
+const path = require('path');
+const rootPath = path.normalize(__dirname + '/..');
+const env = 'development';
+
+
+const config = {
     development: {
         root: rootPath,
         app: {
-            name: 'NodeJsTeamWork'
+            name: 'NodeJsTeamWork',
         },
         port: 3000,
-        db: 'mongodb://localhost/NodeJsTeamWork-development'
-    }
+        db: 'mongodb://localhost/NodeJsTeamWork-development',
+    },
 };
 
 module.exports = config[env];

@@ -13,6 +13,10 @@
             "error",
             "always"
         ],
+
+        //add manual
+        "linebreak-style": 0,
+
         "semi": 2,
         "no-undef": 2,
         "no-use-before-define": 0,
