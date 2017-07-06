@@ -6,7 +6,7 @@ module.exports = function(app, config) {
     app.locals.ENV = env;
     app.locals.ENV_DEVELOPMENT = env === 'development';
 
-    app.set('views', config.root + '/app/views');
+    app.set('views', config.root + '/app/MVC/views');
     app.set('view engine', 'pug');
 
     app.use(express.static(config.root + '/public'));
@@ -16,6 +16,11 @@ module.exports = function(app, config) {
     controllers.forEach(
         function(controller) {
             require(controller)(app);
+    });
+
+    const routes = glob.sync(config.root + '/app/routes/*.js');
+    routes.forEach(function(route) {
+        require(route)(app);
     });
 
     app.use(
