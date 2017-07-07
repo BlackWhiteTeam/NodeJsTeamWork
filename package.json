@@ -1,16 +1,11 @@
 {
-  "name": "NodeJsTeamWork",
+  "name": "Idea",
   "version": "1.0.0",
   "main": "index.js",
-  "repository": "https://github.com/TwoBoobsAhead/NodeJsTeamWork.git",
-  "author": "vladi99 <vlpetrovic99@gmail.com>",
   "license": "MIT",
   "dependencies": {
-    "bootstrap": "^3.3.7",
+    "body-parser": "^1.17.2",
     "express": "^4.15.3",
-    "glob": "^7.1.2",
-    "openurl": "^1.1.1",
-    "path": "^0.12.7",
     "pug": "^2.0.0-rc.2"
   },
   "devDependencies": {
