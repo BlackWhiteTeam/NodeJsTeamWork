@@ -8,12 +8,12 @@ class BaseData {
     }
 
     getAll() {
-        const result = this.collection
+        let result = this.collection
             .find()
             .toArray();
 
         if (this.ModelClass.toViewModel) {
-            result.then((models) => {
+            result = result.then((models) => {
                 return models.map((model) =>
                     this.ModelClass.toViewModel(model));
             });
@@ -29,6 +29,13 @@ class BaseData {
             .then(() => {
                 return this.ModelClass.toViewModel(model);
             });
+    }
+
+    getById(id) {
+        const mongo = require('mongodb');
+        const objectId = new mongo.ObjectID(id);
+        return this.collection
+            .findOne({ _id: objectId });
     }
 
     _isModelValid(model) {

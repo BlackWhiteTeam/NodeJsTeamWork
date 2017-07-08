@@ -15,16 +15,24 @@ const attachTo = (app, data) => {
     app.post('/register', (req, res) => {
         const user = req.body;
 
-        // validate user
-
         data.users.create(user)
             .then((dbUser) => {
                 return res.redirect('/users/' + dbUser.id);
             })
             .catch((err) => {
-                // connect-flash
                 req.flash('error', err);
                 return res.redirect('/register');
+            });
+    });
+
+    app.get('/users/:id', (req, res) => {
+        const urlParts = req.url.split('/');
+        const id = urlParts[urlParts.length - 1];
+        data.users.getById(id)
+            .then((user) => {
+                res.render('users/profile', {
+                    context: user,
+                });
             });
     });
 };
