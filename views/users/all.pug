@@ -1,0 +1,19 @@
+extends ../shared/_layout
+
+block content
+    .container
+        ul
+            each user in context
+                li
+                    strong User: &nbsp
+                    =user.name
+                    ul
+                        li
+                            strong Profile picture: &nbsp
+                            | TODO
+                        li
+                            strong Email: &nbsp
+                            =user.email
+                        li
+                            strong Password - For test purpose: &nbsp
+                            =user.password

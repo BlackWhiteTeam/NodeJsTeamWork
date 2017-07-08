@@ -5,7 +5,13 @@
   "license": "MIT",
   "dependencies": {
     "body-parser": "^1.17.2",
+    "bootstrap": "^3.3.7",
+    "connect-flash": "^0.1.1",
+    "cookie-parser": "^1.4.3",
     "express": "^4.15.3",
+    "express-messages": "^1.0.1",
+    "express-session": "^1.15.3",
+    "mongodb": "^2.2.30",
     "pug": "^2.0.0-rc.2"
   },
   "devDependencies": {
