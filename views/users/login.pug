@@ -6,12 +6,12 @@ block content
             .col-md-6.col-md-offset-3
                 h1.display-4.m-b-2 Login
 
-                form(method='POST' action='/login')
-                    div.form-group
+                form(action='/login' method='post')
+                    p.form-group
                         label(for='username') Username:
-                        input#username.form-control(type='text', placeholder='Username' name='name')
-                    div.form-group
-                        label(for='pw') Password:
-                        input#pw.form-control(type='password' placeholder='Password' name='password')
-                    button#login-submit.btn.btn-primary(type='submit') Log in
-                    a#register-button(href='/register') You don't have an account? Click here!
+                        input#username.form-control(name='username', required='required', type='text', placeholder='Username')
+                    p.form-group
+                        label(for='password') Password:
+                        input#password.form-control(name='password', required='required', type='password', placeholder='Password')
+                    p.form-group
+                        input.btn.btn-primary(type='submit', value='Login')

@@ -5,16 +5,15 @@ const passport = require('passport');
 
 const init = (app, usersData) => {
     app.use(cookieParser());
-    app.use(session(
-        {
+    app.use(session({
             secret: 'secret',
-            maxAge: new Date(Date.now() + 1000000),
         }));
     app.use(passport.initialize());
     app.use(passport.session());
 
     passport.use(new Strategy(
         (username, password, done) => {
+            console.log('works');
             return usersData.getByObjectName(username)
                 .then((user) => done(null, user))
                 .catch((error) => done(error));

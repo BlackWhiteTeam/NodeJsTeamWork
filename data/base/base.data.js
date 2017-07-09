@@ -1,4 +1,4 @@
-const { ObjectId } = require('mongodb');
+const ObjectId = require('mongodb').ObjectID;
 
 class BaseData {
     constructor(db, ModelClass, validator) {
@@ -34,13 +34,12 @@ class BaseData {
     }
 
     getById(id) {
-        return this.collection
-            .findOne({ _id: new ObjectId(id) });
+        // eslint-disable-next-line
+        return this.collection.findOne({ _id: ObjectId(id) });
     }
 
     getByObjectName(objectName) {
         const dbObject = this.collection.findOne({ objectName });
-        console.log(dbObject);
         return dbObject;
     }
 
