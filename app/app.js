@@ -5,6 +5,7 @@ const path = require('path');
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
 const session = require('express-session');
+const passport = require('passport');
 
 const init = (data) => {
     const app = express();
@@ -16,9 +17,6 @@ const init = (data) => {
     app.use('/libs', express.static(path.join(__dirname, '../node_modules/')));
     app.use(express.static(path.join(__dirname, '../public/')));
 
-    app.use(cookieParser('keyboard cat'));
-    app.use(session({ cookie: { maxAge: 60000 } }));
-
     app.use(require('connect-flash')());
     app.use((req, res, next) => {
         res.locals.messages = require('express-messages')(req, res);
@@ -27,6 +25,8 @@ const init = (data) => {
 
     require('./routers')
         .attachTo(app, data);
+
+    require('./auth').init(app, data.users);
 
     return Promise.resolve(app);
 };

@@ -1,3 +1,5 @@
+const { ObjectId } = require('mongodb');
+
 class BaseData {
     constructor(db, ModelClass, validator) {
         this.db = db;
@@ -32,11 +34,13 @@ class BaseData {
     }
 
     getById(id) {
-        // TODO: think how to inject
-        const mongo = require('mongodb');
-        const objectId = new mongo.ObjectID(id);
         return this.collection
-            .findOne({ _id: objectId });
+            .findOne({ _id: new ObjectId(id) });
+    }
+
+    getByObjectName(objectName) {
+        const dbObject = this.collection.findOne({ name: objectName });
+        return dbObject;
     }
 
     _isModelValid(model) {

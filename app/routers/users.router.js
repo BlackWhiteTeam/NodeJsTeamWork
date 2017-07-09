@@ -17,21 +17,24 @@ const attachTo = (app, data) => {
     app.post('/register', (req, res) => {
         const user = req.body;
 
+
         data.users.create(user)
             .then((dbUser) => {
                 return res.redirect('/users/' + dbUser.id);
             })
             .catch((err) => {
-                req.flash('error', err);
                 return res.redirect('/register');
             });
     });
 
-    app.post('/login', passport.authenticate('local',
-        {
-            successRedirect: '/users/' + user.id,
-            failureRedirect: '/login',
-            failureFlash: true,
+    app.get('/login', (req, res) => {
+        return res.render('users/login');
+    });
+
+    app.post('/login', passport.authenticate('local', {
+            successRedirect: '/',
+            failureRedirect: '/register',
+            failureFlash: false,
         })
     );
 
