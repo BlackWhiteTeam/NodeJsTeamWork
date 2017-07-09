@@ -1,3 +1,5 @@
+const passport = require('passport');
+
 const attachTo = (app, data) => {
     app.get('/users', (req, res) => {
         return data.users.getAll()
@@ -24,6 +26,14 @@ const attachTo = (app, data) => {
                 return res.redirect('/register');
             });
     });
+
+    app.post('/login', passport.authenticate('local',
+        {
+            successRedirect: '/users/' + user.id,
+            failureRedirect: '/login',
+            failureFlash: true,
+        })
+    );
 
     app.get('/users/:id', (req, res) => {
         const urlParts = req.url.split('/');
