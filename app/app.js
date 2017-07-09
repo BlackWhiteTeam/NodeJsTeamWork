@@ -20,10 +20,10 @@ const init = (data) => {
     //     next();
     // });
 
+    require('./auth')(app, data.users);
+
     require('./routers')
         .attachTo(app, data);
-
-    require('./auth')(app, data.users);
 
     return Promise.resolve(app);
 };

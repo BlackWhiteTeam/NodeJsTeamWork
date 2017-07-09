@@ -6,17 +6,21 @@ const passport = require('passport');
 const init = (app, usersData) => {
     app.use(cookieParser());
     app.use(session({
-            secret: 'secret',
-        }));
+        secret: 'secret',
+    }));
     app.use(passport.initialize());
     app.use(passport.session());
 
     passport.use(new Strategy(
         (username, password, done) => {
-            console.log('works');
             return usersData.getByObjectName(username)
-                .then((user) => done(null, user))
-                .catch((error) => done(error));
+                .then((user) => {
+                    // console.log(user);
+                    done(null, user);
+                })
+                .catch((error) => {
+                    done(error);
+                });
         }
     ));
 
