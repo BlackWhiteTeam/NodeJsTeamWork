@@ -1,16 +1,17 @@
 {
-  "name": "NodeJsTeamWork",
+  "name": "Idea",
   "version": "1.0.0",
   "main": "index.js",
-  "repository": "https://github.com/TwoBoobsAhead/NodeJsTeamWork.git",
-  "author": "vladi99 <vlpetrovic99@gmail.com>",
   "license": "MIT",
   "dependencies": {
+    "body-parser": "^1.17.2",
     "bootstrap": "^3.3.7",
+    "connect-flash": "^0.1.1",
+    "cookie-parser": "^1.4.3",
     "express": "^4.15.3",
-    "glob": "^7.1.2",
-    "openurl": "^1.1.1",
-    "path": "^0.12.7",
+    "express-messages": "^1.0.1",
+    "express-session": "^1.15.3",
+    "mongodb": "^2.2.30",
     "pug": "^2.0.0-rc.2"
   },
   "devDependencies": {

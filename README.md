@@ -1,6 +1,2 @@
 # NodeJsTeamWork
-Course project for node.js course
-
-Start project:
-1) yarn install
-2) node app.js
+An attempt to make project structure better with purpose to increase maintainability and testability.

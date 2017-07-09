@@ -1,19 +1,4 @@
-/* global __dirname */
+const port = 3001;
+const connectionString = 'mongodb://localhost/db';
 
-const path = require('path');
-const rootPath = path.normalize(__dirname + '/..');
-const env = 'development';
-
-
-const config = {
-    development: {
-        root: rootPath,
-        app: {
-            name: 'NodeJsTeamWork',
-        },
-        port: 3000,
-        db: 'mongodb://localhost/NodeJsTeamWork-development',
-    },
-};
-
-module.exports = config[env];
+module.exports = { port, connectionString };
