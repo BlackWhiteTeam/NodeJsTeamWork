@@ -39,7 +39,8 @@ class BaseData {
     }
 
     getByObjectName(objectName) {
-        const dbObject = this.collection.findOne({ name: objectName });
+        const dbObject = this.collection.findOne({ objectName });
+        console.log(dbObject);
         return dbObject;
     }
 
