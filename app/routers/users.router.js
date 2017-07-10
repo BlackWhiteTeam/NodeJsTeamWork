@@ -23,6 +23,7 @@ const attachTo = (app, data) => {
                 return res.redirect('/users/' + dbUser.id);
             })
             .catch((err) => {
+                req.flash('error', err);
                 return res.redirect('/register');
             });
     });
