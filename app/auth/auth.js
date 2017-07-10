@@ -1,13 +1,7 @@
 const { Strategy } = require('passport-local');
-const cookieParser = require('cookie-parser');
-const session = require('express-session');
 const passport = require('passport');
 
 const init = (app, usersData) => {
-    app.use(cookieParser());
-    app.use(session({
-        secret: 'secret',
-    }));
     app.use(passport.initialize());
     app.use(passport.session());
 
