@@ -1,25 +1,33 @@
 extends ../shared/_layout
 
+block css
+    link(rel='stylesheet', href='/libs/bootstrap/dist/css/bootstrap.css')
+    link(rel='stylesheet', href='/css/style.css')
+    link(rel='stylesheet', href='/css/profiles.css')
+
 block content
+    form.navbar-form.navbar-left
+        p.form-group
+            input.form-control(type='text', placeholder='Search User By Name')
+        button.btn.btn-success(type='submit') Search 
+
     .container
             each user in context
                 .row
                     .col-sm-6.col-md-4
                         .thumbnail
-                        img(src='../../public/images/defaultpic.jpg', alt='Profile picture')
-                        .caption
-                            h3
-                                strong User: &nbsp
-                                =user.name
-                            ul
-                                li
-                                    strong Profile picture: &nbsp
-                                    | TODO
-                                li
-                                    strong Email: &nbsp
-                                    =user.email
-                                li
+                            img(src='/images/defaultpic.jpg', alt='Profile picture')
+                            .caption
+                                h3
+                                    strong 
+                                        =user.name
+
+                                if user.email
+                                    p
+                                        strong Email: &nbsp
+                                        =user.email
+                                p
                                     strong Password - For test purpose: &nbsp
                                     =user.password
-                            a.btn.btn-primary(href='/users/' + user._id, role='button') View Profile
+                                a.btn.btn-primary(href='/users/' + user._id, role='button') View Profile
 
