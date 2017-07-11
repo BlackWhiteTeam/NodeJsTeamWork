@@ -1,4 +1,15 @@
 const passport = require('passport');
+const multer = require('multer');
+const storage = multer.diskStorage({
+    destination: (req, file, cb) => {
+        cb(null, './public/uploads');
+    },
+    filename: (req, file, cb) => {
+        cb(null, file.fieldname + '-' + Date.now());
+    },
+});
+
+const upload = multer({ storage: storage });
 
 const attachTo = (app, data) => {
     app.get('/users', (req, res) => {
@@ -17,7 +28,6 @@ const attachTo = (app, data) => {
     app.post('/register', (req, res) => {
         const user = req.body;
 
-
         data.users.create(user)
             .then((dbUser) => {
                 return res.redirect('/users/' + dbUser.id);
@@ -32,9 +42,10 @@ const attachTo = (app, data) => {
         return res.render('users/login');
     });
 
-    app.post('/login', passport.authenticate('local', {
+    app.post('/login', passport.authenticate('local',
+        {
             successRedirect: '/',
-            failureRedirect: '/register',
+            failureRedirect: '/login',
             failureFlash: true,
         })
     );
@@ -48,6 +59,11 @@ const attachTo = (app, data) => {
                     context: user,
                 });
             });
+    });
+
+    app.post('/users/:id', upload.single('imageupload'), (req, res) => {
+        req.flash('info', 'File upload successfully.');
+        return res.redirect('/');
     });
 };
 
