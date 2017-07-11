@@ -1,6 +1,6 @@
 const passport = require('passport');
-const multer = require('multer');
 
+const multer = require('multer');
 const storage = multer.diskStorage({
     destination: (req, file, cb) => {
         cb(null, './public/uploads');
@@ -10,7 +10,6 @@ const storage = multer.diskStorage({
         cb(null, Date.now() + '.' + filename[filename.length - 1]);
     },
 });
-
 const upload = multer({ storage: storage });
 
 const getIdByUrl = (url) => {
@@ -49,12 +48,17 @@ const attachTo = (app, data) => {
         return res.render('users/login');
     });
 
-    app.post('/login', passport.authenticate('local',
-        {
-            successRedirect: '/',
+    app.post('/login',
+        passport.authenticate('local', {
             failureRedirect: '/login',
             failureFlash: true,
-        })
+        }),
+        (req, res) => {
+            data.users.getByObjectName(req.body.username)
+                .then((user) => {
+                    res.redirect('/users/' + user._id);
+                });
+        },
     );
 
     app.get('/users/:id', (req, res) => {
