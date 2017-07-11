@@ -2,4 +2,15 @@ body {
     min-height: 2000px;
     padding-top: 70px;
 }
-
+.navbar
+{
+    font-size: 18px;
+    font-weight: bold;
+  
+}
+ul li ul li{
+    font-weight: bold; 
+}
+.dropdown-menu > li > a {
+    font-weight: bold;
+}
