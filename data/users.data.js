@@ -1,3 +1,5 @@
+const ObjectId = require('mongodb').ObjectID;
+
 const BaseData = require('./base/base.data');
 const User = require('../models/user.model');
 
@@ -18,6 +20,11 @@ class UsersData extends BaseData {
             }
             return true;
         });
+    }
+
+    updateProfilePicture(id, photo) {
+        // eslint-disable-next-line
+        this.collection.update({ _id: ObjectId(id) }, { $set: { stringProfilePicture: photo.filename } });
     }
 
     _isModelValid(model) {

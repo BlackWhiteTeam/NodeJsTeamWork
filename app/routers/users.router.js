@@ -7,12 +7,16 @@ const storage = multer.diskStorage({
     },
     filename: (req, file, cb) => {
         const filename = file.originalname.split('.');
-        cb(null, file.fieldname + '-' + Date.now() +
-            '.' + filename[filename.length - 1]);
+        cb(null, Date.now() + '.' + filename[filename.length - 1]);
     },
 });
 
 const upload = multer({ storage: storage });
+
+const getIdByUrl = (url) => {
+    const urlParts = url.split('/');
+    return urlParts[urlParts.length - 1];
+};
 
 const attachTo = (app, data) => {
     app.get('/users', (req, res) => {
@@ -30,7 +34,7 @@ const attachTo = (app, data) => {
 
     app.post('/register', (req, res) => {
         const user = req.body;
-
+        user.stringProfilePicture = 'defaultpic.jpg';
         data.users.create(user)
             .then((dbUser) => {
                 return res.redirect('/users/' + dbUser.id);
@@ -54,8 +58,7 @@ const attachTo = (app, data) => {
     );
 
     app.get('/users/:id', (req, res) => {
-        const urlParts = req.url.split('/');
-        const id = urlParts[urlParts.length - 1];
+        const id = getIdByUrl(req.url);
         data.users.getById(id)
             .then((user) => {
                 res.render('users/profile', {
@@ -65,9 +68,15 @@ const attachTo = (app, data) => {
     });
 
     app.post('/users/:id', upload.single('imageupload'), (req, res) => {
+        const id = getIdByUrl(req.url);
+        const photo = req.file;
+        data.users.updateProfilePicture(id, photo);
+
         req.flash('info', 'File upload successfully.');
-        return res.redirect('/');
+        return res.redirect('/users/' + id);
     });
+
+
 };
 
 module.exports = { attachTo };
