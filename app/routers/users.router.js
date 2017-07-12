@@ -87,18 +87,19 @@ const attachTo = (app, data) => {
     });
 
     app.post('/users/:id', upload.single('imageupload'), (req, res) => {
-        const currentUser = data.users.getByObjectName(req.user.name);
-        const currentUserId = currentUser.id;
         const id = getIdByUrl(req.url);
+        data.users.getByObjectName(req.user.name)
+            .then((user) => {
+                const currentUserId = user._id.toString();
+                if (id === currentUserId) {
+                    const photo = req.file;
+                    data.users.updateProfilePicture(id, photo);
 
-        if (id === currentUserId) {
-            const photo = req.file;
-            data.users.updateProfilePicture(id, photo);
-
-            req.flash('info', 'File upload successfully.');
-        } else {
-            req.flash('error', 'It is not your profile');
-        }
+                    req.flash('info', 'File upload successfully.');
+                } else {
+                    req.flash('error', 'It is not your profile');
+                }
+            });
 
         return res.redirect('/users/' + id);
     });
