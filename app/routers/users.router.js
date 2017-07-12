@@ -62,6 +62,7 @@ const attachTo = (app, data) => {
     );
 
     app.get('/users/:id', (req, res) => {
+        res.locals.loggedIn = (req.user) ? true : false;
         const id = getIdByUrl(req.url);
         data.users.getById(id)
             .then((user) => {
