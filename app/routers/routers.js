@@ -4,6 +4,12 @@ const fs = require('fs');
 const path = require('path');
 
 const attachTo = (app, data) => {
+    app.get('*', function(req, res, next) {
+        res.locals.loggedIn = !!(req.user);
+
+        next();
+    });
+
     app.get('/', (req, res) => {
         return res.render('home');
     });
