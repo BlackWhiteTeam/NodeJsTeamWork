@@ -26,8 +26,7 @@ block content
                                     p
                                         strong Email: &nbsp
                                         =user.email
-                                p
-                                    strong Password - For test purpose: &nbsp
-                                    =user.password
-                                a.btn.btn-primary(href='/users/' + user._id, role='button') View Profile
+
+                                if loggedIn
+                                    a.btn.btn-primary(href='/users/' + user._id, role='button') View Profile
 

@@ -73,21 +73,33 @@ const attachTo = (app, data) => {
     );
 
     app.get('/users/:id', (req, res) => {
-        const id = getIdByUrl(req.url);
-        data.users.getById(id)
-            .then((user) => {
-                res.render('users/profile', {
-                    context: user,
+        if (req.user) {
+            const id = getIdByUrl(req.url);
+            data.users.getById(id)
+                .then((user) => {
+                    res.render('users/profile', {
+                        context: user,
+                    });
                 });
-            });
+        } else {
+            res.redirect('/login');
+        }
     });
 
     app.post('/users/:id', upload.single('imageupload'), (req, res) => {
+        const currentUser = data.users.getByObjectName(req.user.name);
+        const currentUserId = currentUser.id;
         const id = getIdByUrl(req.url);
-        const photo = req.file;
-        data.users.updateProfilePicture(id, photo);
 
-        req.flash('info', 'File upload successfully.');
+        if (id === currentUserId) {
+            const photo = req.file;
+            data.users.updateProfilePicture(id, photo);
+
+            req.flash('info', 'File upload successfully.');
+        } else {
+            req.flash('error', 'It is not your profile');
+        }
+
         return res.redirect('/users/' + id);
     });
 
