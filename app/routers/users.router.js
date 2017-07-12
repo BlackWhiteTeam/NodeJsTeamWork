@@ -90,6 +90,11 @@ const attachTo = (app, data) => {
         req.flash('info', 'File upload successfully.');
         return res.redirect('/users/' + id);
     });
+
+    app.get('/logout', (req, res) => {
+        req.logout();
+        res.redirect('/');
+    });
 };
 
 module.exports = { attachTo };
