@@ -58,7 +58,7 @@ const attachTo = (app, data) => {
                 .then((user) => {
                     res.redirect('/users/' + user._id);
                 });
-        },
+        }
     );
 
     app.get('/users/:id', (req, res) => {
@@ -80,8 +80,6 @@ const attachTo = (app, data) => {
         req.flash('info', 'File upload successfully.');
         return res.redirect('/users/' + id);
     });
-
-
 };
 
 module.exports = { attachTo };
