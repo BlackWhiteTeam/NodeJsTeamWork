@@ -32,11 +32,22 @@ const attachTo = (app, data) => {
     });
 
     app.post('/register', (req, res) => {
-        const user = req.body;
-        user.stringProfilePicture = 'defaultpic.jpg';
+        // validate
+        const user = {
+            name: req.body.name,
+            email: req.body.email,
+            password: req.body.password,
+            stringProfilePicture: 'defaultpic.jpg',
+        };
+
         data.users.create(user)
             .then((dbUser) => {
-                return res.redirect('/users/' + dbUser.id);
+                req.login(user, (err) => {
+                    if (err) {
+                        req.flash('error', req);
+                    }
+                    return res.redirect('/users/' + dbUser.id);
+                });
             })
             .catch((err) => {
                 req.flash('error', err);
