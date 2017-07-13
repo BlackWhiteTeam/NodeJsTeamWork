@@ -15,10 +15,12 @@
     color: #333;
     text-align: center;
 }
- .row:after{
+.row:after{
   display: none;
 }
-img {
-    max-height: 270px;
-    max-width: 300px;
+.thumbnail > img {
+    height: 233px;
+}
+#search-for-users {
+    padding-left: 40px;
 }

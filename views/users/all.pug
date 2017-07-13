@@ -6,27 +6,21 @@ block css
     link(rel='stylesheet', href='/css/users.css')
 
 block content
-    form.navbar-form.navbar-left
-        p.form-group
-            input.form-control(type='text', placeholder='Search User By Name')
-        button.btn.btn-success(type='submit') Search 
-
     .container
-            each user in context
-                .row
-                    .col-sm-6.col-md-4
-                        .thumbnail
-                            img(src='/uploads/' + user.stringProfilePicture, alt='Profile picture')
-                            .caption
-                                h3
-                                    strong 
-                                        =user.name
-
-                                if user.email
-                                    p
-                                        strong Email: &nbsp
-                                        =user.email
-
-                                if loggedIn
-                                    a.btn.btn-primary(href='/users/' + user._id, role='button') View Profile
+        .row.col-sm-6.col-md-offset-4
+            form#search-for-users.navbar-form
+                div.form-group
+                    input.form-control(type='text', placeholder='Search User By Name')
+                button.btn.btn-success(type='submit') Search
+        each user in context
+            .row
+                .col-sm-6.col-md-4
+                    .thumbnail
+                        img(src='/uploads/' + user.stringProfilePicture, alt='Profile picture')
+                        .caption
+                            h3
+                                strong
+                                    =user.name
+                            if loggedIn
+                                a.btn.btn-primary(href='/users/' + user._id, role='button') View Profile
 
