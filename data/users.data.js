@@ -10,10 +10,10 @@ class UsersData extends BaseData {
 
     checkPassword(user, password) {
         if (!user) {
-            throw new Error('Invalid user');
+            return Promise.reject('Invalid user');
         }
         if (user.password !== password) {
-            throw new Error('Invalid password');
+            return Promise.reject('Invalid password');
         }
         return Promise.resolve(user);
     }

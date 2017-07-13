@@ -8,16 +8,9 @@ const init = (app, usersData) => {
     passport.use(new Strategy(
         (username, password, done) => {
             return usersData.getByObjectName(username)
-                .then((user) => {
-                    usersData.checkPassword(user, password);
-                })
-                .then((user) => {
-                    console.log(user);
-                    done(null, user);
-                })
-                .catch((error) => {
-                    done(error);
-                });
+                .then((user) => usersData.checkPassword(user, password))
+                .then((user) => done(null, user))
+                .catch((error) => done());
         }
     ));
 
