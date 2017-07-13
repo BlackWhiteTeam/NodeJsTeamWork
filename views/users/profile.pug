@@ -8,8 +8,9 @@ block content
         =context.name
         h2 Image:
         img(src='/uploads/' + context.stringProfilePicture, alt='Profile picture')
-        form(method='post', enctype='multipart/form-data')
-            input(type='file', name='imageupload')
-            input(type='submit', name='uploadimage', value='Upload Image')
+        if context._id.toString() === currentUserId
+            form(method='post', enctype='multipart/form-data')
+                input(type='file', name='imageupload')
+                input(type='submit', name='uploadimage', value='Upload Image')
         h2 Email:
         =context.email

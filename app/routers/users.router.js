@@ -79,6 +79,7 @@ const attachTo = (app, data) => {
                 .then((user) => {
                     res.render('users/profile', {
                         context: user,
+                        currentUserId: req.user._id.toString(),
                     });
                 });
         } else {
