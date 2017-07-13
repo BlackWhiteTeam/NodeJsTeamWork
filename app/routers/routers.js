@@ -6,7 +6,7 @@ const path = require('path');
 const attachTo = (app, data) => {
     app.get('*', function(req, res, next) {
         res.locals.loggedIn = !!(req.user);
-
+        res.locals.user = req.user;
         next();
     });
 

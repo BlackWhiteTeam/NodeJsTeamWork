@@ -23,11 +23,11 @@ mixin nav()
                     if loggedIn
                         li.dropdown
                             a.dropdown-toggle(href='#', data-toggle='dropdown', role='button', aria-haspopup='true', aria-expanded='false')
-                                | My Profile
+                                =user.name
                                 span.caret
                             ul.dropdown-menu
                                 li
-                                    a(href='/users/') View my Profile
+                                    a(href='/users/' + user._id) View my Profile
                                 li
                                     a(href='/') My photos
                                 li
