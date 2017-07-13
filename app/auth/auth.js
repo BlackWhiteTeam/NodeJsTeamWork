@@ -9,7 +9,10 @@ const init = (app, usersData) => {
         (username, password, done) => {
             return usersData.getByObjectName(username)
                 .then((user) => {
-                    // console.log(user);
+                    usersData.checkPassword(user, password);
+                })
+                .then((user) => {
+                    console.log(user);
                     done(null, user);
                 })
                 .catch((error) => {

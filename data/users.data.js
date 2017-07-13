@@ -8,23 +8,19 @@ class UsersData extends BaseData {
         super(db, User, User);
     }
 
-    checkPassword(username, password) {
-        this.collection.findOne({
-            username,
-        }).then((user) => {
-            if (!user) {
-                throw new Error('Invalid user');
-            }
-            if (user.password !== password) {
-                throw new Error('Invalid password');
-            }
-            return true;
-        });
+    checkPassword(user, password) {
+        if (!user) {
+            throw new Error('Invalid user');
+        }
+        if (user.password !== password) {
+            throw new Error('Invalid password');
+        }
+        return Promise.resolve(user);
     }
 
     updateProfilePicture(id, photo) {
         // eslint-disable-next-line
-        this.collection.update({ _id: ObjectId(id) }, { $set: { stringProfilePicture: photo.filename } });
+        this.collection.update({_id: ObjectId(id)}, {$set: {stringProfilePicture: photo.filename}});
     }
 
     _isModelValid(model) {
