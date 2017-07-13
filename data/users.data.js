@@ -18,6 +18,14 @@ class UsersData extends BaseData {
         return Promise.resolve(user);
     }
 
+    getAllUsersByMatchingString(input) {
+        const users = this.collection.find({
+                name: new RegExp('^' + input.toString()),
+            })
+            .toArray();
+        return users;
+    }
+
     updateProfilePicture(id, photo) {
         // eslint-disable-next-line
         this.collection.update({_id: ObjectId(id)}, {$set: {stringProfilePicture: photo.filename}});

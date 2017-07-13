@@ -39,10 +39,9 @@ class BaseData {
     }
 
     getByObjectName(objectName) {
-        const dbObject = this.collection.findOne({
+        return this.collection.findOne({
             name: objectName.toString(),
         });
-        return dbObject;
     }
 
     _isModelValid(model) {

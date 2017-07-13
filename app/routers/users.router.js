@@ -105,6 +105,16 @@ const attachTo = (app, data) => {
         return res.redirect('/users/' + id);
     });
 
+    app.post('/users', (req, res) => {
+        const input = req.body.searchedUser;
+        data.users.getAllUsersByMatchingString(input)
+            .then((users) => {
+                return res.render('users/all', {
+                    context: users,
+                });
+            });
+    });
+
     app.get('/logout', (req, res) => {
         req.logout();
         res.redirect('/');
