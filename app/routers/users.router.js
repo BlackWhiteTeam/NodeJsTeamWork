@@ -111,6 +111,7 @@ const attachTo = (app, data) => {
             .then((users) => {
                 return res.render('users/all', {
                     context: users,
+                    lastInput: input,
                 });
             });
     });

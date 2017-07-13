@@ -23,6 +23,7 @@ class UsersData extends BaseData {
                 name: new RegExp('^' + input.toString()),
             })
             .toArray();
+
         return users;
     }
 
