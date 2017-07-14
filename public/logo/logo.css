@@ -1,0 +1,79 @@
+body {
+    background: #FED75A;
+    overflow: hidden;
+}
+
+figure {
+    justify-content: center;
+    align-content: center;
+
+}
+
+svg {
+    width: 7.5vw;
+}
+
+svg > * {
+    fill: #1C1C1C;
+    stroke: #1C1C1C;
+    stroke-width: 0.85px;
+}
+
+figure {
+         margin-top:200px;
+         margin-left:200px;
+        -moz-transform: scaleY(-1);
+        -o-transform: scaleY(-1);
+        -webkit-transform: scaleY(-1);
+        transform: scaleY(-1);
+        filter: FlipH;
+        -ms-filter: "FlipH";
+}
+
+/* hover tip */
+body:hover:after {
+    content: "Hover to Slow Motion";
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 2vh;
+    color: #1C1C1C;
+    text-align: center;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    font: 700 9px/14px Tahoma, sans-serif;
+    -moz-animation: tip 2.5s forwards;
+    -webkit-animation: tip 2.5s forwards;
+    animation: tip 2.5s forwards;
+}
+
+@-moz-keyframes tip {
+    0%, 100% {
+        opacity: 0;
+    }
+    10%, 80% {
+        opacity: 1;
+    }
+}
+
+@-webkit-keyframes tip {
+    0%, 100% {
+        opacity: 0;
+    }
+    10%, 80% {
+        opacity: 1;
+    }
+}
+
+@keyframes tip {
+    0%, 100% {
+        opacity: 0;
+    }
+    10%, 80% {
+        opacity: 1;
+    }
+}
+g {
+    height: 600px;
+    width: 2000px;
+}
