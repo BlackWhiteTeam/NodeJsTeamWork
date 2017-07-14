@@ -3,6 +3,10 @@ extends shared/_layout
 block AdditionalCss
     link(rel='stylesheet', href='/css/home.css')
 
+block Navigation
+
+block Footer
+
 block content
     .container
         figure
@@ -141,6 +145,10 @@ block content
             66 -11z')
             path(d='M6506 583 c-47 -94 -99 -244 -89 -254 5 -4 17 -10 29 -13 19 -6 23 1\
             41 77 11 46 35 118 52 162 29 73 34 105 14 105 -5 0 -26 -35 -47 -77z')
+        if loggedIn
+            a#get-started.btn.btn-default.black-background.white(href='/users') Explore
+        else
+            a#get-started.btn.btn-default.black-background.white(href='/login') Get Started
 block AdditionalJS
         script(src='https://cdnjs.cloudflare.com/ajax/libs/gsap/1.20.2/TweenMax.min.js')
         script(src="/js/home-logo.js")

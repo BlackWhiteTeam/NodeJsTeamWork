@@ -13,9 +13,11 @@ html(lang='en')
             link(rel="stylesheet", href="/css/font-awesome.css")
         block AdditionalCss
     body
-        +nav()
+        block Navigation
+            +nav()
         block content
-        +footer()
+        block Footer
+            +footer()
 
         block js
             script(src='/libs/jquery/dist/jquery.min.js')

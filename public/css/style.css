@@ -1,46 +1,89 @@
 body {
     padding-top: 70px;
 }
+
 body {
-  position: relative;
-  margin: 0;
-  padding-bottom: 6rem;
-  min-height: 100%;
-  overflow-x: hidden;
+    position: relative;
+    margin: 0;
+    padding-bottom: 6rem;
+    min-height: 100%;
+    overflow-x: hidden;
 }
-.navbar
-{
+
+.navbar {
     font-size: 18px;
     font-weight: bold;
-  
+
 }
+
 .dropdown-menu > li > a {
     font-weight: bold;
 }
 
-
 footer {
-    position:fixed;
+    position: fixed;
     left: 0;
     bottom: 0;
     width: 100%;
-    margin-top:-50px;
+    margin-top: -50px;
     height: 40px;
     background-color: black;
 }
- 
-footer  p {
-    display:inline-block;
-    text-align:center;
-    margin-top:10px;
+
+footer p {
+    display: inline-block;
+    text-align: center;
+    margin-top: 10px;
     text-shadow: 0px 1px 2px whitesmoke;
-    color:white
+    color: white
+
 }
 
 .navbar-brand {
-  background: url('../images/shareLogo.png') center / contain no-repeat;
-  width: 200px;
-  transform: translateX(-50%);
-  left: 50%;
-  position: absolute;
+    background: url('../images/shareLogo.png') center / contain no-repeat;
+    width: 200px;
+    transform: translateX(-50%);
+    left: 50%;
+    position: absolute;
+}
+
+a {
+    color: inherit;
+}
+
+a:hover {
+    color: inherit;
+}
+
+.black-background {
+    background-color: #000000;
+}
+
+.white {
+    color: #ffffff;
+}
+
+.black-background:hover {
+    background-color: #ffffff;
+}
+
+.white:hover {
+    color: #000000;
+}
+
+.display-4.m-b-2 {
+    text-align: center;
+}
+
+::-webkit-scrollbar {
+    display: none;
+}
+
+.form-control:focus {
+    border-color: #000000;
+    box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(0, 0, 0, 0.6);
+}
+
+input:-webkit-autofill {
+    -webkit-box-shadow: 0 0 0 1000px white inset !important;
 }

@@ -6,7 +6,7 @@ block AdditionalCss
 block content
     != messages()
 
-    .container
+    .main.container
         .row
             .col-md-6.col-md-offset-3
                 h1.display-4.m-b-2 Login
@@ -19,6 +19,6 @@ block content
                         label(for='password') Password:
                         input#password.form-control(name='password', required='required', type='password', placeholder='Password')
                     p.form-group
-                        input.btn.btn-primary(type='submit', value='Login')
+                        input.btn.btn-default.black-background.white(type='submit', value='Login')
                     p
                         a(href='/register') You don't have an account? Click here to Sign up!

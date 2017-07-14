@@ -1,4 +1,6 @@
-
+body{
+    display:block;
+}
 figure {
     justify-content: center;
     align-content: center;
