@@ -1,0 +1,16 @@
+.main.container a {
+    font-size: large;
+    color: black ;
+    text-decoration: none;
+    text-align: center;
+}
+.main.container a:hover {
+    font-weight: bold;
+    color:darkslategray;
+}
+.container a {
+    font-size: large;
+    color: black;
+    text-decoration: none;
+    text-align: center;
+}

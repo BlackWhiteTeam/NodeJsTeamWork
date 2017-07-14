@@ -29,14 +29,14 @@ footer {
     background-color: black;
 }
  
-footer p {
+footer  p {
     display:inline-block;
     text-align:center;
     margin-top:10px;
     text-shadow: 0px 1px 2px whitesmoke;
     color:white
- 
 }
+
 .navbar-brand {
   background: url('../images/shareLogo.png') center / contain no-repeat;
   width: 200px;

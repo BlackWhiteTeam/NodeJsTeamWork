@@ -11,6 +11,7 @@ html(lang='en')
             link(rel='stylesheet', href='/libs/bootstrap/dist/css/bootstrap.css')
             link(rel='stylesheet', href='/css/style.css')
             link(rel="stylesheet", href="/css/font-awesome.css")
+        block AdditionalCss
     body
         +nav()
         block content
@@ -19,4 +20,4 @@ html(lang='en')
         block js
             script(src='/libs/jquery/dist/jquery.min.js')
             script(src='/libs/bootstrap/dist/js/bootstrap.min.js')
-            script(src="/js/autoSearch.js")
+        block AdditionalJS

@@ -1,5 +1,8 @@
 extends ../shared/_layout
 
+block AdditionalCss
+    link(rel="stylesheet", href='/css/login-register.css')
+
 block content
     != messages()
 
@@ -18,4 +21,4 @@ block content
                     p.form-group
                         input.btn.btn-primary(type='submit', value='Login')
                     p
-                        a.navbar-brand(href='/register') You don't have an account? Click here to Sign up!
+                        a(href='/register') You don't have an account? Click here to Sign up!
