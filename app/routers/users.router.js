@@ -12,6 +12,17 @@ const storage = multer.diskStorage({
 });
 const upload = multer({ storage: storage });
 
+const Jimp = require('jimp');
+const makePictureBlack = (photo, path) => {
+    Jimp.read(path)
+        .then((img) => {
+            img.greyscale().write(path);
+        })
+        .catch((err) => {
+            console.error(err);
+        });
+};
+
 const getIdByUrl = (url) => {
     const urlParts = url.split('/');
     return urlParts[urlParts.length - 1];
@@ -94,6 +105,8 @@ const attachTo = (app, data) => {
                 const currentUserId = user._id.toString();
                 if (id === currentUserId) {
                     const photo = req.file;
+                    const pathToSave = './public/uploads/' + photo.filename;
+                    makePictureBlack(photo, pathToSave);
                     data.users.updateProfilePicture(id, photo);
 
                     req.flash('info', 'File upload successfully.');
