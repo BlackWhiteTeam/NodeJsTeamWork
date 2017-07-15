@@ -1,6 +1,17 @@
+/* global $ */
+
+// For the <p>-introduction opacity 
+
+setTimeout(function() {
+$('.p-style-introduction').css('opacity', '0.8');
+}, 4000);
+
+
+// For the logo - SVG
+
 const tmaxOptionsGlobal = {
-    repeat: 2,
-    repeatDelay: 0.65,
+    repeat: -1,
+    repeatDelay: 0.55,
     yoyo: true,
 };
 
@@ -9,7 +20,7 @@ CSSPlugin.useSVGTransformAttr = true;
 const tl = new TimelineMax(tmaxOptionsGlobal);
 const path = 'svg *';
 const staggerVal = 0.0125;
-const duration = 2;
+const duration = 1.5;
 
 $.each($(path), function(i, el) {
     tl.set($(this), {
@@ -32,8 +43,8 @@ const staggerOptsTo = {
 
 tl.staggerTo(path, duration, staggerOptsTo, staggerVal);
 
-const $svg = $('svg');
-$svg.hover(
+const $container = $('.container');
+$container.hover(
     function() {
         tl.timeScale(0.15);
     },
