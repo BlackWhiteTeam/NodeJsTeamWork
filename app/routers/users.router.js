@@ -119,12 +119,14 @@ const attachTo = (app, data) => {
     });
 
     app.post('/users', (req, res) => {
+        const canSeeProfiles = !!(req.user);
         const input = req.body.searchedUser;
         data.users.getAllUsersByMatchingString(input)
             .then((users) => {
                 return res.render('users/all', {
                     context: users,
                     lastInput: input,
+                    canSeeProfiles: canSeeProfiles,
                 });
             });
     });

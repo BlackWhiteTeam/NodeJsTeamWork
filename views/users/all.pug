@@ -8,7 +8,7 @@ block content
         .row.col-sm-6.col-md-offset-4
             form#search-for-users.navbar-form(action='/users', method='POST')
                 p.form-group
-                    input#searchField.form-control(type='text', name='searchedUser' placeholder='Search User By Name', value=lastInput)
+                    input#searchField.form-control(type='text', name='searchedUser' placeholder='Search User By Name', value=lastInput, autocomplete='off')
                 p.form-group
                     input#searchButton.btn.btn-default.black-background.white(type='submit', value='Search')
         each user in context
@@ -20,8 +20,8 @@ block content
                             h3
                                 strong
                                     =user.name
-                            if loggedIn
-                                a.btn.btn-primary(href='/users/' + user._id, role='button') View Profile
+                            if loggedIn || canSeeProfiles
+                                a.btn.btn-default.black-background.white(href='/users/' + user._id, role='button') View Profile
 block AdditionalJS
     script(src="/js/autoSearch.js")
 
