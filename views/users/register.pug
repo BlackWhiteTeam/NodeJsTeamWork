@@ -14,16 +14,16 @@ block content
                 form(method='POST' action='/register')
                     p.form-group
                         label(for='username') Username:
-                        input#username.form-control(type='text', placeholder='Username' name='name' required)
+                        input#username.form-control(type='text', placeholder='Username' name='name' required, spellcheck='false')
                     p.form-group
                         label(for='email') Email:
-                        input#email.form-control(type='email', placeholder='Email' name='email' required)
+                        input#email.form-control(type='email', placeholder='Email' name='email' required, spellcheck='false')
                     p.form-group
                         label(for='pw') Password:
                         input#pw.form-control(type='password' placeholder='Password' name='password' required)
                     p.form-group
                         label(for='pw2') Confirm Password:
-                        input#pw2.form-control(type='password' placeholder='Confirm Password' name='confirmPassword' required)    
+                        input#pw2.form-control(type='password' placeholder='Confirm Password' name='confirmPassword' required)
                     p.form-group
                         input#register-submit.btn.btn-primary.black-background.white(type='submit', value='Register')
                     p

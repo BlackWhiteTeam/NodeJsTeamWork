@@ -8,7 +8,7 @@ block content
         .row.col-sm-6.col-md-offset-4
             form#search-for-users.navbar-form(action='/users', method='POST')
                 p.form-group
-                    input#searchField.form-control(type='text', name='searchedUser' placeholder='Search User By Name', value=lastInput, autocomplete='off')
+                    input#searchField.form-control(type='text', name='searchedUser' placeholder='Search User By Name', value=lastInput, autocomplete='off', spellcheck='false')
                 p.form-group
                     input#searchButton.btn.btn-default.black-background.white(type='submit', value='Search')
         each user in context

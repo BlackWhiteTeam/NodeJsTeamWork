@@ -1,6 +1,6 @@
 /* global $ */
 
-// For the <p>-introduction opacity 
+// For the <p>-introduction opacity
 
 setTimeout(function() {
 $('.p-style-introduction').css('opacity', '0.8');

@@ -27,5 +27,5 @@ const init = (app, usersData) => {
     });
 };
 
-module.exports = init;
+module.exports = { init };
 

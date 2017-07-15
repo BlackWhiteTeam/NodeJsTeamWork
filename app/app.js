@@ -30,7 +30,8 @@ const init = (data) => {
         next();
     });
 
-    require('./auth')(app, data.users);
+    require('./auth')
+        .init(app, data.users);
 
     require('./routers')
         .attachTo(app, data);
