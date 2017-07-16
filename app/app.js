@@ -33,6 +33,9 @@ const init = (data) => {
     require('./auth')
         .init(app, data.users);
 
+    require('./controllers')
+        .attachTo(data);
+
     require('./routers')
         .attachTo(app, data);
 

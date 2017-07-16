@@ -1,27 +1,6 @@
 const passport = require('passport');
-
-const multer = require('multer');
-const storage = multer.diskStorage({
-    destination: (req, file, cb) => {
-        cb(null, './public/uploads');
-    },
-    filename: (req, file, cb) => {
-        const filename = file.originalname.split('.');
-        cb(null, Date.now() + '.' + filename[filename.length - 1]);
-    },
-});
-const upload = multer({ storage: storage });
-
-const Jimp = require('jimp');
-const makePictureBlack = (photo, path) => {
-    Jimp.read(path)
-        .then((img) => {
-            img.greyscale().write(path);
-        })
-        .catch((err) => {
-            console.error(err);
-        });
-};
+const uploadPictureController =
+    require('../controllers/uploadPicture.controller');
 
 const getIdByUrl = (url) => {
     const urlParts = url.split('/');
@@ -98,15 +77,15 @@ const attachTo = (app, data) => {
         }
     });
 
-    app.post('/users/:id', upload.single('imageupload'), (req, res) => {
+    // eslint-disable-next-line
+    app.post('/users/:id', uploadPictureController.upload.single('imageupload'), (req, res) => {
         const id = getIdByUrl(req.url);
         data.users.getByObjectName(req.user.name)
             .then((user) => {
                 const currentUserId = user._id.toString();
                 if (id === currentUserId) {
                     const photo = req.file;
-                    const pathToSave = './public/uploads/' + photo.filename;
-                    makePictureBlack(photo, pathToSave);
+                    uploadPictureController.uploadPicture(photo);
                     data.users.updateProfilePicture(id, photo);
 
                     req.flash('info', 'File upload successfully.');
