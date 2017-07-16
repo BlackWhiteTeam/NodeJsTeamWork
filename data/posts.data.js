@@ -9,6 +9,12 @@ class PostsData extends BaseData {
     _isModelValid(model) {
         return super._isModelValid(model);
     }
+
+    getPostsByUsername(username) {
+        return this.collection.find({
+            author: username.toString(),
+        }).toArray();
+    }
 }
 
 module.exports = PostsData;

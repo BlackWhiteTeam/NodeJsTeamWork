@@ -12,6 +12,15 @@ const attachTo = (app, data) => {
             });
     });
 
+    app.get('/myphotos', (req, res) => {
+        return data.posts.getPostsByUsername(req.user.name)
+            .then((posts) => {
+                return res.render('posts/gallery', {
+                    context: posts,
+                });
+            });
+    });
+
     app.get('/createPost', (req, res) => {
         return res.render('posts/createPost');
     });
