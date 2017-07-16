@@ -1,6 +1,7 @@
 const uploadPictureController =
     require('../controllers/uploadPicture.controller');
 
+
 const attachTo = (app, data) => {
     app.get('/gallery', (req, res) => {
         return data.posts.getAll()
@@ -24,6 +25,7 @@ const attachTo = (app, data) => {
             picture: photo.filename,
             description: req.body.description,
         };
+
         console.log(post);
 
         data.posts.create(post)
