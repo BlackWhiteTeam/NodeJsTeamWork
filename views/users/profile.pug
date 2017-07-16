@@ -12,6 +12,7 @@ block content
             form#profile-picture-form(method='post', enctype='multipart/form-data')
                 label.btn.btn-default.black-background.white(for="profile-picture") Update profile picture
                 input#profile-picture(type='file', name='imageupload', style='display:none', accept='image/*')
+            a.btn.btn-default.black-background.white(href='/createPost') Create Post
         h2 Email:
         =context.email
 
