@@ -46,6 +46,9 @@ const attachTo = (app, data) => {
     });
 
     app.get('/login', (req, res) => {
+        if (req.user) {
+            return res.redirect('/users/' + req.user._id);
+        }
         return res.render('users/login');
     });
 
