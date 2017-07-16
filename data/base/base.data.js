@@ -24,7 +24,6 @@ class BaseData {
     }
 
     create(model) {
-        console.log('works');
         if (!this._isModelValid(model)) {
             return Promise.reject('Invalid model');
         }

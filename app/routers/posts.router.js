@@ -21,16 +21,14 @@ const attachTo = (app, data) => {
         const photo = req.file;
         uploadPictureController.uploadPicture(photo);
         const post = {
-            author: req.user._id,
+            author: req.user.name,
             picture: photo.filename,
             description: req.body.description,
         };
 
-        console.log(post);
-
         data.posts.create(post)
             .then((dbPost) => {
-                return res.redirect('/users/' + post.author._id);
+                return res.redirect('/users/' + req.user._id);
             })
             .catch((err) => {
                 req.flash('error', err);
