@@ -4,12 +4,10 @@ block AdditionalCss
     link(rel="stylesheet", href='/css/login-register.css')
 
 block content
-    != messages()
-
     .main.container
         .row
             .col-md-6.col-md-offset-3
-                h1.display-4.m-b-2 Login
+                h1.display-4.m-b-2.login-register-title Login
 
                 form(action='/login' method='post')
                     p.form-group

@@ -61,6 +61,7 @@ const attachTo = (app, data) => {
         (req, res) => {
             data.users.getByObjectName(req.body.username)
                 .then((user) => {
+                    req.flash('success', 'You are logged in!')
                     res.redirect('/users/' + user._id);
                 });
         }

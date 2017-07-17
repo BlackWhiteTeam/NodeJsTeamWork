@@ -11,7 +11,7 @@ const init = (app, usersData) => {
                 .then((user) => usersData.checkPassword(user, password))
                 .then((user) => done(null, user))
                 .catch((error) => done(null, false, {
-                    message: 'Invalid Password',
+                    message: error,
                 }));
         }
     ));

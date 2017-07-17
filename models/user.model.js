@@ -1,6 +1,7 @@
+const BaseModel = require('./base/base.model');
 const constants = require('../utils/globalConstants');
 
-class User {
+class User extends BaseModel {
     get id() {
         return this._id;
     }
@@ -14,15 +15,6 @@ class User {
             && model.stringProfilePicture
             .match(constants.USER_PROFILE_PICTURE_MATCH_PATTERN));
         return result;
-    }
-
-    static toViewModel(model) {
-        const viewModel = new User();
-        Object.keys(model)
-            .forEach((prop) => {
-                viewModel[prop] = model[prop];
-            });
-        return viewModel;
     }
 }
 

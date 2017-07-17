@@ -16,7 +16,7 @@ const attachTo = (app, data) => {
         return data.posts.getPostsByUsername(req.user.name)
             .then((posts) => {
                 return res.render('posts/gallery', {
-                    context: posts,
+                    context: posts.reverse(),
                 });
             });
     });
@@ -25,28 +25,30 @@ const attachTo = (app, data) => {
         return res.render('posts/createPost');
     });
 
-    app.get('/addToFavorites/:id', (req, res) => {
+    app.get('/addToFavourites/:id', (req, res, next) => {
         const urlParts = req.url.split('/');
         const idPost = urlParts[urlParts.length - 1];
-        console.log(idPost);
         const idUser = (req.user._id);
-        return data.users.addToFavorites(idUser, idPost);
+        data.users.addToFavorites(idUser, idPost);
+        return res.redirect('/myfavorites');
+        // Гизи заеби го тва, то май се прави с Ajax forms! :D
     });
 
     app.get('/myfavorites', (req, res) => {
         return data.posts.getMyFavoritesPosts(req.user.favorites)
             .then((posts) => {
-                console.log(posts);
                 return res.render('posts/gallery', {
-                    context: posts,
+                    context: posts.reverse(),
                 });
             });
     });
 
     app.post('/createPost',
         uploadPictureController.upload.single('imageupload'), (req, res) => {
+
         const photo = req.file;
         uploadPictureController.uploadPicture(photo);
+
         const post = {
             author: req.user.name,
             picture: photo.filename,

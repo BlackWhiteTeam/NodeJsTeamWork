@@ -1,0 +1,7 @@
+#message
+    each type in Object.keys(messages)
+        div.messageText
+            strong
+                =type.charAt(0).toUpperCase() + type.slice(1) + '! '
+        each message in messages[type]
+            div.messageText=message

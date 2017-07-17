@@ -95,7 +95,30 @@ input:-webkit-autofill {
 
 @media (max-width: 767px) {
     a.navbar-brand {
-        top: 0px !important;
+        top: 0 !important;
         left: 100px !important;
     }
+    .login-register-title {
+        left: 0 !important;
+    }
+
+    .display-4.m-b-2{
+        text-align: left;
+    }
+}
+
+#message {
+    border-left: 5px;
+    position: fixed;
+    right: 10px;
+    background-color: grey;
+    width: 230px;
+    height: 55px;
+    color: white;
+    border-radius: 5px;
+}
+
+.messageText {
+    margin-left: 5px;
+    margin-top: 5px;
 }
