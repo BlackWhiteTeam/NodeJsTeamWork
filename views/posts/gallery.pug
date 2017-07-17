@@ -6,6 +6,7 @@ block content
             .row
                 .col-sm-6.col-md-4
                     .thumbnail
+                        p= moment(parseInt(post.picture)).fromNow()
                         img(src='/uploads/' + post.picture, alt='Profile picture')
                         .caption
                             h3
@@ -14,7 +15,3 @@ block content
                             p
                                 =post.description
                             a.btn.btn-default.black-background.white(href='/addToFavourites/' + post._id, role='button') add to fav
-                            
-
-
-

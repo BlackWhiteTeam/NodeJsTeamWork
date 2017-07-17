@@ -30,6 +30,8 @@ const init = (data) => {
         next();
     });
 
+    app.locals.moment = require('moment');
+
     require('./auth')
         .init(app, data.users);
 
