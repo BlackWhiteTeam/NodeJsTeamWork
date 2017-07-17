@@ -7,7 +7,7 @@ const attachTo = (app, data) => {
         return data.posts.getAll()
             .then((posts) => {
                 return res.render('posts/gallery', {
-                    context: posts,
+                    context: posts.reverse(),
                 });
             });
     });
@@ -45,7 +45,7 @@ const attachTo = (app, data) => {
 
         data.posts.create(post)
             .then((dbPost) => {
-                return res.redirect('/users/' + req.user._id);
+                return res.redirect('/gallery');
             })
             .catch((err) => {
                 req.flash('error', err);
