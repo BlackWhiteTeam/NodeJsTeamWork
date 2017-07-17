@@ -27,6 +27,11 @@ class UsersData extends BaseData {
         return users;
     }
 
+    addToFavorites(idUser, idPost) {
+        // eslint-disable-next-line
+        this.collection.update({_id: ObjectId(idUser)}, {$addToSet: {favorites: idPost}});
+    }
+
     updateProfilePicture(id, photo) {
         // eslint-disable-next-line
         this.collection.update({_id: ObjectId(id)}, {$set: {stringProfilePicture: photo.filename}});

@@ -28,6 +28,7 @@ const attachTo = (app, data) => {
             email: req.body.email,
             password: req.body.password,
             stringProfilePicture: 'defaultpic.jpg',
+            favorites: [],
         };
 
         data.users.create(user)

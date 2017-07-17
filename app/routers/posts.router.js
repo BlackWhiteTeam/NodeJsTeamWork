@@ -25,6 +25,14 @@ const attachTo = (app, data) => {
         return res.render('posts/createPost');
     });
 
+    app.get('/addToFavourites/:id', (req, res) => {
+        const urlParts = req.url.split('/');
+        const idPost = urlParts[urlParts.length - 1];
+        console.log(idPost);
+        const idUser = (req.user._id);
+        return data.users.addToFavorites(idUser, idPost);
+    });
+
     app.post('/createPost',
         uploadPictureController.upload.single('imageupload'), (req, res) => {
         const photo = req.file;
