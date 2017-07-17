@@ -25,12 +25,22 @@ const attachTo = (app, data) => {
         return res.render('posts/createPost');
     });
 
-    app.get('/addToFavourites/:id', (req, res) => {
+    app.get('/addToFavorites/:id', (req, res) => {
         const urlParts = req.url.split('/');
         const idPost = urlParts[urlParts.length - 1];
         console.log(idPost);
         const idUser = (req.user._id);
         return data.users.addToFavorites(idUser, idPost);
+    });
+
+    app.get('/myfavorites', (req, res) => {
+        return data.posts.getMyFavoritesPosts(req.user.favorites)
+            .then((posts) => {
+                console.log(posts);
+                return res.render('posts/gallery', {
+                    context: posts,
+                });
+            });
     });
 
     app.post('/createPost',
