@@ -45,7 +45,7 @@ const attachTo = (app, data) => {
 
         data.posts.create(post)
             .then((dbPost) => {
-                return res.redirect('/gallery');
+                return res.redirect('/myphotos');
             })
             .catch((err) => {
                 req.flash('error', err);
