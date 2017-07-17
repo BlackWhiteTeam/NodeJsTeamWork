@@ -37,7 +37,8 @@ const attachTo = (app, data) => {
                     if (err) {
                         req.flash('error', req);
                     }
-                    return res.redirect('/users/' + dbUser.id);
+                    req.flash('success', 'You are registered!');
+                    return res.redirect('/users/' + dbUser._id);
                 });
             })
             .catch((err) => {
@@ -61,7 +62,7 @@ const attachTo = (app, data) => {
         (req, res) => {
             data.users.getByObjectName(req.body.username)
                 .then((user) => {
-                    req.flash('success', 'You are logged in!')
+                    req.flash('success', 'You are logged in!');
                     res.redirect('/users/' + user._id);
                 });
         }
