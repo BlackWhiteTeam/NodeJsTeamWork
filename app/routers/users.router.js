@@ -121,18 +121,22 @@ const attachTo = (app, data) => {
         res.redirect('/');
     });
 
-    app.get('/addToFavorites/:id', (req, res, next) => {
+    app.get('/addToFavorites/:id', (req, res) => {
         const idPost = getIdByUrl(req.url);
         const idUser = (req.user._id);
         data.users.addToFavorites(idUser, idPost);
         return res.redirect('/myfavorites');
     });
 
-    app.get('/deleteFromFavorites/:id', (req, res, next) => {
+    app.get('/deleteFromFavorites/:id', (req, res) => {
         const idPost = getIdByUrl(req.url);
         const idUser = (req.user._id);
         data.users.deleteFromFavorites(idUser, idPost);
         return res.redirect('/myfavorites');
+    });
+
+    app.get('/messenger', (req, res) => {
+        return res.render('users/messenger');
     });
 };
 

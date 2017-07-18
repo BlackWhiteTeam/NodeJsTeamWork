@@ -22,7 +22,10 @@ const attachTo = (app, data) => {
     });
 
     app.get('/createPost', (req, res) => {
-        return res.render('posts/createPost');
+        if (req.user) {
+            return res.render('posts/createPost');
+        }
+        return res.redirect('/login');
     });
 
     app.get('/myfavorites', (req, res) => {
