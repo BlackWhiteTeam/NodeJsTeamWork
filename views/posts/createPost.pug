@@ -5,8 +5,14 @@ block content
 
     .container
         form( method='POST', enctype='multipart/form-data' action='/createPost')
-            input.form-group(type='file', name='imageupload')
-            textarea.form-group(rows="4" cols="50" name="description" placeholder='Write a description...') 
-            input.form-group(type='submit', name='uploadimage', value='Upload Image')
+            label.btn.btn-default.black-background.white(for="choose-picture")
+                span.glyphicon.glyphicon-folder-open
+                |&nbsp;&nbsp;Choose File
+            input#choose-picture.form-group(type='file', name='imageupload', style='display:none')
+            textarea.form-group(rows="4" cols="50" name="description" placeholder='Write a description...')
+            label.btn.btn-default.black-background.white(for="postit")
+                span.glyphicon.glyphicon-globe
+                |&nbsp;&nbsp;Post
+            input#postit.form-group(type='submit', name='uploadimage', style='display:none')
 block AdditionalJS
     script(src="/js/uploadImagesEvent.js")

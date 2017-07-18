@@ -13,12 +13,19 @@ mixin nav()
             #navbar.navbar-collapse.collapse
                 ul.nav.navbar-nav.navbar-left
                     li
-                        a(href='/') Home                
+                        a(href='/')
+                            span.glyphicon.glyphicon-home
+                            |  Home
+
                     li
-                        a(href='/users') Users
+                        a(href='/users')
+                            span.glyphicon.glyphicon-globe
+                            |  Users
                     if loggedIn
                         li
-                            a(href='/gallery') Gallery
+                            a(href='/gallery')
+                                span.glyphicon.glyphicon-picture
+                                |  Gallery
                 ul.nav.navbar-nav.navbar-right
                     if loggedIn
                         li.dropdown
@@ -28,18 +35,29 @@ mixin nav()
                                 span.caret
                             ul.dropdown-menu
                                 li
-                                    a(href='/users/' + user._id) View my Profile
+                                    a(href='/users/' + user._id)
+                                        span.glyphicon.glyphicon-user
+                                        |	&nbsp;&nbsp;View my Profile
+
                                 li
-                                    a(href='/myphotos') My photos
+                                    a(href='/myphotos')
+                                        span.glyphicon.glyphicon-picture
+                                        |	&nbsp;&nbsp;My photos
+                                    
                                 li
-                                    a(href='/myfavorites') My favorites
+                                    a(href='/myfavorites')
+                                        span.glyphicon.glyphicon-star-empty
+                                        |	&nbsp;&nbsp;My favorites
                                 li.divider(role='separator')
                                 li
-                                    a(href='/logout') Log out
+                                    a(href='/logout')
+                                        span.glyphicon.glyphicon-off
+                                        |	&nbsp;&nbsp;Log out
                     else
                         li
                             a(href='/login')
-                                | Log in / Sign up
+                                span.glyphicon.glyphicon-log-in
+                                |  &nbsp;Log in / Sign up
 
             // /.nav-collapse
 
