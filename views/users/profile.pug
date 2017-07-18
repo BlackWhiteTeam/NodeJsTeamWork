@@ -1,5 +1,7 @@
 extends ../shared/_layout
 
+block AdditionalCss
+    link(rel='stylesheet', href='/css/profile.css')
 block content
     != messages()
 
@@ -10,11 +12,51 @@ block content
         img.img-responsive(src='/uploads/' + context.stringProfilePicture, alt='Profile picture')
         if context._id.toString() === currentUserId
             form#profile-picture-form(method='post', enctype='multipart/form-data')
-                label.btn.btn-default.black-background.white(for="profile-picture") Update profile picture
+                label.btn.btn-default.black-background.white(for="profile-picture")
+                    span.glyphicon.glyphicon-folder-open
+                    |&nbsp;&nbsp;Update profile picture
                 input#profile-picture(type='file', name='imageupload', style='display:none', accept='image/*')
             a.btn.btn-default.black-background.white(href='/createPost') Create Post
         h2 Email:
         =context.email
+
+    .container
+        .row.profile
+            .col-md-3
+                .profile-sidebar
+                    // SIDEBAR USERPIC
+                    .profile-userpic
+                        img.img-responsive(src='/uploads/' + context.stringProfilePicture, alt='Profile picture')
+                    // END SIDEBAR USERPIC
+                    // SIDEBAR USER TITLE
+                    .profile-usertitle
+                        .profile-usertitle-name Marcus Doe
+                        .profile-usertitle-job Developer
+                    // END SIDEBAR USER TITLE
+                    // SIDEBAR BUTTONS
+                    .profile-userbuttons
+                        button.btn.btn-success.btn-sm(type='button') Follow
+                        button.btn.btn-danger.btn-sm(type='button') Message
+                    // END SIDEBAR BUTTONS
+                    // SIDEBAR MENU
+                    .profile-usermenu
+                        ul.nav
+                            li.active
+                                a(href='#')
+                                    i.glyphicon.glyphicon-home
+                                    | 							Overview
+                            li
+                                a(href='#')
+                                    i.glyphicon.glyphicon-user
+                                    | 							Account Settings
+                            li
+                                a(href='#', target='_blank')
+                                    i.glyphicon.glyphicon-ok
+                                    | 							Tasks
+                            li
+                                a(href='#')
+                                    i.glyphicon.glyphicon-flag
+                                    | 							Help
 
 block AdditionalJS
     script(src="/js/uploadImagesEvent.js")
