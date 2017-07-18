@@ -25,20 +25,12 @@ const attachTo = (app, data) => {
         return res.render('posts/createPost');
     });
 
-    app.get('/addToFavourites/:id', (req, res, next) => {
-        const urlParts = req.url.split('/');
-        const idPost = urlParts[urlParts.length - 1];
-        const idUser = (req.user._id);
-        data.users.addToFavorites(idUser, idPost);
-        return res.redirect('/myfavorites');
-        // Гизи заеби го тва, то май се прави с Ajax forms! :D
-    });
-
     app.get('/myfavorites', (req, res) => {
         return data.posts.getMyFavoritesPosts(req.user.favorites)
             .then((posts) => {
                 return res.render('posts/gallery', {
                     context: posts.reverse(),
+                    isDelete: true,
                 });
             });
     });

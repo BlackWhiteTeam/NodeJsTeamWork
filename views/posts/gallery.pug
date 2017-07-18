@@ -14,4 +14,7 @@ block content
                                     =post.author
                             p
                                 =post.description
-                            a.btn.btn-default.black-background.white(href='/addToFavourites/' + post._id, role='button') add to favourites
+                            if isDelete
+                                a.btn.btn-default.black-background.white(href='/deleteFromFavorites/' + post._id, role='button') Delete from fav
+                            else
+                                a.btn.btn-default.black-background.white(href='/addToFavorites/' + post._id, role='button') +Add to fav

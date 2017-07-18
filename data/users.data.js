@@ -48,6 +48,13 @@ class UsersData extends BaseData {
         this.collection.update({_id: ObjectId(idUser)}, {$addToSet: {favorites: ObjectId(idPost)}});
     }
 
+    deleteFromFavorites(idUser, idPost) {
+
+    this.collection.update(
+        // eslint-disable-next-line
+        { _id: ObjectId(idUser) }, { $pull: { favorites: { $in: [ObjectId(idPost)] } } });
+    }
+
     updateProfilePicture(id, photo) {
         // eslint-disable-next-line
         this.collection.update({_id: ObjectId(id)}, {$set: {stringProfilePicture: photo.filename}});
