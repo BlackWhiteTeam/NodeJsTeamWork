@@ -1,7 +1,25 @@
-extends ../shared/_layout
+block css
+    link(rel='stylesheet', href='/css/style.css')
 
 block content
-    .main.container
+    #messenger
         ul#messages
-            form
-                input#message
+        form#message-form(action='')
+            input#message(autocomplete='off')
+            button#send-button.black-background.white Send
+block js
+    script(src='/socket.io/socket.io.js')
+    script(src='https://code.jquery.com/jquery-1.11.1.js')
+        // refactor
+    script.
+        $(function () {
+            var socket = io();
+            $('#message-form').submit(function () {
+                socket.emit('chat message', $('#message').val());
+                $('#message').val('');
+                return false;
+            });
+            socket.on('chat message', function (msg) {
+                $('#messages').append($('<li>').text(msg));
+            });
+        });
