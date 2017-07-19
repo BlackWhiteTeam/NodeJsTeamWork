@@ -10,16 +10,4 @@ block content
 block js
     script(src='/socket.io/socket.io.js')
     script(src='https://code.jquery.com/jquery-1.11.1.js')
-        // refactor
-    script.
-        $(function () {
-            var socket = io();
-            $('#message-form').submit(function () {
-                socket.emit('chat message', $('#message').val());
-                $('#message').val('');
-                return false;
-            });
-            socket.on('chat message', function (msg) {
-                $('#messages').append($('<li>').text(msg));
-            });
-        });
+    script(src='/js/messenger.js')
