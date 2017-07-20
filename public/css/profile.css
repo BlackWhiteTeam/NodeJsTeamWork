@@ -10,9 +10,10 @@
 }
 .profile > img {
   height: 100%;
-  width: auto;
   max-height: 300px;
   margin: auto;
+  width:auto;
+  max-width:100%;
 }
 
 .email {
@@ -123,9 +124,10 @@
     .profile{
         display:block;
         margin: auto;
-        width: 100% !important;
         padding:5px;
         float:none;
+        min-width:100%;
+        min-width:100%;
     }
     .carousel {
         margin: 1%;
