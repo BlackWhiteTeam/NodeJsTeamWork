@@ -7,9 +7,17 @@ $(document).ready(function() {
     }, 4000);
 
     // For the logo - SVG
+    // For the logo - SVG
+    let repeat;
+    if (navigator.userAgent
+            .match(/(iPhone|iPod|iPad|Android|BlackBerry|IEMobile)/)) {
+        repeat = 0;
+    } else {
+        repeat = -1;
+    }
 
     const tmaxOptionsGlobal = {
-        repeat: -1,
+        repeat: repeat,
         repeatDelay: 0.55,
         yoyo: true,
     };
