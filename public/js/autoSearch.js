@@ -6,7 +6,7 @@ $(document).ready(function() {
     searchField.focus();
     searchField.val(searchField.val());
 
-    searchField.keyup((ev) => {
+    searchField.keyup(function(ev) {
         if (meaningfulKey(ev.keyCode)) {
             setTimeout(() => {
                 searchButton.trigger('click');
