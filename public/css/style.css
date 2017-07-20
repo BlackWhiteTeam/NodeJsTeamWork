@@ -138,6 +138,7 @@ input:-webkit-autofill {
     height: 55px;
     color: white;
     border-radius: 5px;
+    z-index: 999;
 }
 
 .messageText {
