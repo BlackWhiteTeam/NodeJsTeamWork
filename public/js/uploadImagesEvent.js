@@ -1,3 +1,6 @@
-document.getElementById('profile-picture').onchange = () => {
-    document.getElementById('profile-picture-form').submit();
-};
+/* globals $ */
+$(document).ready(function() {
+    $('#profile-picture').change(() => {
+        $('#profile-picture-form').submit();
+    });
+});
