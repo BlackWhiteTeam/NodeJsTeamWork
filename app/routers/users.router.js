@@ -73,10 +73,14 @@ const attachTo = (app, data) => {
             const id = getIdByUrl(req.url);
             data.users.getById(id)
                 .then((user) => {
-                    res.render('users/profile', {
-                        context: user,
-                        currentUserId: req.user._id.toString(),
-                    });
+                    data.posts.getPostsByUsername(user.name)
+                        .then((posts) => {
+                            res.render('users/profile', {
+                            context: user,
+                            posts: posts,
+                            currentUserId: req.user._id.toString(),
+                            });
+                        });
                 });
         } else {
             res.redirect('/login');

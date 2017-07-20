@@ -40,7 +40,6 @@ const attachTo = (app, data) => {
 
     app.post('/createPost',
         uploadPictureController.upload.single('imageupload'), (req, res) => {
-
         const photo = req.file;
         uploadPictureController.uploadPicture(photo);
 
