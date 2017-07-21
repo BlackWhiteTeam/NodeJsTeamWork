@@ -1,5 +1,69 @@
 extends shared/_layout
 
+block AdditionalCss
+    link(rel='stylesheet', href='/css/about.css')
 block content
     .container
-        h1 About
+        .bg
+        .jumbotron
+            h1 The colors of the Past...
+            p
+            | Welcome to the Black&White Photography Social Network! Let's be inspired again by the beauty of the black and white colors...
+            p SHARE, DISCOVER, EXPLORE and EXPRESS YOURSELF 
+            a.btn.btn-default.black-background.white(href='/login', role='button') Get started »
+        .container-fluid
+            h1 Black&White Team:
+            .row
+                .col-sm-4
+                    .card
+                        // Bacground color
+                        .avatar
+                            img.rounded-circle.img-responsive(src='images/Vladimir_Petrov.jpg')
+                        .card-block
+                            // Name
+                            h4.card-title Vladimir Petrov
+                            h6.card-subtitle Back-End Developer
+                            hr
+                            // Quotation
+                            p
+                                i.glyphicon.glyphicon-lock
+                                |  &nbsp;Student at Telerik Academy - 2016/2017
+                            p
+                                i.glyphicon.glyphicon-envelope
+                                | &nbsp;&nbsp;vladimir_petrov@gmail.com
+                .col-sm-4
+                    .card
+                        // Bacground color
+                        .avatar
+                            img.rounded-circle.img-responsive(src='images/Gizdava_Geneva.jpg')
+                        .card-block
+                            // Name
+                            h4.card-title Gizdava Geneva
+                            h6.card-subtitle Front-End Developer
+                            hr
+                            // Quotation
+                            p
+                                i.glyphicon.glyphicon-lock
+                                |  &nbsp;Student at Telerik Academy - 2016/2017
+                            p
+                                i.glyphicon.glyphicon-envelope
+                                |  &nbsp;&nbsp;g.geneva94@gmail.com
+                .col-sm-4
+                    .card
+                        // Bacground color
+                        .avatar
+                            img.rounded-circle.img-responsive(src='images/Cvetozar_Kalchev.jpg')
+                        .card-block
+                            // Name
+                            h4.card-title Cvetozar Kalchev
+                            h6.card-subtitle QA tester
+                            hr
+                            // Quotation
+                            p
+                                i.glyphicon.glyphicon-lock
+                                |  &nbsp;Student at Telerik Academy - 2016/2017
+                            p
+                                i.glyphicon.glyphicon-envelope
+                                |  &nbsp;&nbsp;tsvetlozar_kalchev@gmail.com
+block AdditionalJS
+    script(src='/js/about.js')
