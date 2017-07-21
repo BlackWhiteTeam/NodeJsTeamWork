@@ -138,10 +138,6 @@ const attachTo = (app, data) => {
         data.users.deleteFromFavorites(idUser, idPost);
         return res.redirect('/myfavorites');
     });
-
-    app.get('/messenger', (req, res) => {
-        return res.render('users/messenger');
-    });
 };
 
 module.exports = { attachTo };

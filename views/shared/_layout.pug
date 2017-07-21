@@ -27,4 +27,7 @@ html(lang='en')
             script(src='/libs/jquery/dist/jquery.min.js')
             script(src='/libs/bootstrap/dist/js/bootstrap.min.js')
             script(src='/js/messageEffects.js')
+            if loggedIn
+                script(src='/socket.io/socket.io.js')
+                script(src='/js/chat-draw.js')
         block AdditionalJS

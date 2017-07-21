@@ -29,8 +29,8 @@ class BaseData {
         }
         return this.collection.insert(model)
             .then(() => {
-                return this.ModelClass.toViewModel(model);
-            });
+            return this.ModelClass.toViewModel(model);
+        });
     }
 
     getById(id) {

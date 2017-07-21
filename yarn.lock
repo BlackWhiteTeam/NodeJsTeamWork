@@ -1817,6 +1817,10 @@ sax@>=0.6.0:
   version "1.2.4"
   resolved "https://registry.yarnpkg.com/sax/-/sax-1.2.4.tgz#2816234e2378bddc4e5354fab5caa895df7100d9"
 
+scmp@0.0.3:
+  version "0.0.3"
+  resolved "https://registry.yarnpkg.com/scmp/-/scmp-0.0.3.tgz#3648df2d7294641e7f78673ffc29681d9bad9073"
+
 semver@^5.1.0:
   version "5.3.0"
   resolved "https://registry.yarnpkg.com/semver/-/semver-5.3.0.tgz#9b2ce5d3de02d17c6012ad326aa6b4d0cf54f94f"
@@ -1855,6 +1859,12 @@ setprototypeof@1.0.3:
 signal-exit@^3.0.2:
   version "3.0.2"
   resolved "https://registry.yarnpkg.com/signal-exit/-/signal-exit-3.0.2.tgz#b5fdc08f1287ea1178628e415e25132b73646c6d"
+
+simple-encryptor@^1.1.0:
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/simple-encryptor/-/simple-encryptor-1.1.0.tgz#653bb1926c8f0fc2b8d7038577cc846053263ae8"
+  dependencies:
+    scmp "0.0.3"
 
 slice-ansi@0.0.4:
   version "0.0.4"

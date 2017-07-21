@@ -9,7 +9,7 @@ block content
         .profile
             img(src='/uploads/' + context.stringProfilePicture, alt='Profile picture')
             h1 
-                strong
+                strong#username
                     =context.name
             p.email
                 =context.email
