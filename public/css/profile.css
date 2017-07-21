@@ -62,8 +62,30 @@
   min-width: 60%;
   float: left;
 }
+
 .clearfix{
   clear:both
+}
+
+#add {
+  float:left;
+  margin-left:10%;
+  width: 70px;
+  height: 30px;
+}
+
+.like-dislike-btn{
+  height: 25px !important;
+  width: 35px !important;
+}
+
+.float-right{
+  float:right;
+  margin-right: 15% !important;
+}
+.counter-likes, .counter-dislikes {
+  color:white;
+  font-weight: bold;
 }
 @media (max-width: 1300px) {
   .carousel {
@@ -151,5 +173,15 @@
         width: auto;
         max-height: 200px;
         margin: auto;
+    }
+    .like-dislike-btn{
+        margin-top:5px;
+        height: 20px !important;
+        width: 28px !important;
+    }
+    .counter-likes, .counter-dislikes {
+        margin-top: 15px !important;
+        font-size:10px;
+        font-weight: normal;
     }
 }

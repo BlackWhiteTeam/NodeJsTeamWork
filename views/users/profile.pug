@@ -25,33 +25,65 @@ block content
                 a.btn.btn-default.black-background.white(href='/createPost') Create Post
             else
                 a.btn.btn-default.black-background.white
-
-        #myCarousel.carousel.slide(data-ride='carousel')
-            // Indicators
-            ol.carousel-indicators
-                each post, index in posts
-                    if (index < 131)
+        if (posts.length > 0)
+            #myCarousel.carousel.slide(data-ride='carousel')
+                // Indicators
+                ol.carousel-indicators
+                    each post, index in posts
+                        if (index < 131)
+                            if (index === 0)
+                                li.active(data-target='#myCarousel', data-slide-to=index)
+                            else
+                                li(data-target='#myCarousel', data-slide-to=index)
+                // Wrapper for slides
+                .carousel-inner
+                    each post, index in posts
                         if (index === 0)
-                            li.active(data-target='#myCarousel', data-slide-to=index)
+                            .item.active
+                                img(src='/uploads/' + post.picture, alt=post.picture)
+                                a.btn.black-background.white#add(href='/addToFavorites/' + post._id, role='button')
+                                    span.glyphicon.glyphicon-plus
+                                    |  Favs
+                                .float-right
+                                    span.counter-likes
+                                        |0
+                                    if !isLiked
+                                        img.like-dislike-btn(src='/images/like-btn.png', alt='like')
+                                    else
+                                        img.like-dislike-btn(src='/images/liked-btn.png', alt='liked')
+                                    if !isDisliked
+                                        img.like-dislike-btn(src='/images/dislike-btn.png', alt='dislike')
+                                    else
+                                        img.like-dislike-btn(src='/images/disliked-btn.png', alt='disliked')
+                                    span.counter-dislikes
+                                        |0
                         else
-                            li(data-target='#myCarousel', data-slide-to=index)
-            // Wrapper for slides
-            .carousel-inner
-                each post, index in posts
-                    if (index === 0)
-                        .item.active
-                            img(src='/uploads/' + post.picture, alt=post.picture)
-                    else
-                        .item
-                            img(src='/uploads/' + post.picture, alt=post.picture)
-
-            // Left and right controls
-            a.left.carousel-control(href='#myCarousel', data-slide='prev')
-                span.glyphicon.glyphicon-chevron-left
-                span.sr-only Previous
-            a.right.carousel-control(href='#myCarousel', data-slide='next')
-                span.glyphicon.glyphicon-chevron-right
-                span.sr-only Next
+                            .item
+                                img(src='/uploads/' + post.picture, alt=post.picture)
+                                a.btn.black-background.white#add(href='/addToFavorites/' + post._id, role='button')
+                                    span.glyphicon.glyphicon-plus
+                                    |  Favs
+                                .float-right
+                                    span.counter-likes
+                                        |0
+                                    //should implement counter for likes and dislikes
+                                    if isLiked
+                                        img.like-dislike-btn(src='/images/liked-btn.png', alt='liked')
+                                    else
+                                        img.like-dislike-btn(src='/images/like-btn.png', alt='like')
+                                    if isDisliked
+                                        img.like-dislike-btn(src='/images/disliked-btn.png', alt='disliked')
+                                    else
+                                        img.like-dislike-btn(src='/images/dislike-btn.png', alt='dislike')
+                                    span.counter-dislikes
+                                        |0
+                // Left and right controls
+                a.left.carousel-control(href='#myCarousel', data-slide='prev')
+                    span.glyphicon.glyphicon-chevron-left
+                    span.sr-only Previous
+                a.right.carousel-control(href='#myCarousel', data-slide='next')
+                    span.glyphicon.glyphicon-chevron-right
+                    span.sr-only Next
 
 
 block AdditionalJS
