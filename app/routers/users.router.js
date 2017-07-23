@@ -27,7 +27,7 @@ const attachTo = (app, data) => {
             name: req.body.name,
             email: req.body.email,
             password: req.body.password,
-            stringProfilePicture: 'defaultpic.jpg',
+            stringProfilePicture: 'defaultpic.png',
             favorites: [],
         };
 

@@ -47,14 +47,10 @@ block content
                                 .float-right
                                     span.counter-likes
                                         |0
-                                    if !isLiked
-                                        img.like-dislike-btn(src='/images/like-btn.png', alt='like')
-                                    else
-                                        img.like-dislike-btn(src='/images/liked-btn.png', alt='liked')
-                                    if !isDisliked
-                                        img.like-dislike-btn(src='/images/dislike-btn.png', alt='dislike')
-                                    else
-                                        img.like-dislike-btn(src='/images/disliked-btn.png', alt='disliked')
+                                    img.like.like-dislike-btn(src='/images/like-btn.png', alt='like')
+                                    img.liked.like-dislike-btn(src='/images/liked-btn.png', alt='liked',style="display:none;")
+                                    img.dislike.like-dislike-btn(src='/images/dislike-btn.png', alt='dislike')
+                                    img.disliked.like-dislike-btn(src='/images/disliked-btn.png', alt='disliked',style="display:none;")
                                     span.counter-dislikes
                                         |0
                         else
@@ -66,15 +62,10 @@ block content
                                 .float-right
                                     span.counter-likes
                                         |0
-                                    //should implement counter for likes and dislikes
-                                    if isLiked
-                                        img.like-dislike-btn(src='/images/liked-btn.png', alt='liked')
-                                    else
-                                        img.like-dislike-btn(src='/images/like-btn.png', alt='like')
-                                    if isDisliked
-                                        img.like-dislike-btn(src='/images/disliked-btn.png', alt='disliked')
-                                    else
-                                        img.like-dislike-btn(src='/images/dislike-btn.png', alt='dislike')
+                                    img.like.like-dislike-btn(src='/images/like-btn.png', alt='like')
+                                    img.liked.like-dislike-btn(src='/images/liked-btn.png', alt='liked',style="display:none;")
+                                    img.dislike.like-dislike-btn(src='/images/dislike-btn.png', alt='dislike')
+                                    img.disliked.like-dislike-btn(src='/images/disliked-btn.png', alt='disliked',style="display:none;")
                                     span.counter-dislikes
                                         |0
                 // Left and right controls
@@ -88,3 +79,4 @@ block content
 
 block AdditionalJS
     script(src="/js/uploadImagesEvent.js")
+    script(src="/js/likes-btns.js")
