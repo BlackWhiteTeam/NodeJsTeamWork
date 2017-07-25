@@ -3,20 +3,33 @@
     padding: 4px;
     margin-bottom: 20px;
     line-height: 1.42857143;
-    background-color: gainsboro;
-    border: 1px solid black;
+    background-color: whitesmoke;
+    box-shadow: 1px 5px 10px 1px rgba(0, 0, 0, 0.3);
     border-radius: 2px;
     -webkit-transition: border .2s ease-in-out;
     -o-transition: border .2s ease-in-out;
     transition: border .2s ease-in-out;
 }
+.thumbnail:hover {
+    border: solid 1px #CCC;
+    -moz-box-shadow: 1px 1px 5px #999;
+    -webkit-box-shadow: 1px 1px 5px #999;
+    box-shadow: 1px 1px 5px #999;
+}
+.thumbnail:hover > img{
+    border-radius: 15px;
+}
+.thumbnail > img{
+    background:whitesmoke;
+}
+
 .caption {
     padding: 2px;
     color: #333;
     text-align: center;
 }
 .row:after{
-  display: none;
+    display: none;
 }
 .thumbnail > img {
     height: 233px;
