@@ -1,6 +1,6 @@
 const uploadPictureController =
     require('../controllers/uploadPicture.controller');
-
+let lastPicture = 'upload-icon.png';
 
 const attachTo = (app, data) => {
     app.get('/gallery', (req, res) => {
@@ -23,7 +23,9 @@ const attachTo = (app, data) => {
 
     app.get('/createPost', (req, res) => {
         if (req.user) {
-            return res.render('posts/createPost');
+            return res.render('posts/createPost', {
+                image: lastPicture,
+            });
         }
         return res.redirect('/login');
     });
@@ -40,24 +42,30 @@ const attachTo = (app, data) => {
 
     app.post('/createPost',
         uploadPictureController.upload.single('imageupload'), (req, res) => {
-        const photo = req.file;
-        uploadPictureController.uploadPicture(photo);
+            const post = {
+                author: req.user.name,
+                picture: lastPicture,
+                description: req.body.description,
+            };
 
-        const post = {
-            author: req.user.name,
-            picture: photo.filename,
-            description: req.body.description,
-        };
+            data.posts.create(post)
+                .then((dbPost) => {
+                    return res.redirect('/myphotos');
+                })
+                .catch((err) => {
+                    req.flash('error', err);
+                    return res.redirect('/');
+                });
+        });
 
-        data.posts.create(post)
-            .then((dbPost) => {
-                return res.redirect('/myphotos');
-            })
-            .catch((err) => {
-                req.flash('error', err);
-                return res.redirect('/');
-            });
-    });
+    app.post('/showPicture',
+        uploadPictureController.upload.single('imageupload'), (req, res) => {
+            const photo = req.file;
+            uploadPictureController.uploadPicture(photo);
+            lastPicture = photo.filename;
+            console.log(lastPicture);
+            return res.redirect('/createPost');
+        });
 };
 
 module.exports = { attachTo };

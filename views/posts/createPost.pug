@@ -4,11 +4,12 @@ block content
     != messages()
 
     .container
+        form#profile-picture-form(method='post', enctype='multipart/form-data' action='/showPicture')
+            label(for='profile-picture')
+                img(src='uploads/' + image, alt='Upload picture')
+            input#profile-picture(type='file', name='imageupload', style='display:none', accept='image/*')
+
         form( method='POST', enctype='multipart/form-data' action='/createPost')
-            label.btn.btn-default.black-background.white(for="choose-picture")
-                span.glyphicon.glyphicon-folder-open
-                |&nbsp;&nbsp;Choose File
-            input#choose-picture.form-group(type='file', name='imageupload', style='display:none')
             textarea.form-group(rows="4" cols="50" name="description" placeholder='Write a description...')
             label.btn.btn-default.black-background.white(for="postit")
                 span.glyphicon.glyphicon-globe
