@@ -1,5 +1,7 @@
 body {
     padding-top: 70px;
+    /* Just in case :D*/
+    filter: grayscale(100%);
 }
 
 body {
