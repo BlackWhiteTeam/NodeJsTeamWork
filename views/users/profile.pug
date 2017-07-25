@@ -23,8 +23,6 @@ block content
                         |&nbsp;&nbsp;Update profile picture
                     input#profile-picture(type='file', name='imageupload', style='display:none', accept='image/*')
                 a.btn.btn-default.black-background.white(href='/createPost') Create Post
-            else
-                a.btn.btn-default.black-background.white
         if (posts.length > 0)
             #myCarousel.carousel.slide(data-ride='carousel')
                 // Indicators

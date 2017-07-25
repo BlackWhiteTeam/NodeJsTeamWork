@@ -21,8 +21,7 @@ $(document).ready(function() {
     });
 
     $('.like').click(function() {
-        $(this).hide();
-        $('.liked').show();
+        $.ajax()
     });
 
     $('.liked').click(function() {
