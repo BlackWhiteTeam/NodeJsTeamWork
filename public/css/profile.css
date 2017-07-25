@@ -1,187 +1,200 @@
 .profile {
-  box-shadow: 1px 5px 10px 1px rgba(0, 0, 0, 0.3);
-  max-width: 400px;
-  min-width:400px;
-  max-height: 500px;
-  text-align: center;
-  padding: 5px;
-  float:left;
-  margin: 1%;
+    box-shadow: 1px 5px 10px 1px rgba(0, 0, 0, 0.3);
+    max-width: 400px;
+    min-width: 400px;
+    max-height: 500px;
+    text-align: center;
+    padding: 5px;
+    float: left;
+    margin: 1%;
 }
-.profile > img {
-  height: 100%;
-  max-height: 300px;
-  margin: auto;
-  width:auto;
-  max-width:100%;
+
+.profile>img {
+    height: 100%;
+    max-height: 300px;
+    margin: auto;
+    width: auto;
+    max-width: 100%;
 }
 
 .email {
-  color: grey;
-  font-size: 18px;
+    color: grey;
+    font-size: 18px;
 }
-.photos-counter{
-  color: grey;
-  font-weight: bold;
+
+.photos-counter {
+    color: grey;
+    font-weight: bold;
 }
-.profile > div > a {
-  text-decoration: none;
-  font-size: 22px;
-  color: black;
+
+.profile>div>a {
+    text-decoration: none;
+    font-size: 22px;
+    color: black;
 }
-.profile > .btn {
-  width:100% !important;
+
+.profile>.btn {
+    width: 100% !important;
 }
-.profile > label {
-  width:100%;
+
+.profile>label {
+    width: 100%;
 }
+
 .carousel-indicators {
-  position: absolute;
-  bottom: 10px;
-  left: 32%;
-  z-index: 15;
-  width: 95%;
-  padding-left: 0;
-  margin-left: -30%;
-  text-align: center;
-  list-style: none;
+    position: absolute;
+    bottom: 10px;
+    left: 32%;
+    z-index: 15;
+    width: 95%;
+    padding-left: 0;
+    margin-left: -30%;
+    text-align: center;
+    list-style: none;
 }
 
-.carousel-inner > .item > img {
-  height: 100%;
-  width: auto;
-  max-height: 450px;
-  margin: auto;
+.carousel-inner>.item>img {
+    height: 500px;
+    width: auto;
+    max-height: 450px;
+    margin: auto;
 }
+
 .carousel {
-  box-shadow: 2px 8px 10px 2px rgba(0, 0, 0, 0.5);
-  margin:1%;
-  background: black;
-  min-height: 70%;
-  max-width: 60%;
-  min-width: 60%;
-  float: left;
+    box-shadow: 2px 8px 10px 2px rgba(0, 0, 0, 0.5);
+    margin: 1%;
+    background: black;
+    min-height: 70%;
+    max-width: 60%;
+    min-width: 60%;
+    float: left;
 }
 
-.clearfix{
-  clear:both
+.clearfix {
+    clear: both
 }
 
 #add {
-  float:left;
-  margin-left:10%;
-  width: 70px;
-  height: 30px;
-}
-
-.like-dislike-btn{
-  height: 25px !important;
-  width: 35px !important;
-}
-
-.float-right{
-  float:right;
-  margin-right: 15% !important;
-}
-.counter-likes, .counter-dislikes {
-  color:white;
-  font-weight: bold;
-}
-@media (max-width: 1300px) {
-  .carousel {
-    margin:1%;
-    min-height: 60%;
-    max-width: 55%;
-    min-width: 55%;
     float: left;
-    margin-top:20px;
-  }
-
+    margin-left: 10%;
+    width: 70px;
+    height: 30px;
 }
+
+.like-dislike-btn {
+    height: 25px !important;
+    width: 35px !important;
+}
+
+.float-right {
+    float: right;
+    margin-right: 15% !important;
+}
+
+.counter-likes,
+.counter-dislikes {
+    color: white;
+    font-weight: bold;
+}
+
+@media (max-width: 1300px) {
+    .carousel {
+        margin: 1%;
+        min-height: 60%;
+        max-width: 55%;
+        min-width: 55%;
+        float: left;
+        margin-top: 20px;
+    }
+}
+
 @media (max-width: 1200px) {
-    .profile{
+    .profile {
         margin: auto;
         width: 50% !important;
         padding: 10px;
-        float:none;
+        float: none;
     }
-
     .carousel {
         margin: 1%;
         max-width: 100%;
         min-width: 100%;
         float: none;
-        margin-top:20px;
+        margin-top: 20px;
     }
-    .carousel-inner > .item > img {
+    .carousel-inner>.item>img {
         width: auto;
         max-height: 450px;
         margin: auto;
     }
 }
+
 @media (max-width: 800px) {
-    .profile{
+    .profile {
         margin: auto;
         width: 70% !important;
         padding: 5px;
-        float:none;
+        float: none;
     }
 }
+
 @media (max-width: 650px) {
-    .profile{
+    .profile {
         margin: auto;
         width: 100% !important;
-        padding:5px;
-        float:none;
+        padding: 5px;
+        float: none;
     }
     .carousel {
         margin: 1%;
         max-width: 100%;
         min-width: 100%;
         float: none;
-        margin-top:20px;
+        margin-top: 20px;
     }
-    .carousel-inner > .item > img {
+    .carousel-inner>.item>img {
         width: auto;
-         max-height: 250px;
-         margin: auto;
+        max-height: 250px;
+        margin: auto;
     }
 }
+
 @media (max-width: 400px) {
-    .email{
+    .email {
         font-size: 12px;
     }
-    .photos-counter{
+    .photos-counter {
         font-size: 12px;
     }
-    .profile{
-        display:block;
+    .profile {
+        display: block;
         margin: auto;
-        padding:5px;
-        float:none;
-        min-width:100%;
-        min-width:100%;
+        padding: 5px;
+        float: none;
+        min-width: 100%;
+        min-width: 100%;
     }
     .carousel {
         margin: 1%;
         max-width: 100%;
         min-width: 100%;
         float: none;
-        margin-top:20px;
+        margin-top: 20px;
     }
-    .carousel-inner > .item > img {
+    .carousel-inner>.item>img {
         width: auto;
         max-height: 200px;
         margin: auto;
     }
-    .like-dislike-btn{
-        margin-top:5px;
+    .like-dislike-btn {
+        margin-top: 5px;
         height: 20px !important;
         width: 28px !important;
     }
-    .counter-likes, .counter-dislikes {
+    .counter-likes,
+    .counter-dislikes {
         margin-top: 15px !important;
-        font-size:10px;
+        font-size: 10px;
         font-weight: normal;
     }
 }
