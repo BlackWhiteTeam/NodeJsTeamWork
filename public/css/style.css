@@ -13,10 +13,9 @@ body {
 .navbar {
     font-size: 18px;
     font-weight: bold;
-
 }
 
-.dropdown-menu > li > a {
+.dropdown-menu>li>a {
     font-weight: bold;
 }
 
@@ -36,7 +35,6 @@ footer p {
     margin-top: 10px;
     text-shadow: 0px 1px 2px whitesmoke;
     color: white
-
 }
 
 .navbar-brand {
@@ -89,7 +87,8 @@ input:-webkit-autofill {
     -webkit-box-shadow: 0 0 0 1000px white inset !important;
 }
 
-.navbar > .container .navbar-brand, .navbar > .container-fluid .navbar-brand {
+.navbar>.container .navbar-brand,
+.navbar>.container-fluid .navbar-brand {
     margin-left: 10px;
 }
 
@@ -101,11 +100,11 @@ input:-webkit-autofill {
     .login-register-title {
         left: 0 !important;
     }
-
-    .display-4.m-b-2{
+    .display-4.m-b-2 {
         text-align: left;
     }
 }
+
 @media (max-width: 280px) {
     a.navbar-brand {
         left: 60px !important;
@@ -116,18 +115,18 @@ input:-webkit-autofill {
 @media (max-width: 992px) {
     .container {
         width: 98% !important;
-  }
+    }
 }
+
 @media (max-width: 850px) {
     .container {
         width: 100% !important;
     }
-    .nav > li > a {
+    .nav>li>a {
         margin-left: -5px !important;
         margin-right: -5px !important;
     }
 }
-
 
 #information-message {
     border-left: 5px;
@@ -187,12 +186,29 @@ input:-webkit-autofill {
     padding: 0;
 }
 
-#messages li { padding: 5px 10px; }
-#messages li:nth-child(odd) { background: #eee; }
+#messages li {
+    padding: 5px 10px;
+}
+
+#messages li:nth-child(odd) {
+    background: #eee;
+}
+
 #messenger {
     font: 13px Helvetica, Arial;
 }
 
-#span-slipped{
-    margin-right:-10px;
+#span-slipped {
+    margin-right: -10px;
+}
+
+.center-block {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#upload-description {
+    margin: 0 auto;
+    float: none;
 }

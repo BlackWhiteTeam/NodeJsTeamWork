@@ -40,30 +40,28 @@ const attachTo = (app, data) => {
             });
     });
 
-    app.post('/createPost',
-        uploadPictureController.upload.single('imageupload'), (req, res) => {
-            const post = {
-                author: req.user.name,
-                picture: lastPicture,
-                description: req.body.description,
-            };
-
-            data.posts.create(post)
-                .then((dbPost) => {
-                    return res.redirect('/myphotos');
-                })
-                .catch((err) => {
-                    req.flash('error', err);
-                    return res.redirect('/');
-                });
-        });
+    app.post('/createPost', (req, res) => {
+        const post = {
+            author: req.user.name,
+            picture: lastPicture,
+            description: req.body.description,
+        };
+        lastPicture = 'upload-icon.png';
+        data.posts.create(post)
+            .then((dbPost) => {
+                return res.redirect('/myphotos');
+            })
+            .catch((err) => {
+                req.flash('error', err);
+                return res.redirect('/');
+            });
+    });
 
     app.post('/showPicture',
         uploadPictureController.upload.single('imageupload'), (req, res) => {
             const photo = req.file;
             uploadPictureController.uploadPicture(photo);
             lastPicture = photo.filename;
-            console.log(lastPicture);
             return res.redirect('/createPost');
         });
 };

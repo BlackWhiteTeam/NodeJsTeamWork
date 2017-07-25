@@ -1,20 +1,26 @@
 extends ../shared/_layout
 
+block AdditionalCss
+    link(rel="stylesheet", href='/css/login-register.css')
+
 block content
     != messages()
 
-    .container
-        form#profile-picture-form(method='post', enctype='multipart/form-data' action='/showPicture')
-            label(for='profile-picture')
-                img(src='uploads/' + image, alt='Upload picture')
-            input#profile-picture(type='file', name='imageupload', style='display:none', accept='image/*')
 
-        form( method='POST', enctype='multipart/form-data' action='/createPost')
-            textarea.form-group(rows="4" cols="50" name="description" placeholder='Write a description...')
-            label.btn.btn-default.black-background.white(for="postit")
-                span.glyphicon.glyphicon-globe
-                |&nbsp;&nbsp;Post
-            input#postit.form-group(type='submit', name='uploadimage', style='display:none')
+    .container
+        .col-md-6.col-md-offset-3
+            form#upload-picture-form(method='post', enctype='multipart/form-data' action='/showPicture')
+                label(for='upload-picture')
+                    h1.display-4.m-b-2.login-register-title Click to Upload/Change Image
+                    img(src='uploads/' + image, alt='Upload picture')
+                input#upload-picture(type='file', name='imageupload', style='display:none', accept='image/*')
+
+            form( method='POST', enctype='multipart/form-data' action='/createPost')
+                textarea.form-group(rows="4" cols="50" name="description" placeholder='Write a description...')
+                label.btn.btn-default.black-background.white(for="postit")
+                    span.glyphicon.glyphicon-globe
+                    |&nbsp;&nbsp;Post
+                input#postit.form-group(type='submit', name='uploadimage', style='display:none')
 
 block AdditionalJS
     script(src="/js/uploadImagesEvent.js")
