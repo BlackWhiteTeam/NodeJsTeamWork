@@ -58,6 +58,10 @@ const init = (app) => {
                 socket.on('send-message', (messageData) => {
                     app.data.chats.addMessageToChat(userNow.username, messageData.toUser, userNow.username, messageData.message)
                         .then((message) => {
+                            if (typeof(message.value) !== 'undefined') {
+                                message = message.value;
+                            }
+
                             const messageToSendToSender = {
                                 toUsername: messageData.toUser,
                                 messages: message.messages,
@@ -65,9 +69,10 @@ const init = (app) => {
                                     return user.name === messageData.toUser;
                                 }).length > 0,
                             };
+
                             socket.emit('message-recive', messageToSendToSender);
 
-                            for (let i = 0; i < onlineUsers.length; i += 1) {
+                            for (let i = 0; i < onlineUsers.length; i++) {
                                 if (onlineUsers[i].username === messageData.toUser) {
                                     const messageToSendToReciver = {
                                         toUsername: userNow.username,

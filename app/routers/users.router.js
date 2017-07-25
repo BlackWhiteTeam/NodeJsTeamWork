@@ -22,7 +22,6 @@ const attachTo = (app, data) => {
     });
 
     app.post('/register', (req, res) => {
-        // validate
         const user = {
             name: req.body.name,
             email: req.body.email,

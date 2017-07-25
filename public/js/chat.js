@@ -1,11 +1,9 @@
 /* globals $ io */
+/* eslint-disable max-len */
 
 drawUsersContainer();
 
-const SCROLL_WIDTH = 24;
-
 const popup = $('#popup');
-const popupBar = $('#popup-bar');
 const btnClose = $('#btn-close');
 const myProfile = $('#my-profile');
 const profileImg = $('#my-profile-image');
@@ -28,7 +26,7 @@ let isClosed = false;
 
 const popupProperties = {
     right: 5,
-    bottom: 5,
+    bottom: 35,
     width: 250,
     height: 450,
 };
@@ -76,7 +74,7 @@ const messageBoxIconProperties = {
 
 const popupMessageBoxProperties = {
     right: 270,
-    bottom: 5,
+    bottom: 35,
     width: 260,
     height: 340,
 };
@@ -92,7 +90,6 @@ setStylesToItems();
 
 $('body').on('click', function(event) {
     const element = $(event.target);
-    // alert($(event.target).attr('class'))
 
     if (element.attr('class') === 'msg-exit-button') {
         closeMessageBox();
@@ -182,10 +179,11 @@ function chatBoxEvent(ev) {
         const messageBox = $(ev.target);
         const text = messageBox.val();
         messageBox.val('');
-        const fromUser = messageBox.attr('data-from-username');
         const toUser = messageBox.attr('data-to-username');
-
         messageController.sendMessage(toUser, text);
+        setTimeout(function() {
+            $('.chat-box').scrollTop($('.chat-box')[0].scrollHeight);
+        }, 300);
     }
 }
 
@@ -365,6 +363,10 @@ function drawMessageBox(messageCollection, localUserParam) {
     exitButton.addClass('msg-exit-button');
 
     exitButton.appendTo(popupMessageBox);
+
+    setTimeout(function() {
+        $('.chat-box').scrollTop($('.chat-box')[0].scrollHeight);
+    }, 300);
 }
 
 function drawOnlineUsers(onlineUsers, localUserData, messageCollection) {
@@ -375,7 +377,6 @@ function drawOnlineUsers(onlineUsers, localUserData, messageCollection) {
     usersOnline = onlineUsers;
 
     localUser = localUserData;
-
     $('#my-profile-name').html(localUser.username);
     $('#my-profile-image').attr('src', localUser.imgUrl);
 
@@ -519,6 +520,7 @@ function setStylesToItems() {
     popupMessageBox.css('bottom', popupMessageBoxProperties.bottom);
     popupMessageBox.css('background-color', '#404040');
     popupMessageBox.css('display', 'none');
+    popupMessageBox.css('z-index', '99999');
 }
 
 $(function() {
@@ -557,6 +559,9 @@ $(function() {
 
         messageController.sendMessage = function(toUser, message) {
             socket.emit('send-message', { toUser, message });
+            setTimeout(function() {
+                $('.chat-input-field').focus();
+            }, 100);
         };
 
         socket.on('message-recive', function(message) {
@@ -574,14 +579,14 @@ $(function() {
 
         socket.on('person-online', (userData) => {
             for (let i = 0; i < usersOnline.length; i += 1) {
-                if (usersOnline[i].username == userData.username) {
+                if (usersOnline[i].username === userData.username) {
                     usersOnline[i].online = true;
                     break;
                 }
             }
 
             for (let i = 0; i < messageCollectionData.length; i += 1) {
-                if (messageCollectionData[i].toUsername == userData.username) {
+                if (messageCollectionData[i].toUsername === userData.username) {
                     messageCollectionData[i].online = true;
                     break;
                 }

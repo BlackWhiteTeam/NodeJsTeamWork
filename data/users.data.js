@@ -36,9 +36,8 @@ class UsersData extends BaseData {
 
     getAllUsersByMatchingString(input) {
         const users = this.collection.find({
-                name: new RegExp('^' + input.toString()),
-            })
-            .toArray();
+            name: new RegExp('^' + input.toString(), 'i'),
+        }).toArray();
 
         return users;
     }
@@ -49,10 +48,9 @@ class UsersData extends BaseData {
     }
 
     deleteFromFavorites(idUser, idPost) {
-
-    this.collection.update(
-        // eslint-disable-next-line
-        { _id: ObjectId(idUser) }, { $pull: { favorites: { $in: [ObjectId(idPost)] } } });
+        this.collection.update(
+            // eslint-disable-next-line
+            {_id: ObjectId(idUser)}, {$pull: {favorites: {$in: [ObjectId(idPost)]}}});
     }
 
     updateProfilePicture(id, photo) {
