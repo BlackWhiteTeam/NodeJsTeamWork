@@ -1,4 +1,4 @@
 # NodeJsTeamWork
 Node.js Team Work
 
-Link: http://ec2-13-58-244-186.us-east-2.compute.amazonaws.com
+Link: http://ec2-52-15-38-159.us-east-2.compute.amazonaws.com/
