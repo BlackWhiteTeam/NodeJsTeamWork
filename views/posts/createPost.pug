@@ -13,9 +13,9 @@ block content
                 img.img-responsive(src='uploads/' + image, alt='Upload picture')
             input#upload-picture(type='file', name='imageupload', style='display:none', accept='image/*')
 
-        form.col-md-6.col-md-offset-3(method='POST', enctype='multipart/form-data' action='/createPost')
-            textarea.form-group(rows="4" cols="50" name="description" placeholder='Write a description...')
-            label.btn.btn-default.black-background.white(for="postit")
+        form.col-md-6.col-md-offset-3(method='POST', action='/createPost')
+            input.form-group.col-md-6.col-md-offset-3(name="description" placeholder='Write a description...')
+            label.btn.btn-default.black-background.white.col-md-6.col-md-offset-3(for="postit")
                 span.glyphicon.glyphicon-globe
                 |&nbsp;&nbsp;Post
             input#postit.form-group(type='submit', name='uploadimage', style='display:none')

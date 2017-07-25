@@ -41,6 +41,7 @@ const attachTo = (app, data) => {
     });
 
     app.post('/createPost', (req, res) => {
+        console.log(req.body);
         const post = {
             author: req.user.name,
             picture: lastPicture,
