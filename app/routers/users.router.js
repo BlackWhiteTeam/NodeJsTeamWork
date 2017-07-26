@@ -1,10 +1,7 @@
+const passport = require('passport');
+
 const uploadPictureHelper =
     require('../helpers/uploadPicture.helper');
-// put in helper
-const getIdByUrl = (url) => {
-    const urlParts = url.split('/');
-    return urlParts[urlParts.length - 1];
-};
 
 const attachTo = (app, { usersController }) => {
     app.get('/users', usersController.renderAllUsers);
@@ -17,7 +14,10 @@ const attachTo = (app, { usersController }) => {
 
     app.get('/login', usersController.renderLoginPage);
 
-    app.post('/login', usersController.loginUser);
+    app.post('/login', passport.authenticate('local', {
+        failureRedirect: '/login',
+        failureFlash: true,
+    }), usersController.loginUser);
 
     app.get('/users/:id', usersController.getProfilePage);
 

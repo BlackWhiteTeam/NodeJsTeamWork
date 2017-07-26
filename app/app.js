@@ -36,7 +36,6 @@ const init = (data) => {
     require('./auth').init(app, data.users);
 
     const controllers = require('./controllers')(data, helpers);
-
     require('./routers').attachTo(app, controllers);
 
     return Promise.resolve({ server: app, data: data });

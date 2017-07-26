@@ -3,7 +3,7 @@
 const fs = require('fs');
 const path = require('path');
 
-const attachTo = (app, controller) => {
+const attachTo = (app, controllers) => {
     app.get('*', (req, res, next) => {
         res.locals.loggedIn = !!(req.user);
         res.locals.user = req.user;
@@ -20,9 +20,9 @@ const attachTo = (app, controller) => {
 
     fs.readdirSync(__dirname)
         .filter((file) => file.includes('.router'))
-        .forEach((file) => {
-            const modulePath = path.join(__dirname, file);
-            require(modulePath).attachTo(app, controller);
+        .forEach((filename) => {
+            const modulePath = path.join(__dirname, filename);
+            require(modulePath).attachTo(app, controllers);
         });
 };
 

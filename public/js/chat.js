@@ -105,9 +105,6 @@ $('body').on('click', function(event) {
 
         let toUserData = null;
 
-        console.log('To Users: ' + toUser);
-        console.log(usersOnline);
-
         for (let i = 0; i < usersOnline.length; i += 1) {
             if (usersOnline[i].username === toUser) {
                 toUserData = usersOnline[i];

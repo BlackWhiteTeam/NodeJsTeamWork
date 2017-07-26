@@ -15,7 +15,6 @@ const getControllers = (data, helpers) => {
             controllers[currentController.name] =
                 currentController(data, helpers);
         });
-
     return controllers;
 };
 

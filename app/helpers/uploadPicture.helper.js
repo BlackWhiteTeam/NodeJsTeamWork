@@ -18,7 +18,7 @@ const makePictureBlack = (photo, path) => {
             img.greyscale().write(path);
         })
         .catch((err) => {
-            console.error(err);
+            req.flash;
         });
 };
 

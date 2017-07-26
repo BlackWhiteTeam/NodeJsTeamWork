@@ -87,9 +87,6 @@ const init = (app) => {
                         });
                 });
 
-
-                console.log('Connected: ' + onlineUsers.length + ' users connected');
-
                 chatInfo.localUser = userNow;
                 chatInfo.allUsersData = allUsersData;
                 chatInfo.chats = [];
@@ -131,7 +128,6 @@ const init = (app) => {
                 }
 
                 sockets.splice(socketId, 1);
-                console.log('Disconnected: ' + onlineUsers.length + ' users connected');
             }
         });
     });

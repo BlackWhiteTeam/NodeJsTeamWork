@@ -1,6 +1,10 @@
-const passport = require('passport');
+// put in helper
+const getIdByUrl = (url) => {
+    const urlParts = url.split('/');
+    return urlParts[urlParts.length - 1];
+};
 
-const userController = (data, helpers) => {
+const usersController = (data, helpers) => {
     return {
         renderAllUsers(req, res) {
             return data.users.getAll()
@@ -21,7 +25,7 @@ const userController = (data, helpers) => {
                 stringProfilePicture: 'defaultpic.png',
                 favorites: [],
             };
-            // return?
+
             data.users.create(user)
                 .then((dbUser) => {
                     req.login(user, (err) => {
@@ -44,17 +48,11 @@ const userController = (data, helpers) => {
             return res.render('users/login');
         },
         loginUser(req, res) {
-            passport.authenticate('local', {
-                    failureRedirect: '/login',
-                    failureFlash: true,
-                })
-                (req, res) => {
-                    data.users.getByObjectName(req.body.username)
-                        .then((user) => {
-                            req.flash('success', 'You are logged in!');
-                            res.redirect('/users/' + user._id);
-                        });
-                }
+            data.users.getByObjectName(req.body.username)
+                .then((user) => {
+                    req.flash('success', 'You are logged in!');
+                    res.redirect('/users/' + user._id);
+                });
         },
         getProfilePage(req, res) {
             if (req.user) {
@@ -81,7 +79,7 @@ const userController = (data, helpers) => {
                     const currentUserId = user._id.toString();
                     if (id === currentUserId) {
                         const photo = req.file;
-                        helpers.uploadPictureHelper.uploadPicture(photo);
+                        helpers.uploadPicture(photo);
                         data.users.updateProfilePicture(id, photo);
 
                         req.flash('info', 'File upload successfully.');
@@ -92,6 +90,7 @@ const userController = (data, helpers) => {
 
             return res.redirect('/users/' + id);
         },
+
         searchUser(req, res) {
             const canSeeProfiles = !!(req.user);
             const input = req.body.searchedUser;
@@ -104,12 +103,12 @@ const userController = (data, helpers) => {
                     });
                 });
         },
+
         userLogout(req, res) {
             req.logout();
             res.redirect('/');
-        }
-
+        },
     };
 };
 
-module.exports = userController;
+module.exports = usersController;
