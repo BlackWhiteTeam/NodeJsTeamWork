@@ -47,7 +47,7 @@ const userController = (data, helpers) => {
             passport.authenticate('local', {
                     failureRedirect: '/login',
                     failureFlash: true,
-                }),
+                })
                 (req, res) => {
                     data.users.getByObjectName(req.body.username)
                         .then((user) => {
