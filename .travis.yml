@@ -3,4 +3,4 @@ node_js:
   - "7"
 install:
     - npm install
-after_success: node server.js
+after_success: npm start

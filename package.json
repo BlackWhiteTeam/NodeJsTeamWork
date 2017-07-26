@@ -3,6 +3,9 @@
   "version": "1.0.0",
   "main": "index.js",
   "license": "MIT",
+  "script": {
+      "start": "node server.js"
+  },
   "dependencies": {
     "body-parser": "^1.17.2",
     "bootstrap": "^3.3.7",
