@@ -3,8 +3,8 @@
 const fs = require('fs');
 const path = require('path');
 
-const attachTo = (app, data) => {
-    app.get('*', function(req, res, next) {
+const attachTo = (app, controller) => {
+    app.get('*', (req, res, next) => {
         res.locals.loggedIn = !!(req.user);
         res.locals.user = req.user;
         next();
@@ -22,7 +22,7 @@ const attachTo = (app, data) => {
         .filter((file) => file.includes('.router'))
         .forEach((file) => {
             const modulePath = path.join(__dirname, file);
-            require(modulePath).attachTo(app, data);
+            require(modulePath).attachTo(app, controller);
         });
 };
 

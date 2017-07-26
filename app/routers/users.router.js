@@ -1,21 +1,14 @@
 const passport = require('passport');
-const uploadPictureController =
-    require('../controllers/uploadPicture.controller');
-
+const uploadPictureHelper =
+    require('../helpers/uploadPicture.helper');
+// put in helper
 const getIdByUrl = (url) => {
     const urlParts = url.split('/');
     return urlParts[urlParts.length - 1];
 };
 
-const attachTo = (app, data) => {
-    app.get('/users', (req, res) => {
-        return data.users.getAll()
-            .then((users) => {
-                return res.render('users/all', {
-                    context: users,
-                });
-            });
-    });
+const attachTo = (app, { usersController }) => {
+    app.get('/users', usersController.renderAllUsers);
 
     app.get('/register', (req, res) => {
         return res.render('users/register');
@@ -87,14 +80,14 @@ const attachTo = (app, data) => {
     });
 
     // eslint-disable-next-line
-    app.post('/users/:id', uploadPictureController.upload.single('imageupload'), (req, res) => {
+    app.post('/users/:id', uploadPictureHelper.upload.single('imageupload'), (req, res) => {
         const id = getIdByUrl(req.url);
         data.users.getByObjectName(req.user.name)
             .then((user) => {
                 const currentUserId = user._id.toString();
                 if (id === currentUserId) {
                     const photo = req.file;
-                    uploadPictureController.uploadPicture(photo);
+                    uploadPictureHelper.uploadPicture(photo);
                     data.users.updateProfilePicture(id, photo);
 
                     req.flash('info', 'File upload successfully.');

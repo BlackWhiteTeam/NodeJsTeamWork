@@ -1,5 +1,5 @@
 const uploadPictureController =
-    require('../controllers/uploadPicture.controller');
+    require('../helpers/uploadPicture.helper');
 let lastPicture = 'upload-icon.png';
 
 const attachTo = (app, data) => {

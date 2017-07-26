@@ -5,6 +5,7 @@ const path = require('path');
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
 const session = require('express-session');
+const helpers = require('./helpers');
 
 const init = (data) => {
     const app = express();
@@ -32,18 +33,13 @@ const init = (data) => {
 
     app.locals.moment = require('moment');
 
-    require('./auth')
-        .init(app, data.users);
+    require('./auth').init(app, data.users);
 
-    require('./controllers')
-        .attachTo(data);
+    const controllers = require('./controllers')(data, helpers);
 
-    require('./routers')
-        .attachTo(app, data);
+    require('./routers').attachTo(app, controllers);
 
     return Promise.resolve({ server: app, data: data });
 };
 
-module.exports = {
-    init,
-};
+module.exports = { init };
