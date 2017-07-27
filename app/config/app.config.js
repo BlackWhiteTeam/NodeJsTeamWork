@@ -1,7 +1,9 @@
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
 const session = require('express-session');
+const MongoStore = require('connect-mongo')(session);
 const multer = require('multer');
+const config = require('../../config');
 
 const attachTo = (app) => {
     app.set('view engine', 'pug');
@@ -10,6 +12,7 @@ const attachTo = (app) => {
 
     app.use(cookieParser('keyboard cat'));
     app.use(session({
+        store: new MongoStore({ url: config.connectionString }),
         saveUninitialized: true,
         resave: false,
         secret: 'secret',

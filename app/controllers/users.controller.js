@@ -112,6 +112,7 @@ const usersController = (data, helpers) => {
 
         userLogout(req, res) {
             req.logout();
+            req.flash('info', 'You are logged out!')
             res.redirect('/');
         },
     };

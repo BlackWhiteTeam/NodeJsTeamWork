@@ -4,3 +4,9 @@ node_js:
 install:
     - npm install
 after_success: npm run coverage
+notifications:
+    email:
+        - vlpetrovic99@gmail.com
+        - g.geneva94@gmail.com
+    on_success: never
+    on_failure: always
