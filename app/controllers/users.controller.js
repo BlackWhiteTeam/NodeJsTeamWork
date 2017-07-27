@@ -112,8 +112,29 @@ const usersController = (data, helpers) => {
 
         userLogout(req, res) {
             req.logout();
-            req.flash('info', 'You are logged out!')
+            req.flash('info', 'You are logged out!');
             res.redirect('/');
+        },
+
+        likePost(req, res) {
+            const postId = req.body.postId;
+            // base logic
+            return res.send({});
+        },
+        unlikePost(req, res) {
+            const postId = req.body.postId;
+            // base logic
+            return res.send({});
+        },
+        dislikePost(req, res) {
+            const postId = req.body.postId;
+            // base logic
+            return res.send({});
+        },
+        undislikePost(req, res) {
+            const postId = req.body.postId;
+            // base logic
+            return res.send({});
         },
     };
 };

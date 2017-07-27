@@ -1,31 +1,45 @@
 /* global $ */
 
-
-// Влади току що осъзнах, че това тук не е валидно за нашия carrousel,
-// трябва да се направи така че като се цъкне на парента примерно,
-// само неговия child да се променя,
-// Защото така се променят всички останали likes and dislikes btns :D
-// Хрумва ми да се направи парент на всеки два бутона с id = post.index
-// и по парента вече вътре двата класа лесно ще ги контролираме,
-// ако успея да се включа оттам ще го направя
-
 $(document).ready(function() {
-    $('.dislike').click(function() {
-        $(this).hide();
-        $('.disliked').show();
+    $('.dislike').click(function(ev) {
+        sendRate(ev, 'dislike', 1, false);
+        $(ev.target).parent().find('.disliked').show();
     });
 
-    $('.disliked').click(function() {
-        $(this).hide();
-        $('.dislike').show();
+    $('.disliked').click(function(ev) {
+        sendRate(ev, 'undislike', -1, false);
+        $(ev.target).parent().find('.dislike').show();
     });
 
-    $('.like').click(function() {
-        $.ajax()
+    $('.like').click(function(ev) {
+        sendRate(ev, 'like', 1, true);
+        // $('.dislike').off('click');
+        $(ev.target).parent().find('.liked').show();
     });
 
-    $('.liked').click(function() {
-        $(this).hide();
-        $('.like').show();
+    $('.liked').click(function(ev) {
+        sendRate(ev, 'unlike', -1, true);
+        $(ev.target).parent().find('.like').show();
     });
 });
+
+function sendRate(ev, type, count, like) {
+    const id = $('.item.active').attr('data-post-id');
+    $.ajax({
+        url: '/' + type,
+        type: 'POST',
+        data: ({
+            postId: id,
+        }),
+        success: () => {
+            let counter = '';
+            if (like) {
+                counter = $(ev.target).siblings().eq(0);
+            } else {
+                counter = $(ev.target).siblings().last();
+            }
+            counter.text(+counter.text() + count);
+        },
+    });
+    $(ev.target).hide();
+}

@@ -8,6 +8,10 @@ const attachTo = (app, { usersController }) => {
     app.post('/users/:id', usersController.updateProfilePicture);
     app.post('/users', usersController.searchUser);
     app.get('/logout', usersController.userLogout);
+    app.post('/like', usersController.likePost);
+    app.post('/unlike', usersController.unlikePost);
+    app.post('/dislike', usersController.dislikePost);
+    app.post('/undislike', usersController.undislikePost);
 };
 
 module.exports = { attachTo };

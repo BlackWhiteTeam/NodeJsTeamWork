@@ -35,37 +35,26 @@ block content
                                 li(data-target='#myCarousel', data-slide-to=index)
                 // Wrapper for slides
                 .carousel-inner
+                    - var state = ''
                     each post, index in posts
                         if (index === 0)
-                            .item.active
-                                img(src='/uploads/' + post.picture, alt=post.picture)
-                                a.btn.black-background.white#add(href='/addToFavorites/' + post._id, role='button')
-                                    span.glyphicon.glyphicon-plus
-                                    |  Favs
-                                .float-right
-                                    span.counter-likes
-                                        |0
-                                    img.like.like-dislike-btn(src='/images/like-btn.png', alt='like')
-                                    img.liked.like-dislike-btn(src='/images/liked-btn.png', alt='liked',style="display:none;")
-                                    img.dislike.like-dislike-btn(src='/images/dislike-btn.png', alt='dislike')
-                                    img.disliked.like-dislike-btn(src='/images/disliked-btn.png', alt='disliked',style="display:none;")
-                                    span.counter-dislikes
-                                        |0
+                            - state = 'active'
                         else
-                            .item
-                                img(src='/uploads/' + post.picture, alt=post.picture)
-                                a.btn.black-background.white#add(href='/addToFavorites/' + post._id, role='button')
-                                    span.glyphicon.glyphicon-plus
-                                    |  Favs
-                                .float-right
-                                    span.counter-likes
-                                        |0
-                                    img.like.like-dislike-btn(src='/images/like-btn.png', alt='like')
-                                    img.liked.like-dislike-btn(src='/images/liked-btn.png', alt='liked',style="display:none;")
-                                    img.dislike.like-dislike-btn(src='/images/dislike-btn.png', alt='dislike')
-                                    img.disliked.like-dislike-btn(src='/images/disliked-btn.png', alt='disliked',style="display:none;")
-                                    span.counter-dislikes
-                                        |0
+                            - state = ''
+                        div(class="item " + state, data-post-id=post._id)
+                            img(src='/uploads/' + post.picture, alt=post.picture)
+                            a.btn.black-background.white#add(href='/addToFavorites/' + post._id, role='button')
+                                span.glyphicon.glyphicon-plus
+                                |  Favs
+                            .float-right
+                                span.counter-likes
+                                    =post.likes
+                                img.like.like-dislike-btn(src='/images/like-btn.png', alt='like')
+                                img.liked.like-dislike-btn(src='/images/liked-btn.png', alt='liked',style="display:none;")
+                                img.dislike.like-dislike-btn(src='/images/dislike-btn.png', alt='dislike')
+                                img.disliked.like-dislike-btn(src='/images/disliked-btn.png', alt='disliked',style="display:none;")
+                                span.counter-dislikes
+                                    =post.dislikes
                 // Left and right controls
                 a.left.carousel-control(href='#myCarousel', data-slide='prev')
                     span.glyphicon.glyphicon-chevron-left

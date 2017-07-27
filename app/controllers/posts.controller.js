@@ -41,6 +41,8 @@ const postsController = (data, helpers) => {
                 author: req.user.name,
                 picture: lastPicture,
                 description: req.body.description,
+                likes: 0,
+                dislikes: 0,
             };
             lastPicture = 'upload-icon.png';
             data.posts.create(post)
