@@ -1,9 +1,3 @@
-// put in helper
-const getIdByUrl = (url) => {
-    const urlParts = url.split('/');
-    return urlParts[urlParts.length - 1];
-};
-
 const passport = require('passport');
 
 const usersController = (data, helpers) => {
@@ -68,7 +62,7 @@ const usersController = (data, helpers) => {
         },
         getProfilePage(req, res) {
             if (req.user) {
-                const id = getIdByUrl(req.url);
+                const id = req.params.id;
                 data.users.getById(id)
                     .then((user) => {
                         data.posts.getPostsByUsername(user.name)
@@ -85,7 +79,7 @@ const usersController = (data, helpers) => {
             }
         },
         updateProfilePicture(req, res) {
-            const id = getIdByUrl(req.url);
+            const id = req.params.id;
             data.users.getByObjectName(req.user.name)
                 .then((user) => {
                     const currentUserId = user._id.toString();
@@ -118,6 +112,7 @@ const usersController = (data, helpers) => {
 
         userLogout(req, res) {
             req.logout();
+            req.flash('info', 'You are logged out!')
             res.redirect('/');
         },
     };
