@@ -6,6 +6,7 @@ const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
 const session = require('express-session');
 const helpers = require('./helpers');
+const multer = require('multer');
 
 const init = (data) => {
     const app = express();
@@ -30,7 +31,17 @@ const init = (data) => {
         res.locals.messages = require('express-messages')(req, res);
         next();
     });
-
+    app.use(multer({
+        storage: multer.diskStorage({
+            destination: (req, file, cb) => {
+                cb(null, './public/uploads');
+            },
+            filename: (req, file, cb) => {
+                const filename = file.originalname.split('.');
+                cb(null, Date.now() + '.' + filename[filename.length - 1]);
+            },
+        }),
+    }).single('imageupload'));
     app.locals.moment = require('moment');
 
     require('./auth').init(app, data.users);

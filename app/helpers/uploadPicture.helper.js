@@ -1,15 +1,3 @@
-const multer = require('multer');
-const storage = multer.diskStorage({
-    destination: (req, file, cb) => {
-        cb(null, './public/uploads');
-    },
-    filename: (req, file, cb) => {
-        const filename = file.originalname.split('.');
-        cb(null, Date.now() + '.' + filename[filename.length - 1]);
-    },
-});
-const upload = multer({ storage: storage });
-
 const Jimp = require('jimp');
 
 const makePictureBlack = (photo, path) => {
@@ -18,7 +6,7 @@ const makePictureBlack = (photo, path) => {
             img.greyscale().write(path);
         })
         .catch((err) => {
-            req.flash;
+            console.error(err);
         });
 };
 
@@ -28,4 +16,4 @@ const uploadPicture = (photo) => {
 };
 
 
-module.exports = { upload, uploadPicture };
+module.exports = { uploadPicture };

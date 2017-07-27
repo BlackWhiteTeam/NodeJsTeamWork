@@ -4,6 +4,8 @@ const getIdByUrl = (url) => {
     return urlParts[urlParts.length - 1];
 };
 
+const passport = require('passport');
+
 const usersController = (data, helpers) => {
     return {
         renderAllUsers(req, res) {
@@ -47,12 +49,22 @@ const usersController = (data, helpers) => {
             }
             return res.render('users/login');
         },
-        loginUser(req, res) {
-            data.users.getByObjectName(req.body.username)
-                .then((user) => {
+        loginUser(req, res, next) {
+            return passport.authenticate('local', (err, user) => {
+                if (err) {
+                    req.flash('error', err);
+                    return res.redirect('/login');
+                }
+                req.login(user, (error) => {
+                    if (error) {
+                        req.flash(error);
+                        return res.redirect('/login');
+                    }
                     req.flash('success', 'You are logged in!');
-                    res.redirect('/users/' + user._id);
+                    return res.redirect('/users/' + user._id);
                 });
+                return next();
+            })(req, res, next);
         },
         getProfilePage(req, res) {
             if (req.user) {
