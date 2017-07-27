@@ -4,29 +4,29 @@ const sinon = require('sinon');
 const BaseData = require('../../../data/base/base.data');
 
 const db = {
-    collection: () => { },
-};
-let items = [];
-
-let ModelClass = null;
-const validator = null;
-let data = null;
-
-const toArray = () => {
-    return Promise.resolve(items);
-};
-
-const find = () => {
-    return {
-        toArray,
+        collection: () => { },
     };
-};
-const insert = (something) => {
-    return Promise.resolve(something);
-};
+    let items = [];
 
+    let ModelClass = null;
+    const validator = null;
+    let data = null;
+
+    const toArray = () => {
+        return Promise.resolve(items);
+    };
+
+    const find = () => {
+        return {
+            toArray,
+        };
+    };
+    const insert = (something) => {
+        return Promise.resolve(something);
+    };
+    
 describe('BaseData getAll()', () => {
-
+    
     describe('when there are items in db', () => {
         beforeEach(() => {
             items = [1, 2, 3, 4];

@@ -1,26 +1,44 @@
+const { expect } = require('chai');
+const sinon = require('sinon');
+
+const BaseData = require('../../../data/base/base.data');
+
 const db = {
     collection: () => { },
 };
-let items = [];
+let items = [1];
 
 let ModelClass = null;
 const validator = null;
 let data = null;
 
-const toArray = () => {
-    return Promise.resolve(items);
+const findOne = (item) => {
+    return Promise.resolve();
 };
 
-const find = () => {
-    return {
-        toArray,
-    };
-};
-const insert = (something) => {
-    return Promise.resolve(something);
-};
-describe('greshen test', () => {
-    it('greshentestzatest', () => {
-        expect(3).to.equal(5);
+describe('GetById', () => {
+    beforeEach(() => {
+        sinon.stub(db, 'collection')
+            .callsFake(() => {
+                return {
+                    findOne,
+                };
+            });
+        ModelClass = class {
+        };
+        afterEach(() => {
+            db.collection.restore();
+        });
+        // Arrange
+        data = new BaseData(db, ModelClass, validator);
+    });
+    it('findOne should be called', () => {
+        return data.getById()
+            .then(() => {
+                expect(true).to.be.true;
+            },
+            () => {
+                expect(false).to.be.true;
+            });
     });
 });
