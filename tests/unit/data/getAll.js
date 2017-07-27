@@ -3,43 +3,49 @@ const sinon = require('sinon');
 
 const BaseData = require('../../../data/base/base.data');
 
-describe('BaseData.getAll()', () => {
-    const db = {
-        collection: () => { },
-    };
-    let items = [];
+const db = {
+    collection: () => { },
+};
+let items = [];
 
-    let ModelClass = null;
-    const validator = null;
-    let data = null;
+let ModelClass = null;
+const validator = null;
+let data = null;
 
-    const toArray = () => {
-        return Promise.resolve(items);
-    };
+const toArray = () => {
+    return Promise.resolve(items);
+};
 
-    const find = () => {
-        return {
-            toArray,
-        };
+const find = () => {
+    return {
+        toArray,
     };
+};
+const insert = (something) => {
+    return Promise.resolve(something);
+};
+
+describe('BaseData getAll()', () => {
 
     describe('when there are items in db', () => {
+        beforeEach(() => {
+            items = [1, 2, 3, 4];
+            sinon.stub(db, 'collection')
+                .callsFake(() => {
+                    return {
+                        find,
+                    };
+                });
+        });
+        afterEach(() => {
+            db.collection.restore();
+        });
         describe('with default toViewModel', () => {
             beforeEach(() => {
-                items = [1, 2, 3, 4];
-                sinon.stub(db, 'collection')
-                    .callsFake(() => {
-                        return { find };
-                    });
                 ModelClass = class {
                 };
-
                 // Arrange
                 data = new BaseData(db, ModelClass, validator);
-            });
-
-            afterEach(() => {
-                db.collection.restore();
             });
 
             it('expect to return items', () => {
@@ -52,21 +58,12 @@ describe('BaseData.getAll()', () => {
 
         describe('with custom toViewModel', () => {
             beforeEach(() => {
-                items = [1, 2, 3, 4];
-                sinon.stub(db, 'collection')
-                    .callsFake(() => {
-                        return { find };
-                    });
                 ModelClass.toViewModel = (model) => {
                     return model + '1';
                 };
 
                 // Arrange
                 data = new BaseData(db, ModelClass, validator);
-            });
-
-            afterEach(() => {
-                db.collection.restore();
             });
 
             it('expect to return items', () => {
