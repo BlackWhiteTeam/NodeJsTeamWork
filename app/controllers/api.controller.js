@@ -12,14 +12,14 @@ const apiController = (data, helpers) => {
                 });
         },
         getUserById(req, res) {
-            const id = helpers.getIdByUrl(req.url);
+            const id = req.params.id;
             data.users.getById(id)
                 .then((user) => {
                     return res.send(user);
                 });
         },
         getUserPosts(req, res) {
-            const id = helpers.getIdByUrl(req.url.slice(0, -6));
+            const id = req.params.id;
             data.users.getById(id)
                 .then((user) => {
                     data.posts.getPostsByUsername(user.name)
@@ -35,7 +35,7 @@ const apiController = (data, helpers) => {
                 });
         },
         getPostById(req, res) {
-            const id = helpers.getIdByUrl(req.url);
+            const id = req.params.id;
             data.posts.getById(id)
                 .then((post) => {
                     return res.send(post);

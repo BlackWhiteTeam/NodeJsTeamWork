@@ -62,7 +62,7 @@ const usersController = (data, helpers) => {
         },
         getProfilePage(req, res) {
             if (req.user) {
-                const id = helpers.getIdByUrl(req.url);
+                const id = req.params.id;
                 data.users.getById(id)
                     .then((user) => {
                         data.posts.getPostsByUsername(user.name)
@@ -79,7 +79,7 @@ const usersController = (data, helpers) => {
             }
         },
         updateProfilePicture(req, res) {
-            const id = helpers.getIdByUrl(req.url);
+            const id = req.params.id;
             data.users.getByObjectName(req.user.name)
                 .then((user) => {
                     const currentUserId = user._id.toString();

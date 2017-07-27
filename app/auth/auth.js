@@ -1,7 +1,7 @@
 const { Strategy } = require('passport-local');
 const passport = require('passport');
 
-const init = (app, usersData) => {
+const attachTo = (app, usersData) => {
     app.use(passport.initialize());
     app.use(passport.session());
 
@@ -25,5 +25,5 @@ const init = (app, usersData) => {
     });
 };
 
-module.exports = { init };
+module.exports = { attachTo };
 
