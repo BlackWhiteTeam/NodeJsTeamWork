@@ -1,9 +1,3 @@
-// put in helper
-const getIdByUrl = (url) => {
-    const urlParts = url.split('/');
-    return urlParts[urlParts.length - 1];
-};
-
 const apiController = (data, helpers) => {
     return {
         getUsers(req, res) {
@@ -18,14 +12,14 @@ const apiController = (data, helpers) => {
                 });
         },
         getUserById(req, res) {
-            const id = getIdByUrl(req.url);
+            const id = helpers.getIdByUrl(req.url);
             data.users.getById(id)
                 .then((user) => {
                     return res.send(user);
                 });
         },
         getUserPosts(req, res) {
-            const id = getIdByUrl(req.url.slice(0, -6));
+            const id = helpers.getIdByUrl(req.url.slice(0, -6));
             data.users.getById(id)
                 .then((user) => {
                     data.posts.getPostsByUsername(user.name)
@@ -41,7 +35,7 @@ const apiController = (data, helpers) => {
                 });
         },
         getPostById(req, res) {
-            const id = getIdByUrl(req.url);
+            const id = helpers.getIdByUrl(req.url);
             data.posts.getById(id)
                 .then((post) => {
                     return res.send(post);
