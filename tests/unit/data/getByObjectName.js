@@ -6,17 +6,17 @@ const BaseData = require('../../../data/base/base.data');
 const db = {
     collection: () => { },
 };
-let items = 1;
+const item = 1;
 
 let ModelClass = null;
 const validator = null;
 let data = null;
 
-const findOne = (item) => {
-    return Promise.resolve();
+const findOne = (object) => {
+    return Promise.resolve(object.name);
 };
 
-describe('GetById', () => {
+describe('getByObjectName', () => {
     beforeEach(() => {
         sinon.stub(db, 'collection')
             .callsFake(() => {
@@ -31,13 +31,12 @@ describe('GetById', () => {
     afterEach(() => {
         db.collection.restore();
     });
-    it('findOne should be called', () => {
-        return data.getById()
-            .then(() => {
-                expect(true).to.be.true;
-            },
-            () => {
-                expect(false).to.be.true;
+    // Arrange
+    it('findOne should be called with correct string', () => {
+        const expectedResult = item;
+        return data.getByObjectName(item)
+            .then((result) => {
+                expect(+result).to.equal(expectedResult);
             });
     });
 });
