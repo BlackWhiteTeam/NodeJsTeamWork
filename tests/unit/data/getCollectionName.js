@@ -3,26 +3,19 @@ const sinon = require('sinon');
 
 const BaseData = require('../../../data/base/base.data');
 
+const item = 'modelclass';
+let ModelClass = null;
 const db = {
     collection: () => { },
 };
-let items = 1;
-
-let ModelClass = null;
 const validator = null;
 let data = null;
 
-const findOne = (item) => {
-    return Promise.resolve();
-};
-
-describe('GetById', () => {
+describe('getCollectionName', () => {
     beforeEach(() => {
         sinon.stub(db, 'collection')
             .callsFake(() => {
-                return {
-                    findOne,
-                };
+                return () => {};
             });
         ModelClass = class {
         };
@@ -31,13 +24,8 @@ describe('GetById', () => {
     afterEach(() => {
         db.collection.restore();
     });
-    it('findOne should be called', () => {
-        return data.getById()
-            .then(() => {
-                expect(true).to.be.true;
-            },
-            () => {
-                expect(false).to.be.true;
-            });
+    it('should return correct name', () => {
+        const expectedResult = item + 's';
+        return expect(data._getCollectionName()).to.equals(expectedResult);
     });
 });
