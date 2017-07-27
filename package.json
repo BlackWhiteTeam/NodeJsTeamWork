@@ -3,8 +3,9 @@
   "version": "1.0.0",
   "main": "index.js",
   "license": "MIT",
-  "script": {
-      "start": "node server.js"
+  "scripts": {
+    "start": "node server.js",
+    "test": "./node_modules/.bin/mocha tests/unit/data/getAll.js"
   },
   "dependencies": {
     "body-parser": "^1.17.2",
@@ -25,11 +26,15 @@
     "passport-local": "^1.0.0",
     "pug": "^2.0.0-rc.2",
     "simple-encryptor": "^1.1.0",
+    "sinon": "^2.4.1",
     "socket.io": "^2.0.3"
   },
   "devDependencies": {
     "babel-eslint": "^7.2.3",
+    "chai": "^4.1.0",
     "eslint": "^4.1.1",
-    "eslint-config-google": "^0.8.0"
+    "eslint-config-google": "^0.8.0",
+    "istanbul": "^0.4.5",
+    "mocha": "^3.4.2"
   }
 }
