@@ -43,4 +43,15 @@ describe('checkPassword', () => {
                 expect(true).to.be.true;
             });
     });
+    it('expect to resoolve with user when everything is correct', () => {
+        // eslint-disable-next-line new-cap
+        const cryptedPass = CryptoJS.SHA1(password).toString();
+        user = {
+            password: cryptedPass,
+        };
+        return data.checkPassword(user, password)
+            .then((result) => {
+                expect(result).to.deep.equal(user);
+            });
+    });
 });
