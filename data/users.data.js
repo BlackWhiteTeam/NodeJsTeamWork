@@ -57,10 +57,6 @@ class UsersData extends BaseData {
         // eslint-disable-next-line
         this.collection.update({_id: ObjectId(id)}, {$set: {stringProfilePicture: photo.filename}});
     }
-
-    _isModelValid(model) {
-        return super._isModelValid(model);
-    }
 }
 
 module.exports = UsersData;

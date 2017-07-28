@@ -1,7 +1,7 @@
 const { expect } = require('chai');
 const sinon = require('sinon');
 
-const BaseData = require('../../../data/base/base.data');
+const BaseData = require('../../../../data/base/base.data');
 
 const db = {
         collection: () => { },
@@ -21,12 +21,7 @@ const db = {
             toArray,
         };
     };
-    const insert = (something) => {
-        return Promise.resolve(something);
-    };
-    
 describe('BaseData getAll()', () => {
-    
     describe('when there are items in db', () => {
         beforeEach(() => {
             items = [1, 2, 3, 4];

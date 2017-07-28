@@ -1,27 +1,33 @@
 const { expect } = require('chai');
 const sinon = require('sinon');
 
-const BaseData = require('../../../data/base/base.data');
+const BaseData = require('../../../../data/posts.data');
 
 const db = {
     collection: () => { },
 };
-const item = 1;
+const item = 'testResult';
 
 let ModelClass = null;
 const validator = null;
 let data = null;
 
-const findOne = (object) => {
-    return Promise.resolve(object.name);
+const toArray = () => {
+    return Promise.resolve(item);
 };
 
-describe('getByObjectName', () => {
+const find = (object) => {
+    return {
+        toArray,
+    };
+};
+
+describe('getPostsByUsername', () => {
     beforeEach(() => {
         sinon.stub(db, 'collection')
             .callsFake(() => {
                 return {
-                    findOne,
+                    find,
                 };
             });
         ModelClass = class {
@@ -32,11 +38,11 @@ describe('getByObjectName', () => {
         db.collection.restore();
     });
     // Arrange
-    it('findOne should be called with correct string', () => {
+    it('find should be called with correct string', () => {
         const expectedResult = item;
-        return data.getByObjectName(item)
+        return data.getPostsByUsername(item)
             .then((result) => {
-                expect(+result).to.equal(expectedResult);
+                expect(result).to.equal(expectedResult);
             });
     });
 });

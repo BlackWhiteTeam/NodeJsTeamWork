@@ -1,27 +1,34 @@
 const { expect } = require('chai');
 const sinon = require('sinon');
 
-const BaseData = require('../../../data/base/base.data');
+const BaseData = require('../../../../data/posts.data');
 
-const item = 1;
-let ModelClass = null;
 const db = {
     collection: () => { },
 };
-const validator = {
-    isValid: () => { },
-};
+const item = 'testResult';
+
+let ModelClass = null;
+const validator = null;
 let data = null;
 
-describe('isModelValid', () => {
+const toArray = () => {
+    return Promise.resolve(item);
+};
+
+const find = (object) => {
+    return {
+        toArray,
+    };
+};
+
+describe('getMyFavoritePosts', () => {
     beforeEach(() => {
         sinon.stub(db, 'collection')
             .callsFake(() => {
-                return () => {};
-            });
-        sinon.stub(validator, 'isValid')
-            .callsFake((item) => {
-                return Promise.resolve(item);
+                return {
+                    find,
+                };
             });
         ModelClass = class {
         };
@@ -29,11 +36,11 @@ describe('isModelValid', () => {
     });
     afterEach(() => {
         db.collection.restore();
-        validator.isValid.restore();
     });
-    it('should call validator.Isvalid', () => {
+    // Arrange
+    it('find and ToArray should be called', () => {
         const expectedResult = item;
-        return data._isModelValid(item)
+        return data.getMyFavoritesPosts(item)
             .then((result) => {
                 expect(result).to.equal(expectedResult);
             });
