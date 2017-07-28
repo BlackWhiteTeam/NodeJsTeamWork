@@ -20,22 +20,22 @@ class PostsData extends BaseData {
 
     like(postId) {
         // eslint-disable-next-line
-        this.collection.update({_id: ObjectId(postId)}, {$inc: {likes: 1}});
+       return this.collection.update({_id: ObjectId(postId)}, {$inc: {likes: 1}});
     }
 
     unlike(postId) {
         // eslint-disable-next-line
-        this.collection.update({_id: ObjectId(postId)}, {$inc: {likes: -1}});
+       return this.collection.update({_id: ObjectId(postId)}, {$inc: {likes: -1}});
     }
 
     dislike(postId) {
         // eslint-disable-next-line
-        this.collection.update({_id: ObjectId(postId)}, {$inc: {dislikes: 1}});
+       return this.collection.update({_id: ObjectId(postId)}, {$inc: {dislikes: 1}});
     }
 
     undislike(postId) {
         // eslint-disable-next-line
-        this.collection.update({_id: ObjectId(postId)}, {$inc: {dislikes: -1}});
+        return this.collection.update({_id: ObjectId(postId)}, {$inc: {dislikes: -1}});
     }
 }
 
