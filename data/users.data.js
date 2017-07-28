@@ -88,6 +88,17 @@ class UsersData extends BaseData {
                 $set: { stringProfilePicture: photo.filename },
             });
     }
+
+    addToFavourites(idUser, idPost) {
+        // eslint-disable-next-line
+       return this.collection.update({_id: ObjectId(idUser)}, {$addToSet: {favorites: ObjectId(idPost)}});
+    }
+
+    deleteFromFavourites(idUser, idPost) {
+        return this.collection.update(
+            // eslint-disable-next-line
+            {_id: ObjectId(idUser)}, {$pull: {favorites: {$in: [ObjectId(idPost)]}}});
+    }
 }
 
 module.exports = UsersData;
