@@ -18,7 +18,7 @@ const update = (item1) => {
     return Promise.resolve(item1._id);
 };
 
-describe('addToFavourites', () => {
+describe('like tests', () => {
     beforeEach(() => {
         sinon.stub(db, 'collection')
             .callsFake(() => {
@@ -33,7 +33,7 @@ describe('addToFavourites', () => {
     afterEach(() => {
         db.collection.restore();
     });
-    it('update should be called', () => {
+    it('update should be called with right id', () => {
         return data.like(idPost)
             .then((result) => {
                 expect(result[0]).to.equal(ObjectId(idPost)[0]);

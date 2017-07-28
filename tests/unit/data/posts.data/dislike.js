@@ -3,23 +3,22 @@ const sinon = require('sinon');
 const { ObjectId } = require('mongodb');
 
 
-const BaseData = require('../../../../data/users.data');
+const BaseData = require('../../../../data/posts.data');
 
 const db = {
     collection: () => { },
 };
-let idUser = 1;
 let idPost = 1;
 
 let ModelClass = null;
 const validator = null;
 let data = null;
 
-const update = (item1, item2) => {
+const update = (item1) => {
     return Promise.resolve(item1._id);
 };
 
-describe('addToFavourites', () => {
+describe('dislike tests', () => {
     beforeEach(() => {
         sinon.stub(db, 'collection')
             .callsFake(() => {
@@ -35,11 +34,11 @@ describe('addToFavourites', () => {
         db.collection.restore();
     });
     it('update should be called with right id', () => {
-        return data.addToFavourites(idUser, idPost)
+        return data.dislike(idPost)
             .then((result) => {
-                expect(result[0]).to.equal(ObjectId(idUser)[0]);
-                expect(result[1]).to.equal(ObjectId(idUser)[1]);
-                expect(result[2]).to.equal(ObjectId(idUser)[2]);
+                expect(result[0]).to.equal(ObjectId(idPost)[0]);
+                expect(result[1]).to.equal(ObjectId(idPost)[1]);
+                expect(result[2]).to.equal(ObjectId(idPost)[2]);
             });
     });
 });
