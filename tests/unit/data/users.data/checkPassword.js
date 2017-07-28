@@ -33,4 +33,14 @@ describe('checkPassword', () => {
                 expect(true).to.be.true;
             });
     });
+    it('expect to reject if wrong password is provided', () => {
+        user = true;
+        return data.checkPassword(user, password)
+            .then(() => {
+                expect(false).to.be.true;
+            },
+            () => {
+                expect(true).to.be.true;
+            });
+    });
 });
