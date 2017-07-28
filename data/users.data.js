@@ -1,3 +1,4 @@
+/* eslint-disable new-cap */
 const ObjectId = require('mongodb').ObjectID;
 const CryptoJS = require('crypto-js');
 
@@ -35,27 +36,57 @@ class UsersData extends BaseData {
     }
 
     getAllUsersByMatchingString(input) {
-        const users = this.collection.find({
+        return this.collection.find({
             name: new RegExp('^' + input.toString(), 'i'),
         }).toArray();
+    }
 
-        return users;
+    addToLiked(idUser, idPost) {
+        return this.collection.update({ _id: ObjectId(idUser) },
+            {
+                $addToSet: { liked: ObjectId(idPost) },
+            });
+    }
+
+    deleteFromLiked(idUser, idPost) {
+        return this.collection.update({ _id: ObjectId(idUser) },
+            {
+                $pull: { liked: ObjectId(idPost) },
+            });
+    }
+    addToDisliked(idUser, idPost) {
+        return this.collection.update({ _id: ObjectId(idUser) },
+            {
+                $addToSet: { disliked: ObjectId(idPost) },
+            });
+    }
+
+    deleteFromDisliked(idUser, idPost) {
+        return this.collection.update({ _id: ObjectId(idUser) },
+            {
+                $pull: { disliked: ObjectId(idPost) },
+            });
     }
 
     addToFavorites(idUser, idPost) {
-        // eslint-disable-next-line
-        this.collection.update({_id: ObjectId(idUser)}, {$addToSet: {favorites: ObjectId(idPost)}});
+        return this.collection.update({ _id: ObjectId(idUser) },
+            {
+                $addToSet: { favorites: ObjectId(idPost) },
+            });
     }
 
     deleteFromFavorites(idUser, idPost) {
-        this.collection.update(
-            // eslint-disable-next-line
-            {_id: ObjectId(idUser)}, {$pull: {favorites: {$in: [ObjectId(idPost)]}}});
+        return this.collection.update({ _id: ObjectId(idUser) },
+            {
+                $pull: { favorites: { $in: [ObjectId(idPost)] } },
+            });
     }
 
     updateProfilePicture(id, photo) {
-        // eslint-disable-next-line
-        this.collection.update({_id: ObjectId(id)}, {$set: {stringProfilePicture: photo.filename}});
+        return this.collection.update({ _id: ObjectId(id) },
+            {
+                $set: { stringProfilePicture: photo.filename },
+            });
     }
 }
 

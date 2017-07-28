@@ -45,8 +45,8 @@ const postsController = (data, helpers) => {
                 dislikes: 0,
             };
             lastPicture = 'upload-icon.png';
-            data.posts.create(post)
-                .then((dbPost) => {
+            return data.posts.create(post)
+                .then(() => {
                     return res.redirect('/myphotos');
                 })
                 .catch((err) => {

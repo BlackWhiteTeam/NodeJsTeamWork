@@ -20,9 +20,11 @@ const usersController = (data, helpers) => {
                 password: req.body.password,
                 stringProfilePicture: 'defaultpic.png',
                 favorites: [],
+                liked: [],
+                disliked: [],
             };
 
-            data.users.create(user)
+            return data.users.create(user)
                 .then((dbUser) => {
                     req.login(user, (err) => {
                         if (err) {
@@ -61,46 +63,48 @@ const usersController = (data, helpers) => {
             })(req, res, next);
         },
         getProfilePage(req, res) {
-            if (req.user) {
-                const id = req.params.id;
-                data.users.getById(id)
-                    .then((user) => {
-                        data.posts.getPostsByUsername(user.name)
-                            .then((posts) => {
-                                res.render('users/profile', {
-                                    context: user,
-                                    posts: posts,
-                                    currentUserId: req.user._id.toString(),
-                                });
-                            });
-                    });
-            } else {
-                res.redirect('/login');
+            if (!req.user) {
+                return res.redirect('/login');
             }
+            const id = req.params.id;
+            return data.users.getById(id)
+                .then((user) => {
+                    return Promise.all(
+                        [data.posts.getPostsByUsername(user.name), user]
+                    );
+                }).then(([posts, user]) => {
+                    return res.render('users/profile', {
+                        context: user,
+                        posts: posts,
+                        currentUserId: req.user._id.toString(),
+                    });
+                });
         },
         updateProfilePicture(req, res) {
             const id = req.params.id;
-            data.users.getByObjectName(req.user.name)
+            return data.users.getByObjectName(req.user.name)
                 .then((user) => {
                     const currentUserId = user._id.toString();
-                    if (id === currentUserId) {
-                        const photo = req.file;
-                        helpers.uploadPicture(photo);
-                        data.users.updateProfilePicture(id, photo);
-
-                        req.flash('info', 'File upload successfully.');
-                    } else {
-                        req.flash('error', 'It is not your profile');
+                    if (id !== currentUserId) {
+                        return Promise.reject('It is not your profile');
                     }
+                    const photo = req.file;
+                    helpers.uploadPicture(photo);
+                    return data.users.updateProfilePicture(id, photo)
+                })
+                .then(() => {
+                    req.flash('info', 'File upload successfully.');
+                    return res.redirect('/users/' + id);
+                })
+                .catch((err) => {
+                    req.flash('error', err);
                 });
-
-            return res.redirect('/users/' + id);
         },
 
         searchUser(req, res) {
             const canSeeProfiles = !!(req.user);
             const input = req.body.searchedUser;
-            data.users.getAllUsersByMatchingString(input)
+            return data.users.getAllUsersByMatchingString(input)
                 .then((users) => {
                     return res.render('users/all', {
                         context: users,
@@ -113,38 +117,54 @@ const usersController = (data, helpers) => {
         userLogout(req, res) {
             req.logout();
             req.flash('info', 'You are logged out!');
-            res.redirect('/');
+            return res.redirect('/');
         },
 
         likePost(req, res) {
             if (req.user) {
                 const postId = req.body.postId;
-                data.posts.like(postId);
-                return res.send({});
+                return data.users.addToLiked(req.user._id, postId)
+                    .then(() => {
+                        return data.posts.like(postId);
+                    }).then(() => {
+                        return res.send({});
+                    });
             }
             return res.redirect('/login');
         },
         unlikePost(req, res) {
             if (req.user) {
                 const postId = req.body.postId;
-                data.posts.unlike(postId);
-                return res.send({});
+                return data.users.deleteFromLiked(req.user._id, postId)
+                    .then(() => {
+                        return data.posts.unlike(postId);
+                    }).then(() => {
+                        return res.send({});
+                    });
             }
             return res.redirect('/login');
         },
         dislikePost(req, res) {
             if (req.user) {
                 const postId = req.body.postId;
-                data.posts.dislike(postId);
-                return res.send({});
+                return data.users.addToDisliked(req.user._id, postId)
+                    .then(() => {
+                        return data.posts.dislike(postId);
+                    }).then(() => {
+                        return res.send({});
+                    });
             }
             return res.redirect('/login');
         },
         undislikePost(req, res) {
             if (req.user) {
                 const postId = req.body.postId;
-                data.posts.undislike(postId);
-                return res.send({});
+                return data.users.deleteFromDisliked(req.user._id, postId)
+                    .then(() => {
+                        return data.posts.undislike(postId);
+                    }).then(() => {
+                        return res.send({});
+                    });
             }
             return res.redirect('/login');
         },

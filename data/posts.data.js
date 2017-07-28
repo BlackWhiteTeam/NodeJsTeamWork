@@ -1,3 +1,4 @@
+/* eslint-disable new-cap */
 const ObjectId = require('mongodb').ObjectID;
 const BaseData = require('./base/base.data');
 const Post = require('../models/post.model');
@@ -19,23 +20,33 @@ class PostsData extends BaseData {
     }
 
     like(postId) {
-        // eslint-disable-next-line
-        this.collection.update({_id: ObjectId(postId)}, {$inc: {likes: 1}});
+        return this.collection.update({ _id: ObjectId(postId) },
+            {
+                $inc: { likes: 1 },
+            });
     }
 
     unlike(postId) {
-        // eslint-disable-next-line
-        this.collection.update({_id: ObjectId(postId)}, {$inc: {likes: -1}});
+        return this.collection.update(
+            { _id: ObjectId(postId), likes: { $gt: 0 } },
+            {
+                $inc: { likes: -1 },
+            });
     }
 
     dislike(postId) {
-        // eslint-disable-next-line
-        this.collection.update({_id: ObjectId(postId)}, {$inc: {dislikes: 1}});
+        return this.collection.update({ _id: ObjectId(postId) },
+            {
+                $inc: { dislikes: 1 },
+            });
     }
 
     undislike(postId) {
-        // eslint-disable-next-line
-        this.collection.update({_id: ObjectId(postId)}, {$inc: {dislikes: -1}});
+        return this.collection.update(
+            { _id: ObjectId(postId), likes: { $gt: 0 } },
+            {
+                $inc: { dislikes: -1 },
+            });
     }
 }
 
