@@ -2,10 +2,6 @@ const BaseModel = require('./base/base.model');
 const constants = require('../utils/globalConstants');
 
 class User extends BaseModel {
-    get id() {
-        return this._id;
-    }
-
     static isValid(model) {
         const result =
             !!(typeof model.name !== 'undefined'
