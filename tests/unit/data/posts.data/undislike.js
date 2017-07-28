@@ -18,7 +18,7 @@ const update = (item1) => {
     return Promise.resolve(item1._id);
 };
 
-describe('unlike tests', () => {
+describe('dislike tests', () => {
     beforeEach(() => {
         sinon.stub(db, 'collection')
             .callsFake(() => {
@@ -34,7 +34,7 @@ describe('unlike tests', () => {
         db.collection.restore();
     });
     it('update should be called with right id', () => {
-        return data.unlike(idPost)
+        return data.undislike(idPost)
             .then((result) => {
                 expect(result[0]).to.equal(ObjectId(idPost)[0]);
                 expect(result[1]).to.equal(ObjectId(idPost)[1]);
