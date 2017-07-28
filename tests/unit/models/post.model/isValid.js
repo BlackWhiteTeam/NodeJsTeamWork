@@ -1,5 +1,4 @@
 const { expect } = require('chai');
-const sinon = require('sinon');
 
 const model = require('../../../../models/post.model');
 
