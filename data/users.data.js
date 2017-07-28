@@ -38,7 +38,7 @@ class UsersData extends BaseData {
         const users = this.collection.find({
             name: new RegExp('^' + input.toString(), 'i'),
         }).toArray();
-
+        console.log(users);
         return users;
     }
 
