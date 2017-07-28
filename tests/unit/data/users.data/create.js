@@ -35,11 +35,11 @@ describe('create(model)', () => {
     });
     afterEach(() => {
         db.collection.restore();
-        validator.isValid.restore();
+        data.validator.isValid.restore();
     });
 
     it('expect to reject when invalid', () => {
-        sinon.stub(validator, 'isValid')
+        sinon.stub(data.validator, 'isValid')
             .callsFake(() => {
                 return false;
             });
@@ -51,20 +51,20 @@ describe('create(model)', () => {
                 expect(true).to.be.true;
             });
     });
-    // it('expect to add correctly when valid', () => {
-    //     const expectedReuslt = {
-    //         0: 1,
-    //         1: 2,
-    //         2: 3,
-    //         3: 4,
-    //     }
-    //     sinon.stub(validator, 'isValid')
-    //         .callsFake(() => {
-    //             return true;
-    //         });
-    //     return data.create(items)
-    //         .then((result) => {
-    //             expect(result).to.contain(expectedReuslt);
-    //         });
-    // });
+    it('expect to add correctly when valid', () => {
+         const expectedResult = {
+             0: 1,
+             1: 2,
+             2: 3,
+             3: 4,
+         };
+         sinon.stub(data.validator, 'isValid')
+             .callsFake(() => {
+                 return true;
+             });
+         return data.create(items)
+             .then((result) => {
+                 expect(result).to.contain(expectedResult);
+             });
+     });
 });
