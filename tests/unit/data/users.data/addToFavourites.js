@@ -1,33 +1,30 @@
 const { expect } = require('chai');
 const sinon = require('sinon');
+const { ObjectId } = require('mongodb');
+
 
 const BaseData = require('../../../../data/users.data');
 
 const db = {
     collection: () => { },
 };
-const item = 'testResult';
+let idUser = 1;
+let idPost = 1;
 
 let ModelClass = null;
 const validator = null;
 let data = null;
 
-const toArray = () => {
-    return Promise.resolve(item);
+const update = (item1, item2) => {
+    return Promise.resolve(item1._id);
 };
 
-const find = (object) => {
-    return {
-        toArray,
-    };
-};
-
-describe('getAllUsersByMatchingString', () => {
+describe('addToFavourites', () => {
     beforeEach(() => {
         sinon.stub(db, 'collection')
             .callsFake(() => {
                 return {
-                    find,
+                    update,
                 };
             });
         ModelClass = class {
@@ -37,12 +34,12 @@ describe('getAllUsersByMatchingString', () => {
     afterEach(() => {
         db.collection.restore();
     });
-    // Arrange
-    it('find should be called with correct string', () => {
-        const expectedResult = item;
-        return data.getAllUsersByMatchingString(item)
+    it('update should be called', () => {
+        return data.addToFavourites(idUser, idPost)
             .then((result) => {
-                expect(result).to.equal(expectedResult);
+                expect(result[0]).to.equal(ObjectId(idUser)[0]);
+                expect(result[1]).to.equal(ObjectId(idUser)[1]);
+                expect(result[2]).to.equal(ObjectId(idUser)[2]);
             });
     });
 });

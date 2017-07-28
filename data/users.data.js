@@ -1,4 +1,4 @@
-const ObjectId = require('mongodb').ObjectID;
+const { ObjectId } = require('mongodb');
 const CryptoJS = require('crypto-js');
 
 const BaseData = require('./base/base.data');
@@ -38,24 +38,23 @@ class UsersData extends BaseData {
         const users = this.collection.find({
             name: new RegExp('^' + input.toString(), 'i'),
         }).toArray();
-        console.log(users);
         return users;
     }
 
-    addToFavorites(idUser, idPost) {
+    addToFavourites(idUser, idPost) {
         // eslint-disable-next-line
-        this.collection.update({_id: ObjectId(idUser)}, {$addToSet: {favorites: ObjectId(idPost)}});
+       return this.collection.update({_id: ObjectId(idUser)}, {$addToSet: {favorites: ObjectId(idPost)}});
     }
 
-    deleteFromFavorites(idUser, idPost) {
-        this.collection.update(
+    deleteFromFavourites(idUser, idPost) {
+        return this.collection.update(
             // eslint-disable-next-line
             {_id: ObjectId(idUser)}, {$pull: {favorites: {$in: [ObjectId(idPost)]}}});
     }
 
     updateProfilePicture(id, photo) {
         // eslint-disable-next-line
-        this.collection.update({_id: ObjectId(id)}, {$set: {stringProfilePicture: photo.filename}});
+        return this.collection.update({_id: ObjectId(id)}, {$set: {stringProfilePicture: photo.filename}});
     }
 }
 
