@@ -4,6 +4,7 @@ $(document).ready(function() {
     $('.dislike').click(function(ev) {
         sendRate(ev, 'dislike', 1, false);
         $(ev.target).parent().find('.disliked').show();
+        $(ev.target).parent().find('.liked').trigger('click');
     });
 
     $('.disliked').click(function(ev) {
@@ -13,8 +14,8 @@ $(document).ready(function() {
 
     $('.like').click(function(ev) {
         sendRate(ev, 'like', 1, true);
-        // $('.dislike').off('click');
         $(ev.target).parent().find('.liked').show();
+        $(ev.target).parent().find('.disliked').trigger('click');
     });
 
     $('.liked').click(function(ev) {
@@ -38,7 +39,11 @@ function sendRate(ev, type, count, like) {
             } else {
                 counter = $(ev.target).siblings().last();
             }
-            counter.text(+counter.text() + count);
+            let rate = +counter.text() + count;
+            if (rate < 0) {
+                rate = 0;
+            }
+            counter.text(rate);
         },
     });
     $(ev.target).hide();

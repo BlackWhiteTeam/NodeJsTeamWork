@@ -117,24 +117,36 @@ const usersController = (data, helpers) => {
         },
 
         likePost(req, res) {
-            const postId = req.body.postId;
-            // base logic
-            return res.send({});
+            if (req.user) {
+                const postId = req.body.postId;
+                data.posts.like(postId);
+                return res.send({});
+            }
+            return res.redirect('/login');
         },
         unlikePost(req, res) {
-            const postId = req.body.postId;
-            // base logic
-            return res.send({});
+            if (req.user) {
+                const postId = req.body.postId;
+                data.posts.unlike(postId);
+                return res.send({});
+            }
+            return res.redirect('/login');
         },
         dislikePost(req, res) {
-            const postId = req.body.postId;
-            // base logic
-            return res.send({});
+            if (req.user) {
+                const postId = req.body.postId;
+                data.posts.dislike(postId);
+                return res.send({});
+            }
+            return res.redirect('/login');
         },
         undislikePost(req, res) {
-            const postId = req.body.postId;
-            // base logic
-            return res.send({});
+            if (req.user) {
+                const postId = req.body.postId;
+                data.posts.undislike(postId);
+                return res.send({});
+            }
+            return res.redirect('/login');
         },
     };
 };

@@ -1,3 +1,4 @@
+const ObjectId = require('mongodb').ObjectID;
 const BaseData = require('./base/base.data');
 const Post = require('../models/post.model');
 
@@ -20,6 +21,26 @@ class PostsData extends BaseData {
         return this.collection.find({
             _id: { $in: favorites },
         }).toArray();
+    }
+
+    like(postId) {
+        // eslint-disable-next-line
+        this.collection.update({_id: ObjectId(postId)}, {$inc: {likes: 1}});
+    }
+
+    unlike(postId) {
+        // eslint-disable-next-line
+        this.collection.update({_id: ObjectId(postId)}, {$inc: {likes: -1}});
+    }
+
+    dislike(postId) {
+        // eslint-disable-next-line
+        this.collection.update({_id: ObjectId(postId)}, {$inc: {dislikes: 1}});
+    }
+
+    undislike(postId) {
+        // eslint-disable-next-line
+        this.collection.update({_id: ObjectId(postId)}, {$inc: {dislikes: -1}});
     }
 }
 
