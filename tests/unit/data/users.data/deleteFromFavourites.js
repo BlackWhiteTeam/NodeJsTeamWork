@@ -35,7 +35,7 @@ describe('deleteFromFavourites', () => {
         db.collection.restore();
     });
     it('update should be called with right id', () => {
-        return data.deleteFromFavourites(idUser, idPost)
+        return data.deleteFromFavorites(idUser, idPost)
             .then((result) => {
                 expect(result[0]).to.equal(ObjectId(idUser)[0]);
                 expect(result[1]).to.equal(ObjectId(idUser)[1]);

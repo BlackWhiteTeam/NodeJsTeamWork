@@ -19,7 +19,7 @@ const update = (item1, item2) => {
     return Promise.resolve(item1._id);
 };
 
-describe('addToFavourites', () => {
+describe('deleteFromFavourites', () => {
     beforeEach(() => {
         sinon.stub(db, 'collection')
             .callsFake(() => {
@@ -35,7 +35,7 @@ describe('addToFavourites', () => {
         db.collection.restore();
     });
     it('update should be called with right id', () => {
-        return data.addToFavorites(idUser, idPost)
+        return data.addToLiked(idUser, idPost)
             .then((result) => {
                 expect(result[0]).to.equal(ObjectId(idUser)[0]);
                 expect(result[1]).to.equal(ObjectId(idUser)[1]);
