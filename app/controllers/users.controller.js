@@ -28,7 +28,7 @@ const usersController = (data, helpers) => {
                 .then((dbUser) => {
                     req.login(user, (err) => {
                         if (err) {
-                            req.flash('error', req);
+                            return Promise.reject(err);
                         }
                         req.flash('success', 'You are registered!');
                         return res.redirect('/users/' + dbUser._id);
