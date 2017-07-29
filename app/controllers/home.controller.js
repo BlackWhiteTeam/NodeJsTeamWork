@@ -7,9 +7,10 @@ const homeController = () => {
             return res.render('about');
         },
         setLocals(req, res, next) {
+            console.log(res.locals + 'sssssssssssssss');
             res.locals.loggedIn = !!(req.user);
             res.locals.user = req.user;
-            next();
+            return next();
         },
     };
 };
