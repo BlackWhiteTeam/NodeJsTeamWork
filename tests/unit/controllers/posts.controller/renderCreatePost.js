@@ -19,7 +19,6 @@ describe('renderCreatePost', () => {
         req = require('../req.res').getRequestMock({
             user: {},
         });
-        
         controller = postsController(data, helpers);
         controller.renderCreatePost(req, res);
         expect(res.viewName).to.equal('posts/createPost');
