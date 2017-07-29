@@ -66,6 +66,7 @@ describe('registerUser', () => {
         controller = userController(data, helpers);
         return controller.registerUser(req, res)
             .then(() => {
+                console.log(errormessage);
                 expect(errormessage).to.be.equal('testError');
                 return expect(res.redirectUrl).to.be.equal('/register');
             });
