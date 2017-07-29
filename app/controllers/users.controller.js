@@ -35,7 +35,6 @@ const usersController = (data, helpers) => {
                     });
                 })
                 .catch((err) => {
-                    console.log(err);
                     req.flash('error', err);
                     return res.redirect('/register');
                 });
@@ -105,6 +104,7 @@ const usersController = (data, helpers) => {
                 })
                 .catch((err) => {
                     req.flash('error', err);
+                    return res.redirect('/login');
                 });
         },
 
