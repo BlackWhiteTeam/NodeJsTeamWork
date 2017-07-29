@@ -3,7 +3,7 @@ const { expect } = require('chai');
 const postsController =
     require('../../../../app/controllers/posts.controller');
 
-describe('getPostById', () => {
+describe('renderCreatePost', () => {
     let data = null;
     let controller = null;
     const helpers = {
@@ -25,5 +25,11 @@ describe('getPostById', () => {
         expect(res.viewName).to.equal('posts/createPost');
         return expect(res.context).to.deep
         .equal({ image: 'upload-icon.png' });
+    });
+    it('should return to login if not logged in', () => {
+        req = require('../req.res').getRequestMock();
+        controller = postsController(data, helpers);
+        controller.renderCreatePost(req, res);
+        return expect(res.redirectUrl).to.equal('/login');
     });
 });
