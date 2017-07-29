@@ -33,7 +33,29 @@ describe('createPost', () => {
         controller = postsController(data, helpers);
         return controller.createPost(req, res)
             .then(() => {
-                 return expect(res.redirectUrl).to.equal('/myphotos');
+                return expect(res.redirectUrl).to.equal('/myphotos');
+            });
+    });
+    it('should redirect to / when invalid', () => {
+        data = {
+            posts: {
+                create: (post) => {
+                    return Promise.reject(post);
+                },
+            },
+        };
+        req = require('../req.res').getRequestMock({
+            user: {
+            },
+            body: {
+                description: {},
+            },
+            flash: () => {},
+        });
+        controller = postsController(data, helpers);
+        return controller.createPost(req, res)
+            .then(() => {
+                return expect(res.redirectUrl).to.equal('/');
             });
     });
 });
