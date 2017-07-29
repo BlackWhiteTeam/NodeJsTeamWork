@@ -84,8 +84,9 @@ const usersController = (data, helpers) => {
             const id = req.params.id;
             return data.users.getByObjectName(req.user.name)
                 .then((user) => {
-                    
                     const currentUserId = user._id.toString();
+                    console.log(currentUserId + "srqdaaaaaaaa");
+                    console.log(id + "vtornikkkkkkkkk");
                     if (id !== currentUserId) {
                         return Promise.reject('It is not your profile');
                     }
@@ -99,6 +100,7 @@ const usersController = (data, helpers) => {
                 })
                 .catch((err) => {
                     req.flash('error', err);
+                    return res.redirect('/login');
                 });
         },
 
