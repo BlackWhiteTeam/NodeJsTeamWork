@@ -3,10 +3,13 @@ node_js:
   - "7"
 install:
     - npm install
-after_success: npm run coverage
+after_success: npm test
 notifications:
     email:
         - vlpetrovic99@gmail.com
         - g.geneva94@gmail.com
     on_success: never
     on_failure: always
+before_deploy:
+    - npm install
+    - npm test
