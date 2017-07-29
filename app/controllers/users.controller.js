@@ -73,11 +73,15 @@ const usersController = (data, helpers) => {
                         [data.posts.getPostsByUsername(user.name), user]
                     );
                 }).then(([posts, user]) => {
-                    posts.forEach((p) => {
-                       p.isLiked = req.user.liked
-                               .indexOf(p._id.toString())>=0;
-                       p.isDisliked = req.user.disliked
-                                .indexOf(p._id.toString())>=0;
+                    posts.forEach((post) => {
+                       post.isLiked = req.user.liked
+                           .findIndex(
+                               (p) => p._id.toString() === post._id.toString()
+                           )>=0;
+                       post.isDisliked = req.user.disliked
+                           .findIndex(
+                               (p) => p._id.toString() === post._id.toString()
+                           )>=0;
                     });
                     return res.render('users/profile', {
                         context: user,
@@ -132,18 +136,25 @@ const usersController = (data, helpers) => {
                 return res.redirect('/login');
             }
             const postId = req.body.postId;
-            return data.users.checkIfPostIsRated(req.user.liked, postId)
-                .then((liked) => {
+            return data.posts.getById(postId)
+                .then((post) => {
+                    return Promise.all([
+                        data.users.checkIfPostIsRated(req.user.liked, post),
+                        post,
+                    ]);
+                }).then(([liked, post]) => {
+                    console.log(liked);
                     if (liked) {
                         return Promise.reject(
                             'You already liked this picture!');
                     }
-                    return data.users.addToLiked(req.user._id, postId);
+                    return data.users.addToLiked(req.user._id, post);
                 }).then(() => {
                     return data.posts.like(postId);
                 }).then(() => {
                     return res.send({});
                 }).catch((err) => {
+                    console.log(err);
                     return res.status(400).send(err);
                 });
         },
@@ -152,17 +163,21 @@ const usersController = (data, helpers) => {
                 return res.redirect('/login');
             }
             const postId = req.body.postId;
-            return data.users.checkIfPostIsRated(req.user.liked, postId)
-                .then((liked) => {
+            return data.posts.getById(postId)
+                .then((post) => {
+                    return Promise.all([
+                        data.users.checkIfPostIsRated(req.user.liked, post),
+                        post,
+                    ]);
+                }).then(([liked, post]) => {
                     if (!liked) {
                         return Promise.reject(
                             'You already unliked this picture!');
                     }
-                    return data.users.deleteFromLiked(req.user._id, postId);
+                    return data.users.deleteFromLiked(req.user._id, post);
                 }).then(() => {
                     return data.posts.unlike(postId);
                 }).then(() => {
-                    console.log('HEREEE');
                     return res.send({});
                 }).catch((err) => {
                     return res.status(400).send(err);
@@ -173,13 +188,18 @@ const usersController = (data, helpers) => {
                 return res.redirect('/login');
             }
             const postId = req.body.postId;
-            return data.users.checkIfPostIsRated(req.user.disliked, postId)
-                .then((disliked) => {
+            return data.posts.getById(postId)
+                .then((post) => {
+                    return Promise.all([
+                        data.users.checkIfPostIsRated(req.user.disliked, post),
+                        post,
+                    ]);
+                }).then(([disliked, post]) => {
                     if (disliked) {
                         return Promise.reject(
-                            'You already liked this picture!');
+                            'You already disliked this picture!');
                     }
-                    return data.users.addToDisliked(req.user._id, postId);
+                    return data.users.addToDisliked(req.user._id, post);
                 }).then(() => {
                     return data.posts.dislike(postId);
                 }).then(() => {
@@ -191,15 +211,20 @@ const usersController = (data, helpers) => {
         undislikePost(req, res) {
             if (!req.user) {
                 return res.redirect('/login');
-                }
+            }
             const postId = req.body.postId;
-            return data.users.checkIfPostIsRated(req.user.disliked, postId)
-                .then((disliked) => {
+            return data.posts.getById(postId)
+                .then((post) => {
+                    return Promise.all([
+                        data.users.checkIfPostIsRated(req.user.disliked, post),
+                        post,
+                    ]);
+                }).then(([disliked, post]) => {
                     if (!disliked) {
                         return Promise.reject(
-                            'You already liked this picture!');
+                            'You already undisliked this picture!');
                     }
-                    return data.users.deleteFromDisliked(req.user._id, postId);
+                    return data.users.deleteFromDisliked(req.user._id, post);
                 }).then(() => {
                     return data.posts.undislike(postId);
                 }).then(() => {

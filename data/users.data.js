@@ -41,44 +41,44 @@ class UsersData extends BaseData {
         }).toArray();
     }
 
-    addToLiked(idUser, idPost) {
+    addToLiked(idUser, post) {
         return this.collection.update({ _id: ObjectId(idUser) },
             {
-                $addToSet: { liked: idPost },
+                $addToSet: { liked: post },
             });
     }
 
-    deleteFromLiked(idUser, idPost) {
+    deleteFromLiked(idUser, post) {
         return this.collection.update({ _id: ObjectId(idUser) },
             {
-                $pull: { liked: idPost },
+                $pull: { liked: { _id: ObjectId(post._id) } },
             });
     }
-    addToDisliked(idUser, idPost) {
+    addToDisliked(idUser, post) {
         return this.collection.update({ _id: ObjectId(idUser) },
             {
-                $addToSet: { disliked: idPost },
-            });
-    }
-
-    deleteFromDisliked(idUser, idPost) {
-        return this.collection.update({ _id: ObjectId(idUser) },
-            {
-                $pull: { disliked: idPost },
+                $addToSet: { disliked: post },
             });
     }
 
-    addToFavorites(idUser, idPost) {
+    deleteFromDisliked(idUser, post) {
         return this.collection.update({ _id: ObjectId(idUser) },
             {
-                $addToSet: { favorites: idPost },
+                $pull: { disliked: { _id: ObjectId(post._id) } },
             });
     }
 
-    deleteFromFavorites(idUser, idPost) {
+    addToFavorites(idUser, post) {
         return this.collection.update({ _id: ObjectId(idUser) },
             {
-                $pull: { favorites: { $in: [idPost] } },
+                $addToSet: { favorites: post },
+            });
+    }
+
+    deleteFromFavorites(idUser, post) {
+        return this.collection.update({ _id: ObjectId(idUser) },
+            {
+                $pull: { favorites: { $in: [post] } },
             });
     }
 
@@ -89,8 +89,10 @@ class UsersData extends BaseData {
             });
     }
 
-    checkIfPostIsRated(liked, postId) {
-        const index = liked.indexOf(postId);
+    checkIfPostIsRated(liked, post) {
+        const index = liked.findIndex(
+            (p) => p._id.toString() === post._id.toString()
+        );
         if (index !== -1) {
             return Promise.resolve(true);
         }
