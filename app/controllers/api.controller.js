@@ -6,37 +6,37 @@ const apiController = (data, helpers) => {
                 const searchedUrl = req.url.split('=');
                 searchedUser = searchedUrl[searchedUrl.length - 1];
             }
-            data.users.getAllUsersByMatchingString(searchedUser)
+            return data.users.getAllUsersByMatchingString(searchedUser)
                 .then((users) => {
                     return res.send(users);
                 });
         },
         getUserById(req, res) {
             const id = req.params.id;
-            data.users.getById(id)
+            return data.users.getById(id)
                 .then((user) => {
                     return res.send(user);
                 });
         },
         getUserPosts(req, res) {
             const id = req.params.id;
-            data.users.getById(id)
+            return data.users.getById(id)
                 .then((user) => {
-                    data.posts.getPostsByUsername(user.name)
+                    return data.posts.getPostsByUsername(user.name)
                         .then((posts) => {
-                            res.send(posts);
+                            return res.send(posts);
                         });
                 });
         },
         getPosts(req, res) {
-            data.posts.getAll()
+            return data.posts.getAll()
                 .then((posts) => {
                     return res.send(posts);
                 });
         },
         getPostById(req, res) {
             const id = req.params.id;
-            data.posts.getById(id)
+            return data.posts.getById(id)
                 .then((post) => {
                     return res.send(post);
                 });
