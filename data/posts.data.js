@@ -42,8 +42,9 @@ class PostsData extends BaseData {
     }
 
     undislike(postId) {
+        console.log('undislike');
         return this.collection.update(
-            { _id: ObjectId(postId), likes: { $gt: 0 } },
+            { _id: ObjectId(postId), dislikes: { $gt: 0 } },
             {
                 $inc: { dislikes: -1 },
             });
