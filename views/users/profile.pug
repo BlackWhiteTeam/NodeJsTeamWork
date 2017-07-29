@@ -49,10 +49,18 @@ block content
                             .float-right
                                 span.counter-likes
                                     =post.likes
-                                img.like.like-dislike-btn(src='/images/like-btn.png', alt='like')
-                                img.liked.like-dislike-btn(src='/images/liked-btn.png', alt='liked',style="display:none;")
-                                img.dislike.like-dislike-btn(src='/images/dislike-btn.png', alt='dislike')
-                                img.disliked.like-dislike-btn(src='/images/disliked-btn.png', alt='disliked',style="display:none;")
+                                if post.isLiked
+                                    img.like.like-dislike-btn(src='/images/like-btn.png', alt='like', style="display:none;")
+                                    img.liked.like-dislike-btn(src='/images/liked-btn.png', alt='liked')
+                                else
+                                    img.like.like-dislike-btn(src='/images/like-btn.png', alt='like')
+                                    img.liked.like-dislike-btn(src='/images/liked-btn.png', alt='liked', style="display:none;")
+                                if post.isDisliked
+                                    img.dislike.like-dislike-btn(src='/images/dislike-btn.png', alt='dislike', style="display:none;")
+                                    img.disliked.like-dislike-btn(src='/images/disliked-btn.png', alt='disliked')
+                                else
+                                    img.dislike.like-dislike-btn(src='/images/dislike-btn.png', alt='dislike')
+                                    img.disliked.like-dislike-btn(src='/images/disliked-btn.png', alt='disliked', style="display:none;")
                                 span.counter-dislikes
                                     =post.dislikes
                 // Left and right controls

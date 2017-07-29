@@ -74,6 +74,12 @@ const usersController = (data, helpers) => {
                         [data.posts.getPostsByUsername(user.name), user]
                     );
                 }).then(([posts, user]) => {
+                    posts.forEach((p) => {
+                       p.isLiked = req.user.liked
+                               .indexOf(p._id.toString())>=0;
+                       p.isDisliked = req.user.disliked
+                                .indexOf(p._id.toString())>=0;
+                    });
                     return res.render('users/profile', {
                         context: user,
                         posts: posts,
