@@ -89,16 +89,8 @@ class UsersData extends BaseData {
             });
     }
 
-    checkIfPostIsLiked(liked, postId) {
+    checkIfPostIsRated(liked, postId) {
         const index = liked.indexOf(postId);
-        if (index !== -1) {
-            return Promise.resolve(true);
-        }
-        return Promise.resolve(false);
-    }
-
-    checkIfPostIsDisliked(disliked, postId) {
-        const index = disliked.indexOf(postId);
         if (index !== -1) {
             return Promise.resolve(true);
         }
