@@ -12,7 +12,7 @@ class UsersData extends BaseData {
 
     create(user) {
         if (!this._isModelValid(user)) {
-            return Promise.reject('Invalid model');
+            return Promise.reject('Invalid user');
         }
 
         // eslint-disable-next-line new-cap
@@ -91,6 +91,14 @@ class UsersData extends BaseData {
 
     checkIfPostIsLiked(liked, postId) {
         const index = liked.indexOf(postId);
+        if (index !== -1) {
+            return Promise.resolve(true);
+        }
+        return Promise.resolve(false);
+    }
+
+    checkIfPostIsDisliked(disliked, postId) {
+        const index = disliked.indexOf(postId);
         if (index !== -1) {
             return Promise.resolve(true);
         }

@@ -26,7 +26,7 @@ const usersController = (data, helpers) => {
 
             return data.users.create(user)
                 .then((dbUser) => {
-                    req.login(user, (err) => {
+                    req.login(dbUser, (err) => {
                         if (err) {
                             return Promise.reject(err);
                         }
@@ -133,23 +133,32 @@ const usersController = (data, helpers) => {
                     }
                     return data.users.addToLiked(req.user._id, postId);
                 }).then(() => {
-                return data.posts.like(postId);
-            }).then(() => {
-                return res.send({});
-            }).catch((err) => {
-                return res.status(400).send(err);
-            });
+                    return data.posts.like(postId);
+                }).then(() => {
+                    return res.send({});
+                }).catch((err) => {
+                    console.log(err);
+                    return res.status(400).send(err);
+                });
         },
         unlikePost(req, res) {
             if (!req.user) {
                 return res.redirect('/login');
             }
             const postId = req.body.postId;
-            return data.users.deleteFromLiked(req.user._id, postId)
-                .then(() => {
-                    return data.posts.like(postId);
+            return data.users.checkIfPostIsLiked(req.user.liked, postId)
+                .then((liked) => {
+                    if (!liked) {
+                        return Promise.reject(
+                            'You already unliked this picture!');
+                    }
+                    return data.users.deleteFromLiked(req.user._id, postId);
+                }).then(() => {
+                    return data.posts.unlike(postId);
                 }).then(() => {
                     return res.send({});
+                }).catch((err) => {
+                    return res.status(400).send(err);
                 });
         },
         dislikePost(req, res) {
@@ -157,11 +166,19 @@ const usersController = (data, helpers) => {
                 return res.redirect('/login');
             }
             const postId = req.body.postId;
-            return data.users.addToDisliked(req.user._id, postId)
-                .then(() => {
-                    return data.posts.like(postId);
+            return data.users.checkIfPostIsDisliked(req.user.disliked, postId)
+                .then((disliked) => {
+                    if (disliked) {
+                        return Promise.reject(
+                            'You already liked this picture!');
+                    }
+                    return data.users.addToDisliked(req.user._id, postId);
+                }).then(() => {
+                    return data.posts.dislike(postId);
                 }).then(() => {
                     return res.send({});
+                }).catch((err) => {
+                    return res.status(400).send(err);
                 });
         },
         undislikePost(req, res) {
@@ -169,11 +186,19 @@ const usersController = (data, helpers) => {
                 return res.redirect('/login');
             }
             const postId = req.body.postId;
-            return data.users.deleteFromDisliked(req.user._id, postId)
-                .then(() => {
-                    return data.posts.like(postId);
+            return data.users.checkIfPostIsDisliked(req.user.disliked, postId)
+                .then((disliked) => {
+                    if (!disliked) {
+                        return Promise.reject(
+                            'You already liked this picture!');
+                    }
+                    return data.users.deleteFromDisliked(req.user._id, postId);
+                }).then(() => {
+                    return data.posts.undislike(postId);
                 }).then(() => {
                     return res.send({});
+                }).catch((err) => {
+                    return res.status(400).send(err);
                 });
         },
     };
