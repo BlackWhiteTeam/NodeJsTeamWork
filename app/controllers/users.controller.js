@@ -90,7 +90,7 @@ const usersController = (data, helpers) => {
                     }
                     const photo = req.file;
                     helpers.uploadPicture(photo);
-                    return data.users.updateProfilePicture(id, photo)
+                    return data.users.updateProfilePicture(id, photo);
                 })
                 .then(() => {
                     req.flash('info', 'File upload successfully.');
@@ -121,52 +121,62 @@ const usersController = (data, helpers) => {
         },
 
         likePost(req, res) {
-            if (req.user) {
-                const postId = req.body.postId;
-                return data.users.addToLiked(req.user._id, postId)
-                    .then(() => {
-                        return data.posts.like(postId);
-                    }).then(() => {
-                        return res.send({});
-                    });
+            if (!req.user) {
+                return res.redirect('/login');
             }
-            return res.redirect('/login');
+            const postId = req.body.postId;
+            return data.users.checkIfPostIsLiked(req.user.liked, postId)
+                .then((liked) => {
+                    console.log(liked);
+                    if (liked) {
+                        return Promise.reject(
+                            'You already liked this picture!');
+                    }
+                    return data.users.addToLiked(req.user._id, postId);
+                }).then(() => {
+                return data.posts.like(postId);
+            }).then(() => {
+                return res.send({});
+            }).catch((err) => {
+                req.flash('error', err);
+                return res.send({});
+            });
         },
         unlikePost(req, res) {
-            if (req.user) {
-                const postId = req.body.postId;
-                return data.users.deleteFromLiked(req.user._id, postId)
-                    .then(() => {
-                        return data.posts.unlike(postId);
-                    }).then(() => {
-                        return res.send({});
-                    });
+            if (!req.user) {
+                return res.redirect('/login');
             }
-            return res.redirect('/login');
+            const postId = req.body.postId;
+            return data.users.deleteFromLiked(req.user._id, postId)
+                .then(() => {
+                    return data.posts.like(postId);
+                }).then(() => {
+                    return res.send({});
+                });
         },
         dislikePost(req, res) {
-            if (req.user) {
-                const postId = req.body.postId;
-                return data.users.addToDisliked(req.user._id, postId)
-                    .then(() => {
-                        return data.posts.dislike(postId);
-                    }).then(() => {
-                        return res.send({});
-                    });
+            if (!req.user) {
+                return res.redirect('/login');
             }
-            return res.redirect('/login');
+            const postId = req.body.postId;
+            return data.users.addToDisliked(req.user._id, postId)
+                .then(() => {
+                    return data.posts.like(postId);
+                }).then(() => {
+                    return res.send({});
+                });
         },
         undislikePost(req, res) {
-            if (req.user) {
-                const postId = req.body.postId;
-                return data.users.deleteFromDisliked(req.user._id, postId)
-                    .then(() => {
-                        return data.posts.undislike(postId);
-                    }).then(() => {
-                        return res.send({});
-                    });
+            if (!req.user) {
+                return res.redirect('/login');
             }
-            return res.redirect('/login');
+            const postId = req.body.postId;
+            return data.users.deleteFromDisliked(req.user._id, postId)
+                .then(() => {
+                    return data.posts.like(postId);
+                }).then(() => {
+                    return res.send({});
+                });
         },
     };
 };

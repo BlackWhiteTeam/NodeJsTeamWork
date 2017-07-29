@@ -8,7 +8,7 @@ const attachTo = (app, usersData) => {
     passport.use(new Strategy(
         (username, password, done) => {
             return usersData.getByObjectName(username)
-                .then((user) => usersData.checkPassword(user, password))
+                .then((user) => UsersData.checkPassword(user, password))
                 .then((user) => done(null, user))
                 .catch((error) => done(error));
         }

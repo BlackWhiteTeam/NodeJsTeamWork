@@ -44,41 +44,41 @@ class UsersData extends BaseData {
     addToLiked(idUser, idPost) {
         return this.collection.update({ _id: ObjectId(idUser) },
             {
-                $addToSet: { liked: ObjectId(idPost) },
+                $addToSet: { liked: idPost },
             });
     }
 
     deleteFromLiked(idUser, idPost) {
         return this.collection.update({ _id: ObjectId(idUser) },
             {
-                $pull: { liked: ObjectId(idPost) },
+                $pull: { liked: idPost },
             });
     }
     addToDisliked(idUser, idPost) {
         return this.collection.update({ _id: ObjectId(idUser) },
             {
-                $addToSet: { disliked: ObjectId(idPost) },
+                $addToSet: { disliked: idPost },
             });
     }
 
     deleteFromDisliked(idUser, idPost) {
         return this.collection.update({ _id: ObjectId(idUser) },
             {
-                $pull: { disliked: ObjectId(idPost) },
+                $pull: { disliked: idPost },
             });
     }
 
     addToFavorites(idUser, idPost) {
         return this.collection.update({ _id: ObjectId(idUser) },
             {
-                $addToSet: { favorites: ObjectId(idPost) },
+                $addToSet: { favorites: idPost },
             });
     }
 
     deleteFromFavorites(idUser, idPost) {
         return this.collection.update({ _id: ObjectId(idUser) },
             {
-                $pull: { favorites: { $in: [ObjectId(idPost)] } },
+                $pull: { favorites: { $in: [idPost] } },
             });
     }
 
@@ -87,6 +87,17 @@ class UsersData extends BaseData {
             {
                 $set: { stringProfilePicture: photo.filename },
             });
+    }
+
+    checkIfPostIsLiked(liked, postId) {
+        console.log(liked);
+        console.log(postId);
+        const index = liked.indexOf(postId);
+        console.log(index);
+        if (index !== -1) {
+            return Promise.resolve(true);
+        }
+        return Promise.resolve(false);
     }
 }
 
