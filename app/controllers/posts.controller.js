@@ -38,7 +38,7 @@ const postsController = (data, helpers) => {
         },
         createPost(req, res) {
             const post = {
-                author: req.user.name,
+                author: req.user,
                 picture: lastPicture,
                 description: req.body.description,
                 likes: 0,

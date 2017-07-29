@@ -7,10 +7,11 @@ class PostsData extends BaseData {
     constructor(db) {
         super(db, Post, Post);
     }
+
     getPostsByUsername(username) {
-        return this.collection.find({
-            author: username.toString(),
-        }).toArray();
+        return this.collection.find(
+            { 'author.name': username }
+        ).toArray();
     }
 
     getMyFavoritesPosts(favorites) {

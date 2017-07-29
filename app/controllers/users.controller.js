@@ -190,7 +190,7 @@ const usersController = (data, helpers) => {
         undislikePost(req, res) {
             if (!req.user) {
                 return res.redirect('/login');
-            }
+                }
             const postId = req.body.postId;
             return data.users.checkIfPostIsRated(req.user.disliked, postId)
                 .then((disliked) => {
