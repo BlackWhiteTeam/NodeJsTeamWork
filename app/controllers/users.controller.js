@@ -162,6 +162,7 @@ const usersController = (data, helpers) => {
                 }).then(() => {
                     return data.posts.unlike(postId);
                 }).then(() => {
+                    console.log('HEREEE');
                     return res.send({});
                 }).catch((err) => {
                     return res.status(400).send(err);
