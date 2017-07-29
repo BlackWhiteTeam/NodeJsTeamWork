@@ -128,7 +128,7 @@ const usersController = (data, helpers) => {
                 return res.redirect('/login');
             }
             const postId = req.body.postId;
-            return data.users.checkIfPostIsLiked(req.user.liked, postId)
+            return data.users.checkIfPostIsRated(req.user.liked, postId)
                 .then((liked) => {
                     if (liked) {
                         return Promise.reject(
@@ -140,7 +140,6 @@ const usersController = (data, helpers) => {
                 }).then(() => {
                     return res.send({});
                 }).catch((err) => {
-                    console.log(err);
                     return res.status(400).send(err);
                 });
         },
@@ -149,7 +148,7 @@ const usersController = (data, helpers) => {
                 return res.redirect('/login');
             }
             const postId = req.body.postId;
-            return data.users.checkIfPostIsLiked(req.user.liked, postId)
+            return data.users.checkIfPostIsRated(req.user.liked, postId)
                 .then((liked) => {
                     if (!liked) {
                         return Promise.reject(
@@ -169,7 +168,7 @@ const usersController = (data, helpers) => {
                 return res.redirect('/login');
             }
             const postId = req.body.postId;
-            return data.users.checkIfPostIsDisliked(req.user.disliked, postId)
+            return data.users.checkIfPostIsRated(req.user.disliked, postId)
                 .then((disliked) => {
                     if (disliked) {
                         return Promise.reject(
@@ -189,7 +188,7 @@ const usersController = (data, helpers) => {
                 return res.redirect('/login');
             }
             const postId = req.body.postId;
-            return data.users.checkIfPostIsDisliked(req.user.disliked, postId)
+            return data.users.checkIfPostIsRated(req.user.disliked, postId)
                 .then((disliked) => {
                     if (!disliked) {
                         return Promise.reject(
