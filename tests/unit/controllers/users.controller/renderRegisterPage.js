@@ -11,7 +11,6 @@ describe('renderRegisterPage', () => {
     const helpers = {
 
     };
-    const users = [1, 2, 3, 4];
 
     let req = null;
     let res = null;

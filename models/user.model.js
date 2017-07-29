@@ -11,7 +11,6 @@ class User extends BaseModel {
             && model.email.match(constants.USER_EMAIL_MATCH_PATTERN)
             && model.stringProfilePicture
             .match(constants.USER_PROFILE_PICTURE_MATCH_PATTERN));
-            console.log(result);
         return result;
     }
 }
