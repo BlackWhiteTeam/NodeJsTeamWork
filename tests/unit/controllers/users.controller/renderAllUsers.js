@@ -3,7 +3,7 @@ const { expect } = require('chai');
 const userController =
     require('../../../../app/controllers/users.controller');
 
-describe('users controller', () => {
+describe('renderAllUsers', () => {
     let data = null;
     let controller = null;
     const helpers = {
@@ -29,7 +29,7 @@ describe('users controller', () => {
     });
 
     it('expect get all to return users', () => {
-        return controller.renderAllUsers(req, res)
+        return controller.renderAllUsers(req, res)  
             .then(() => {
                 expect(res.context).to.be.deep.equal({
                     context: users,
