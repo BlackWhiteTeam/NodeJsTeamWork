@@ -9,7 +9,7 @@ const homeController = () => {
         setLocals(req, res, next) {
             res.locals.loggedIn = !!(req.user);
             res.locals.user = req.user;
-            next();
+            return next();
         },
     };
 };
