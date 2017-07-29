@@ -5,7 +5,7 @@
   "license": "MIT",
   "scripts": {
     "start": "node server.js",
-    "test": "./node_modules/.bin/mocha tests/unit/**/*.js",
+    "test": "./node_modules/.bin/mocha tests/unit/**/**/*.js",
     "coverage": "gulp tests:unit"
   },
   "dependencies": {

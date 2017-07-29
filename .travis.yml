@@ -3,7 +3,6 @@ node_js:
   - "7"
 install:
     - npm install
-after_success: npm test
 notifications:
     email:
         - vlpetrovic99@gmail.com
