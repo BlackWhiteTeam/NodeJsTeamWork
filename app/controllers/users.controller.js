@@ -85,8 +85,6 @@ const usersController = (data, helpers) => {
             return data.users.getByObjectName(req.user.name)
                 .then((user) => {
                     const currentUserId = user._id.toString();
-                    console.log(currentUserId + "srqdaaaaaaaa");
-                    console.log(id + "vtornikkkkkkkkk");
                     if (id !== currentUserId) {
                         return Promise.reject('It is not your profile');
                     }
