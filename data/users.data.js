@@ -90,10 +90,7 @@ class UsersData extends BaseData {
     }
 
     checkIfPostIsLiked(liked, postId) {
-        console.log(liked);
-        console.log(postId);
         const index = liked.indexOf(postId);
-        console.log(index);
         if (index !== -1) {
             return Promise.resolve(true);
         }

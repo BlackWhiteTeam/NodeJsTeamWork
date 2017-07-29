@@ -127,7 +127,6 @@ const usersController = (data, helpers) => {
             const postId = req.body.postId;
             return data.users.checkIfPostIsLiked(req.user.liked, postId)
                 .then((liked) => {
-                    console.log(liked);
                     if (liked) {
                         return Promise.reject(
                             'You already liked this picture!');
@@ -138,8 +137,7 @@ const usersController = (data, helpers) => {
             }).then(() => {
                 return res.send({});
             }).catch((err) => {
-                req.flash('error', err);
-                return res.send({});
+                return res.status(400).send(err);
             });
         },
         unlikePost(req, res) {
