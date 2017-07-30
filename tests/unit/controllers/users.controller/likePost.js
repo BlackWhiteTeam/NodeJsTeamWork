@@ -18,8 +18,8 @@ describe('likePost', () => {
     it('should call res.send with empty object', () => {
         data = {
             users: {
-                checkIfPostIsRated: (user, postId) => {
-                    return Promise.resolve(false);
+                checkIfPostIsRated: (isliked, post) => {
+                    return Promise.resolve(isliked, post);
                 },
                 addToLiked: (user, postId) => {
                     return Promise.resolve();
@@ -29,10 +29,15 @@ describe('likePost', () => {
                 like: (postId) => {
                     return Promise.resolve();
                 },
+                getById: (id) => {
+                    return Promise.resolve(id);
+                },
             },
         };
         req = require('../req.res').getRequestMock({
             user: {
+                liked: false,
+                _id: {},
             },
             body: {
                 postId: {
@@ -54,21 +59,21 @@ describe('likePost', () => {
         return expect(res.redirectUrl).to.be.equal('/login');
     });
     it('should reject if already liked', () => {
-        data = {
+         data = {
             users: {
-                checkIfPostIsRated: (user, postId) => {
-                    return Promise.resolve(true);
-                },
-                addToLiked: (user, postId) => {
+                checkIfPostIsRated: (isliked, post) => {
+                    return Promise.resolve(isliked, post);
                 },
             },
             posts: {
-                like: (postId) => {
+                getById: (id) => {
+                    return Promise.resolve(id);
                 },
             },
         };
         req = require('../req.res').getRequestMock({
             user: {
+                liked: true,
             },
             body: {
                 postId: {
