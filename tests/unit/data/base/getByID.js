@@ -6,7 +6,7 @@ const BaseData = require('../../../../data/base/base.data');
 const db = {
     collection: () => { },
 };
-let items = 1;
+const items = 1;
 
 let ModelClass = null;
 const validator = null;

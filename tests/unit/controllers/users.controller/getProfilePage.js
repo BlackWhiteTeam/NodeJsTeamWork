@@ -7,8 +7,8 @@ describe('updateProfilePicture', () => {
     let data = null;
     let controller = null;
     const helpers = {
-        getLikedAndDisliked: (posts, req) => { 
-            return posts; 
+        getLikedAndDisliked: (posts, req) => {
+            return posts;
         },
     };
 
@@ -53,7 +53,7 @@ describe('updateProfilePicture', () => {
                 return expect(res.viewName).to.be.equal('users/profile');
             });
     });
-    it('when invalid used should redirect to logion', () => {
+    it('when invalid used should redirect to login', () => {
         req = require('../req.res').getRequestMock({
             user: false,
         });

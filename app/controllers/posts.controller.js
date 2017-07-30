@@ -6,6 +6,7 @@ const postsController = (data, helpers) => {
         renderAllPosts(req, res) {
             return data.posts.getAll()
                 .then((posts) => {
+                    helpers.getLikedAndDisliked(posts, req);
                     return res.render('posts/gallery', {
                         context: posts.reverse(),
                     });

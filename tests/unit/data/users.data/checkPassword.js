@@ -8,7 +8,7 @@ const db = {
 };
 
 let user = 'pesho';
-let password = 'goshov';
+const password = 'goshov';
 
 let ModelClass = null;
 let validator = null;

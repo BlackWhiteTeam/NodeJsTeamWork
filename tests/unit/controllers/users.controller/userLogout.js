@@ -29,7 +29,7 @@ describe('userLogout', () => {
             },
         });
         controller = userController(data, helpers);
-        controller.userLogout(req, res)
+        controller.userLogout(req, res);
         expect(returnedMessage).to.be.equal(expectedMessage);
         return expect(res.redirectUrl).to.be.equal('/');
     });

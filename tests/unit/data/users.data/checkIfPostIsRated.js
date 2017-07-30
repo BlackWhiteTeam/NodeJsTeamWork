@@ -24,7 +24,7 @@ describe('checkIfPostIsRated', () => {
             findIndex: () => {
                 return -1;
             },
-        }
+        };
         ModelClass = class {
         };
         data = new BaseData(db, ModelClass, validator);
@@ -38,7 +38,7 @@ describe('checkIfPostIsRated', () => {
             findIndex: () => {
                 return 1;
             },
-        }
+        };
         ModelClass = class {
         };
         data = new BaseData(db, ModelClass, validator);

@@ -13,11 +13,11 @@ describe('renderHome', () => {
         req = require('../req.res').getRequestMock();
     });
     it('should render correctly', () => {
-        res.locals =  {
+        res.locals = {
                 loggedIn: {},
                 user: {},
             };
-        let next = () => {
+        const next = () => {
             return 4;
         };
         controller = homeController();

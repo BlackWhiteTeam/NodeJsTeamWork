@@ -25,7 +25,10 @@ $(document).ready(function() {
 });
 
 function sendRate(ev, type, count, like) {
-    const id = $('.item.active').attr('data-post-id');
+    let id = $('.item').attr('data-post-id');
+    if (!id) {
+        id = $('h3').attr('data-post-id');
+    }
     $.ajax({
         url: '/' + type,
         type: 'POST',

@@ -18,7 +18,7 @@ describe('updateProfilePicture', () => {
     });
 
     it('when user is valid should render', () => {
-        let user = {
+        const user = {
             _id: '5',
         };
         data = {
@@ -28,7 +28,7 @@ describe('updateProfilePicture', () => {
                 },
                 updateProfilePicture: (id, photo) => {
                     return Promise.resolve(id);
-                }
+                },
             },
         };
         req = require('../req.res').getRequestMock({
@@ -50,7 +50,7 @@ describe('updateProfilePicture', () => {
             });
     });
     it('when id is not same should reject', () => {
-        let user = {
+        const user = {
             _id: 3,
         };
         data = {
@@ -60,7 +60,7 @@ describe('updateProfilePicture', () => {
                 },
                 updateProfilePicture: (id, photo) => {
                     return Promise.resolve(id);
-                }
+                },
             },
         };
         req = require('../req.res').getRequestMock({

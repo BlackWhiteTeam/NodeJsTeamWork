@@ -30,7 +30,7 @@ describe('getUsers', () => {
                 },
                 split: () => {
                     return [1];
-                }
+                },
             },
             body: {
                 postId: {

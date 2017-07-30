@@ -4,8 +4,8 @@ const userController =
     require('../../../../app/controllers/users.controller');
 
 describe('renderLoginPage', () => {
-    let data = {
-        
+    const data = {
+
     };
     let controller = null;
     const helpers = {

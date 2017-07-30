@@ -7,6 +7,9 @@ describe('getPostById', () => {
     let data = null;
     let controller = null;
     const helpers = {
+        getLikedAndDisliked: (posts, req) => {
+            return posts;
+        },
     };
 
     let req = null;
@@ -28,7 +31,7 @@ describe('getPostById', () => {
         return controller.renderAllPosts(req, res)
             .then(() => {
                  expect(res.viewName).to.equal('posts/gallery');
-                 return expect (res.context).to.deep.equal({ context: [2, 1] });
+                 return expect(res.context).to.deep.equal({ context: [2, 1] });
             });
     });
 });

@@ -4,7 +4,7 @@ const postsController =
     require('../../../../app/controllers/posts.controller');
 
 describe('renderCreatePost', () => {
-    let data = null;
+    const data = null;
     let controller = null;
     const helpers = {
     };

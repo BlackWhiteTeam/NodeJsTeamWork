@@ -9,7 +9,7 @@ describe('getPosts', () => {
     const helpers = {
     };
 
-    let req = null;
+    const req = null;
     let res = null;
 
     beforeEach(() => {

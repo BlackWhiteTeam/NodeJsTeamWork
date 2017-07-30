@@ -29,7 +29,7 @@ describe('renderAllUsers', () => {
     });
 
     it('expect get all to return users', () => {
-        return controller.renderAllUsers(req, res)  
+        return controller.renderAllUsers(req, res)
             .then(() => {
                 expect(res.context).to.be.deep.equal({
                     context: users,

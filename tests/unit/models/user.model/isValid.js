@@ -2,7 +2,7 @@ const { expect } = require('chai');
 
 const model = require('../../../../models/user.model');
 
-let testModel = {
+const testModel = {
     name: 'somename',
     password: 'somepassword',
     email: 'testema@abv.bg',

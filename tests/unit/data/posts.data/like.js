@@ -8,7 +8,7 @@ const BaseData = require('../../../../data/posts.data');
 const db = {
     collection: () => { },
 };
-let idPost = 1;
+const idPost = 1;
 
 let ModelClass = null;
 const validator = null;
