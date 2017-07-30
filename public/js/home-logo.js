@@ -7,7 +7,6 @@ $(document).ready(function() {
     }, 4000);
 
     // For the logo - SVG
-    // For the logo - SVG
     let repeat;
     if (navigator.userAgent
             .match(/(iPhone|iPod|iPad|Android|BlackBerry|IEMobile)/)) {

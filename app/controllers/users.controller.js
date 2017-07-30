@@ -143,7 +143,6 @@ const usersController = (data, helpers) => {
                         post,
                     ]);
                 }).then(([liked, post]) => {
-                    console.log(liked);
                     if (liked) {
                         return Promise.reject(
                             'You already liked this picture!');
@@ -154,7 +153,6 @@ const usersController = (data, helpers) => {
                 }).then(() => {
                     return res.send({});
                 }).catch((err) => {
-                    console.log(err);
                     return res.status(400).send(err);
                 });
         },

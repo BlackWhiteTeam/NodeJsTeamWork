@@ -1,5 +1,8 @@
 extends ../shared/_layout
 
+block AdditionalCss
+    link(rel='stylesheet', href='/css/gallery.css')
+
 block content
     .container
         each post in context
@@ -11,14 +14,29 @@ block content
                         .caption
                             h3
                                 strong
-                                    =post.author.name
+                                    a(href='users/'+ post.author._id)=post.author.name
+                                .float-right
+                                    span.counter-likes
+                                        =post.likes
+                                    if post.isLiked
+                                        img.like.like-dislike-btn(src='/images/like-btn.png', alt='like', style="display:none;")
+                                        img.liked.like-dislike-btn(src='/images/liked-btn.png', alt='liked')
+                                    else
+                                        img.like.like-dislike-btn(src='/images/like-btn.png', alt='like')
+                                        img.liked.like-dislike-btn(src='/images/liked-btn.png', alt='liked', style="display:none;")
+                                    if post.isDisliked
+                                        img.dislike.like-dislike-btn(src='/images/dislike-btn.png', alt='dislike', style="display:none;")
+                                        img.disliked.like-dislike-btn(src='/images/disliked-btn.png', alt='disliked')
+                                    else
+                                        img.dislike.like-dislike-btn(src='/images/dislike-btn.png', alt='dislike')
+                                        img.disliked.like-dislike-btn(src='/images/disliked-btn.png', alt='disliked', style="display:none;")
+                                    span.counter-dislikes
+                                        =post.dislikes
                             p
                                 =post.description
-                            if isDelete
-                                a.btn.btn-default.black-background.white(href='/deleteFromFavorites/' + post._id, role='button')
-                                    span.glyphicon.glyphicon-trash
-                                    |  Delete from Favs
-                            else
-                                a.btn.btn-default.black-background.white(href='/addToFavorites/' + post._id, role='button')
-                                    span.glyphicon.glyphicon-plus
-                                    |  Add to Favs
+                            a.btn.btn-default.black-background.white()
+                                span.glyphicon.glyphicon-plus
+                                |  Add to Favs
+
+block AdditionalJS
+    script(src="/js/likes-btns.js")
