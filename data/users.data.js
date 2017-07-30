@@ -14,21 +14,24 @@ class UsersData extends BaseData {
         if (!this._isModelValid(user)) {
             return Promise.reject('Invalid user');
         }
-
-        // eslint-disable-next-line new-cap
-        user.password = CryptoJS.SHA1(user.password).toString();
-
-        return this.collection.insert(user)
-            .then(() => {
-                return this.ModelClass.toViewModel(user);
-            });
+        return this.collection.findOne({
+            name: user.name,
+        }).then((userExists) => {
+            if (userExists) {
+                return Promise.reject('Username already taken!');
+            }
+            user.password = CryptoJS.SHA1(user.password).toString();
+            return this.collection.insert(user);
+        }).then(() => {
+            return this.ModelClass.toViewModel(user);
+        });
     }
 
     checkPassword(user, password) {
         if (!user) {
             return Promise.reject('Invalid user');
         }
-        // eslint-disable-next-line new-cap
+
         if (user.password !== CryptoJS.SHA1(password).toString()) {
             return Promise.reject('Invalid password');
         }
@@ -42,50 +45,51 @@ class UsersData extends BaseData {
     }
 
     addToLiked(idUser, post) {
-        return this.collection.update({ _id: ObjectId(idUser) },
+        return this.collection.update({_id: ObjectId(idUser)},
             {
-                $addToSet: { liked: post },
+                $addToSet: {liked: post},
             });
     }
 
     deleteFromLiked(idUser, post) {
-        return this.collection.update({ _id: ObjectId(idUser) },
+        return this.collection.update({_id: ObjectId(idUser)},
             {
-                $pull: { liked: { _id: ObjectId(post._id) } },
+                $pull: {liked: {_id: ObjectId(post._id)}},
             });
     }
+
     addToDisliked(idUser, post) {
-        return this.collection.update({ _id: ObjectId(idUser) },
+        return this.collection.update({_id: ObjectId(idUser)},
             {
-                $addToSet: { disliked: post },
+                $addToSet: {disliked: post},
             });
     }
 
     deleteFromDisliked(idUser, post) {
-        return this.collection.update({ _id: ObjectId(idUser) },
+        return this.collection.update({_id: ObjectId(idUser)},
             {
-                $pull: { disliked: { _id: ObjectId(post._id) } },
+                $pull: {disliked: {_id: ObjectId(post._id)}},
             });
     }
 
     addToFavorites(idUser, post) {
-        return this.collection.update({ _id: ObjectId(idUser) },
+        return this.collection.update({_id: ObjectId(idUser)},
             {
-                $addToSet: { favorites: post },
+                $addToSet: {favorites: post},
             });
     }
 
     deleteFromFavorites(idUser, post) {
-        return this.collection.update({ _id: ObjectId(idUser) },
+        return this.collection.update({_id: ObjectId(idUser)},
             {
-                $pull: { favorites: { $in: [post] } },
+                $pull: {favorites: {$in: [post]}},
             });
     }
 
     updateProfilePicture(id, photo) {
-        return this.collection.update({ _id: ObjectId(id) },
+        return this.collection.update({_id: ObjectId(id)},
             {
-                $set: { stringProfilePicture: photo.filename },
+                $set: {stringProfilePicture: photo.filename},
             });
     }
 
