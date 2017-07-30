@@ -21,7 +21,7 @@ const update = (item1, item2) => {
 describe('checkIfPostIsRated', () => {
     it('should return false if not rated', () => {
         liked = {
-            indexOf: () => {
+            findIndex: () => {
                 return -1;
             },
         }
@@ -35,7 +35,7 @@ describe('checkIfPostIsRated', () => {
     });
     it('should return true if rated', () => {
         liked = {
-            indexOf: () => {
+            findIndex: () => {
                 return 1;
             },
         }

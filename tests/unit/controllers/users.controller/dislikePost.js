@@ -18,8 +18,8 @@ describe('dislikePost', () => {
     it('should call res.send with empty object', () => {
         data = {
             users: {
-                checkIfPostIsRated: (user, postId) => {
-                    return Promise.resolve(false);
+                checkIfPostIsRated: (isDisliked, post) => {
+                    return Promise.resolve(isDisliked, post);
                 },
                 addToDisliked: (user, postId) => {
                     return Promise.resolve();
@@ -29,10 +29,15 @@ describe('dislikePost', () => {
                 dislike: (postId) => {
                     return Promise.resolve();
                 },
+                getById: (id) => {
+                    return Promise.resolve(id);
+                },
             },
         };
         req = require('../req.res').getRequestMock({
             user: {
+                disliked: false,
+                _id: {},
             },
             body: {
                 postId: {
@@ -54,21 +59,21 @@ describe('dislikePost', () => {
         return expect(res.redirectUrl).to.be.equal('/login');
     });
     it('should reject if already disliked', () => {
-        data = {
+         data = {
             users: {
-                checkIfPostIsRated: (user, postId) => {
-                    return Promise.resolve(true);
-                },
-                addToDisliked: (user, postId) => {
+                checkIfPostIsRated: (isDisliked, post) => {
+                    return Promise.resolve(isDisliked, post);
                 },
             },
             posts: {
-                dislike: (postId) => {
+                getById: (id) => {
+                    return Promise.resolve(id);
                 },
             },
         };
         req = require('../req.res').getRequestMock({
             user: {
+                disliked: true,
             },
             body: {
                 postId: {
@@ -79,7 +84,7 @@ describe('dislikePost', () => {
         return controller.dislikePost(req, res)
             .then(() => {
                 expect(res.statusCode).to.be.equal(400);
-                return expect(res.body).to.be.equal('You already liked this picture!');
+                return expect(res.body).to.be.equal('You already disliked this picture!');
             });
     });
 });

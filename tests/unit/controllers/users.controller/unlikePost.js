@@ -18,8 +18,8 @@ describe('unlikePost', () => {
     it('should call res.send with empty object', () => {
         data = {
             users: {
-                checkIfPostIsRated: (user, postId) => {
-                    return Promise.resolve(true);
+                checkIfPostIsRated: (user, post) => {
+                    return Promise.resolve(user, post);
                 },
                 deleteFromLiked: (user, postId) => {
                     return Promise.resolve();
@@ -29,10 +29,15 @@ describe('unlikePost', () => {
                 unlike: (postId) => {
                     return Promise.resolve();
                 },
+                getById: (id) => {
+                    return Promise.resolve(id);
+                },
             },
         };
         req = require('../req.res').getRequestMock({
             user: {
+                liked: true,
+                _id: {},
             },
             body: {
                 postId: {
@@ -53,22 +58,22 @@ describe('unlikePost', () => {
         controller.unlikePost(req, res);
         return expect(res.redirectUrl).to.be.equal('/login');
     });
-    it('should reject if already unliked', () => {
-        data = {
+    it('should reject if already liked', () => {
+         data = {
             users: {
-                checkIfPostIsRated: (user, postId) => {
-                    return Promise.resolve(false);
-                },
-                deleteFromLiked: (user, postId) => {
+                checkIfPostIsRated: (isliked, post) => {
+                    return Promise.resolve(isliked, post);
                 },
             },
             posts: {
-                unlike: (postId) => {
+                getById: (id) => {
+                    return Promise.resolve(id);
                 },
             },
         };
         req = require('../req.res').getRequestMock({
             user: {
+                liked: false,
             },
             body: {
                 postId: {
@@ -79,8 +84,7 @@ describe('unlikePost', () => {
         return controller.unlikePost(req, res)
             .then(() => {
                 expect(res.statusCode).to.be.equal(400);
-                return expect(res.body).to.be
-                .equal('You already unliked this picture!');
+                return expect(res.body).to.be.equal('You already unliked this picture!');
             });
     });
 });
