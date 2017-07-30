@@ -29,7 +29,6 @@ describe('create(model)', () => {
         validator = {
             isValid: () => { },
         };
-
         // Arrange
         data = new BaseData(db, ModelClass, validator);
     });
@@ -57,6 +56,9 @@ describe('create(model)', () => {
              1: 2,
              2: 3,
              3: 4,
+         };
+         data.collection.findOne = () => {
+             return Promise.resolve(null);
          };
          sinon.stub(data.validator, 'isValid')
              .callsFake(() => {
