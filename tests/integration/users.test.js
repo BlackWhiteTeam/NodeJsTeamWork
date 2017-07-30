@@ -1,6 +1,6 @@
 const request = require('supertest');
 
-describe('postsRouter', () => {
+describe('usersRouter', () => {
     const connectionString = 'mongodb://localhost/test-db';
     let app = null;
     beforeEach(() => {
@@ -13,10 +13,10 @@ describe('postsRouter', () => {
                 app = http;
             });
     });
-    describe('GET /gallery', () => {
+    describe('GET /users', () => {
         it('expect to return 200', (done) => {
             request(app)
-                .get('/gallery')
+                .get('/users')
                 .expect(200)
                 .end((err, res) => {
                     if (err) {
@@ -27,10 +27,36 @@ describe('postsRouter', () => {
         });
     });
 
-    describe('GET /createPost', () => {
+    describe('GET /register', () => {
+        it('expect to return 200', (done) => {
+            request(app)
+                .get('/register')
+                .expect(200)
+                .end((err, res) => {
+                    if (err) {
+                        return done(err);
+                    }
+                    return done();
+                });
+        });
+    });
+    describe('GET /login', () => {
+        it('expect to return 200', (done) => {
+            request(app)
+                .get('/login')
+                .expect(200)
+                .end((err, res) => {
+                    if (err) {
+                        return done(err);
+                    }
+                    return done();
+                });
+        });
+    });
+    describe('GET /logout', () => {
         it('expect to return 302', (done) => {
             request(app)
-                .get('/createPost')
+                .get('/logout')
                 .expect(302)
                 .end((err, res) => {
                     if (err) {

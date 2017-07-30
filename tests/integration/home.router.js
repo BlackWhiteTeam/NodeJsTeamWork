@@ -1,8 +1,9 @@
 const request = require('supertest');
 
-describe('postsRouter', () => {
+describe('homeRouter', () => {
     const connectionString = 'mongodb://localhost/test-db';
     let app = null;
+
     beforeEach(() => {
         return Promise.resolve()
             .then(() => require('../../db').init(connectionString))
@@ -13,10 +14,10 @@ describe('postsRouter', () => {
                 app = http;
             });
     });
-    describe('GET /gallery', () => {
+    describe('GET /home', () => {
         it('expect to return 200', (done) => {
             request(app)
-                .get('/gallery')
+                .get('/home')
                 .expect(200)
                 .end((err, res) => {
                     if (err) {
@@ -27,11 +28,24 @@ describe('postsRouter', () => {
         });
     });
 
-    describe('GET /createPost', () => {
-        it('expect to return 302', (done) => {
+    describe('GET /', () => {
+        it('expect to return 200', (done) => {
             request(app)
-                .get('/createPost')
-                .expect(302)
+                .get('/')
+                .expect(200)
+                .end((err, res) => {
+                    if (err) {
+                        return done(err);
+                    }
+                    return done();
+                });
+        });
+    });
+    describe('GET /about', () => {
+        it('expect to return 200', (done) => {
+            request(app)
+                .get('/about')
+                .expect(200)
                 .end((err, res) => {
                     if (err) {
                         return done(err);
