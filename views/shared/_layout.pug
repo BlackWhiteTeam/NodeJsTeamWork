@@ -10,6 +10,7 @@ html(lang='en')
         block css
             link(rel='stylesheet', href='/libs/bootstrap/dist/css/bootstrap.css')
             link(rel='stylesheet', href='/css/style.css')
+            link( rel="stylesheet" href='/libs/toastr/build/toastr.min.css')
         block AdditionalCss
     body
         != messages('shared/_message', locals)
@@ -27,6 +28,7 @@ html(lang='en')
             script(src='/libs/jquery/dist/jquery.min.js')
             script(src='/libs/bootstrap/dist/js/bootstrap.min.js')
             script(src='/js/messageEffects.js')
+            script( src='/libs/toastr/build/toastr.min.js')
             if loggedIn
                 script(src='/socket.io/socket.io.js')
                 // script(src='/js/chat.js')

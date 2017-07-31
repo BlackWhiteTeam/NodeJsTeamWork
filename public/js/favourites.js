@@ -1,4 +1,4 @@
-/* global $ */
+/* global $, toastr */
 
 $(document).ready(function() {
     $('.add').click(function(ev) {
@@ -16,6 +16,7 @@ $(document).ready(function() {
             success: () => {
                 $(ev.target).hide();
                 $(ev.target).parent().find('.delete').show();
+                toastr.success('Added to Favorites');
             },
         });
     });
@@ -35,6 +36,7 @@ $(document).ready(function() {
             success: () => {
                 $(ev.target).hide();
                 $(ev.target).parent().find('.add').show();
+                toastr.success('Delete from Favorites');
             },
         });
     });
