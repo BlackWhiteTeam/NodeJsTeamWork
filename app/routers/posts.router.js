@@ -5,6 +5,7 @@ const attachTo = (app, { postsController }) => {
     app.get('/myFavourites', postsController.renderUserFavourites);
     app.post('/createPost', postsController.createPost);
     app.post('/showPicture', postsController.showPicture);
+    app.post('/deletePost', postsController.deletePost);
 };
 
 module.exports = { attachTo };
