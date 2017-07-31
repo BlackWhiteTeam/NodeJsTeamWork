@@ -65,7 +65,7 @@ gulp.task('test-server:stop', () => {
 gulp.task('tests:browser', ['test-server:start'], () => {
     return gulp.src(['./tests/browser/tests/**/*.js'])
         .pipe(mocha({
-            timeout: 100000,
+            timeout: 20000,
         }))
         .once('end', () => {
             gulp.start('test-server:stop');
