@@ -19,7 +19,7 @@ const usersController = (data, helpers) => {
                 email: req.body.email,
                 password: req.body.password,
                 stringProfilePicture: 'defaultpic.png',
-                favorites: [],
+                favourites: [],
                 liked: [],
                 disliked: [],
             };
@@ -74,6 +74,7 @@ const usersController = (data, helpers) => {
                     );
                 }).then(([posts, user]) => {
                     helpers.getLikedAndDisliked(posts, req);
+                    helpers.getFavourites(posts, req);
                     return res.render('users/profile', {
                         context: user,
                         posts: posts,
@@ -219,6 +220,57 @@ const usersController = (data, helpers) => {
                 }).then(() => {
                     return res.send({});
                 }).catch((err) => {
+                    return res.status(400).send(err);
+                });
+        },
+        addToFavourites(req, res) {
+            if (!req.user) {
+                return res.redirect('/login');
+            }
+            const postId = req.body.postId;
+            return data.posts.getById(postId)
+                .then((post) => {
+                    return Promise.all([
+                        data.users.checkIfPostIsRated(
+                            req.user.favourites, post
+                        ), post,
+                    ]);
+                }).then(([added, post]) => {
+                    if (added) {
+                        return Promise.reject(
+                            'You already added to favourites this picture!');
+                    }
+                    return data.users.addToFavours(req.user._id, post);
+                }).then(() => {
+                    return res.send({});
+                }).catch((err) => {
+                    console.log(err);
+                    return res.status(400).send(err);
+                });
+        },
+        deleteFromFavourites(req, res) {
+            if (!req.user) {
+                return res.redirect('/login');
+            }
+            const postId = req.body.postId;
+            console.log(postId);
+            return data.posts.getById(postId)
+                .then((post) => {
+                    return Promise.all([
+                        data.users.checkIfPostIsRated(
+                            req.user.favourites, post
+                        ), post,
+                    ]);
+                }).then(([added, post]) => {
+                    if (!added) {
+                        return Promise.reject(
+                            'You already delete from favourites this picture!');
+                    }
+                    return data.users.deleteFromFavours(req.user._id, post);
+                }).then(() => {
+                    return res.send({});
+                }).catch((err) => {
+                    console.log(err);
                     return res.status(400).send(err);
                 });
         },

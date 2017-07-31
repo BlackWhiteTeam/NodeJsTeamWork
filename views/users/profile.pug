@@ -43,9 +43,20 @@ block content
                             - state = ''
                         div(class="item " + state, data-post-id=post._id)
                             img(src='/uploads/' + post.picture, alt=post.picture)
-                            a.btn.black-background.white#add(href='/addToFavorites/' + post._id, role='button')
-                                span.glyphicon.glyphicon-plus
-                                |  Favs
+                            if post.isAdded
+                                a.btn.black-background.white.add.favs(style='display:none')
+                                    span.glyphicon.glyphicon-plus
+                                    |  Favs
+                                a.btn.black-background.white.delete.favs
+                                    span.glyphicon.glyphicon-minus
+                                    |  Favs
+                            else
+                                a.btn.black-background.white.add.favs
+                                    span.glyphicon.glyphicon-plus
+                                    |  Favs
+                                a.btn.black-background.white.delete.favs(style='display:none')
+                                    span.glyphicon.glyphicon-minus
+                                    |  Favs
                             .float-right
                                 span.counter-likes
                                     =post.likes
@@ -74,4 +85,5 @@ block content
 
 block AdditionalJS
     script(src="/js/uploadImagesEvent.js")
+    script(src="/js/favourites.js")
     script(src="/js/likes-btns.js")

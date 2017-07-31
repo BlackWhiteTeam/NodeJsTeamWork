@@ -72,17 +72,17 @@ class UsersData extends BaseData {
             });
     }
 
-    addToFavorites(idUser, post) {
+    addToFavours(idUser, post) {
         return this.collection.update({ _id: ObjectId(idUser) },
             {
-                $addToSet: { favorites: post },
+                $addToSet: { favourites: post },
             });
     }
 
-    deleteFromFavorites(idUser, post) {
+    deleteFromFavours(idUser, post) {
         return this.collection.update({ _id: ObjectId(idUser) },
             {
-                $pull: { favorites: { $in: [post] } },
+                $pull: { favourites: { _id: ObjectId(post._id) } },
             });
     }
 

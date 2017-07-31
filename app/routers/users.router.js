@@ -12,6 +12,8 @@ const attachTo = (app, { usersController }) => {
     app.post('/unlike', usersController.unlikePost);
     app.post('/dislike', usersController.dislikePost);
     app.post('/undislike', usersController.undislikePost);
+    app.post('/addToFavourites', usersController.addToFavourites);
+    app.post('/deleteFromFavourites', usersController.deleteFromFavourites);
 };
 
 module.exports = { attachTo };

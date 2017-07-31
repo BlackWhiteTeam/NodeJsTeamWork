@@ -25,7 +25,7 @@ $(document).ready(function() {
 });
 
 function sendRate(ev, type, count, like) {
-    let id = $('.item').attr('data-post-id');
+    let id = $('.item.active').attr('data-post-id');
     if (!id) {
         id = $(ev.target).parent().attr('data-post-id');
     }

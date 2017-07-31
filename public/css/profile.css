@@ -75,7 +75,7 @@
     clear: both
 }
 
-#add {
+.favs {
     float: left;
     margin-left: 10%;
     width: 70px;

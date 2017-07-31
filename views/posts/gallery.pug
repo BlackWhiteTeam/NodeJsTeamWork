@@ -34,9 +34,13 @@ block content
                                         =post.dislikes
                             p
                                 =post.description
-                            a.btn.btn-default.black-background.white()
+                            a.btn.btn-default.black-background.white.add
                                 span.glyphicon.glyphicon-plus
                                 |  Add to Favs
+                            a.btn.btn-default.black-background.white.delete(style="display:none")
+                                span.glyphicon.glyphicon-minus
+                                |  Del from Favs
 
 block AdditionalJS
+    script(src="/js/favourites.js")
     script(src="/js/likes-btns.js")

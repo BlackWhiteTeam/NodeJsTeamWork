@@ -28,5 +28,14 @@ const getLikedAndDisliked = (posts, req) => {
     });
 };
 
+const getFavourites = (posts, req) => {
+    posts.forEach((post) => {
+        post.isAdded = req.user.favourites
+                .findIndex(
+                    (p) => p._id.toString() === post._id.toString()
+                ) >= 0;
+    });
+};
 
-module.exports = { uploadPicture, getLikedAndDisliked };
+
+module.exports = { uploadPicture, getLikedAndDisliked, getFavourites };
