@@ -1,0 +1,55 @@
+#messenger {
+    background: white;
+    width: 50%;
+    display: block;
+    margin: auto;
+}
+
+#message-form {
+    background: #000;
+    padding: 2px;
+    width: 100%;
+}
+
+#message {
+    width: 80%;
+}
+
+#send-button {
+    width: 20%;
+}
+
+h1 {
+    font-size: 2.5em;
+    text-align: center;
+    text-shadow: 2px 2px darkgray;
+    font-weight: 900;
+}
+#messenger > ul > li {
+    font-size: 1.1em;
+    color: #2D2D2D;
+
+}#messenger > ul {
+    list-style-type: none;
+    margin: 5px;
+    padding: 0;
+}
+
+@media (max-width: 510px) {
+    #send-button {
+        width: 30%;
+    }
+    #message {
+        width: 70%;
+    }
+}
+
+@media (max-width: 300px) {
+    #send-button {
+        width: 40%;
+    }
+    #message {
+        width: 60%;
+    }
+}
+
