@@ -3,12 +3,15 @@ const { expect } = require('chai');
 const userController =
     require('../../../../app/controllers/users.controller');
 
-describe('updateProfilePicture', () => {
+describe('getProfilePage', () => {
     let data = null;
     let controller = null;
     const helpers = {
         getLikedAndDisliked: (posts, req) => {
             return posts;
+        },
+        getFavourites: (posts, req) => {
+            return Promise.resolve(posts);
         },
     };
 

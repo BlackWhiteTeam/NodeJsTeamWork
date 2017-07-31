@@ -8,6 +8,9 @@ describe('updateProfilePicture', () => {
     let controller = null;
     const helpers = {
         uploadPicture: () => { },
+        getFavourites: (posts, req) => {
+            return Promise.resolve(posts);
+        },
     };
 
     let req = null;
