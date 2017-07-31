@@ -38,7 +38,7 @@ describe('renderPostsOfUser', () => {
         return controller.renderPostsOfUser(req, res)
             .then(() => {
                  expect(res.viewName).to.equal('posts/gallery');
-                 return expect(res.context).to.deep.equal({ context: [3, 2, 1] });
+                 return expect(res.context.context).to.deep.equal([3, 2, 1]);
             });
     });
 });
