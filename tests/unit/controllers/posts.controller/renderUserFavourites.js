@@ -32,9 +32,8 @@ describe('renderUserFavourites', () => {
         return controller.renderUserFavourites(req, res)
             .then(() => {
                 expect(res.viewName).to.equal('posts/gallery');
-                expect(res.context.context).to.deep
+                return expect(res.context.context).to.deep
                     .equal([4, 3, 2, 1]);
-                return expect(res.context.isDelete).to.be.true;
             });
     });
 });

@@ -16,6 +16,8 @@ const postsController = (data, helpers) => {
         renderPostsOfUser(req, res) {
             return data.posts.getPostsByUsername(req.user.name)
                 .then((posts) => {
+                    helpers.getLikedAndDisliked(posts, req);
+                    helpers.getFavourites(posts, req);
                     return res.render('posts/gallery', {
                         context: posts.reverse(),
                     });
@@ -30,13 +32,13 @@ const postsController = (data, helpers) => {
             return res.redirect('/login');
         },
         renderUserFavourites(req, res) {
-            return data.posts.getMyFavoritesPosts(req.user.favorites)
-                .then((posts) => {
-                    return res.render('posts/gallery', {
-                        context: posts.reverse(),
-                        isDelete: true,
-                    });
-                });
+            const posts = req.user.favourites;
+            helpers.getFavourites(posts, req);
+
+            return res.render('posts/gallery', {
+                context: posts.reverse(),
+                isMyFavourites: true,
+            });
         },
         createPost(req, res) {
             const post = {
