@@ -41,6 +41,20 @@ const apiController = (data, helpers) => {
                     return res.send(post);
                 });
         },
+        deletePostById(req, res) {
+            if (!req.user) {
+                return res.send('You are not authenticated');
+            }
+            const postId = req.params.id;
+
+            return data.posts.getById(postId)
+                .then((post) => {
+                    if (post.author.name === req.user.name) {
+                        return data.users.deletePost(postId);
+                    }
+                    return res.send('It is not your post!');
+                });
+        },
     };
 };
 

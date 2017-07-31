@@ -14,6 +14,10 @@ class PostsData extends BaseData {
         ).toArray();
     }
 
+    deletePost(postId) {
+        return this.collection.remove({ _id: ObjectId(postId) });
+    }
+
     getMyFavoritesPosts(favorites) {
         return this.collection.find({
             _id: { $in: favorites },

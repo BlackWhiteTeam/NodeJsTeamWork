@@ -1,3 +1,4 @@
+/* eslint-disable new-cap */
 const { ObjectId } = require('mongodb');
 
 class BaseData {
@@ -34,7 +35,6 @@ class BaseData {
     }
 
     getById(id) {
-        // eslint-disable-next-line
         return this.collection.findOne({ _id: ObjectId(id) });
     }
 
