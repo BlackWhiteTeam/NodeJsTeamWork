@@ -119,6 +119,12 @@ describe('Users', () => {
                 return utils.waitSeconds(1);
             })
             .then(() => {
+                return utils.click('#content > div > div.profile > a');
+            })
+            .then(() => {
+                return utils.waitSeconds(1);
+            })
+            .then(() => {
                 return utils.click('#content > div > form.col-md-6.col-md-offset-3 > label');
             })
             .then(() => {
