@@ -7,6 +7,12 @@ describe('renderUserFavourites', () => {
     let data = null;
     let controller = null;
     const helpers = {
+        getLikedAndDisliked: (posts, req) => {
+            return posts;
+        },
+        getFavourites: (posts, req) => {
+            return Promise.resolve(posts);
+        },
     };
 
     let req = null;
@@ -25,15 +31,13 @@ describe('renderUserFavourites', () => {
         };
         req = require('../req.res').getRequestMock({
             user: {
-                favorites: [1, 2, 3, 4],
+                favourites: [1, 2, 3, 4],
             },
         });
         controller = postsController(data, helpers);
-        return controller.renderUserFavourites(req, res)
-            .then(() => {
-                expect(res.viewName).to.equal('posts/gallery');
-                return expect(res.context.context).to.deep
-                    .equal([4, 3, 2, 1]);
-            });
+        controller.renderUserFavourites(req, res);
+        expect(res.viewName).to.equal('posts/gallery');
+        return expect(res.context.context).to.deep
+            .equal([4, 3, 2, 1]);
     });
 });

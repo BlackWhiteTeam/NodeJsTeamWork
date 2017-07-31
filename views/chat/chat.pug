@@ -1,0 +1,17 @@
+extends ../shared/_layout
+
+block AdditionalCss
+    link(rel='stylesheet', href='/css/chat.css')
+
+block content
+    .container
+        h1
+            |CHAT ROOM WITH ONLINE USERS
+        #messenger
+            ul#messages
+                li
+                    |message
+            form#message-form(action='')
+                input#message(autocomplete='off')
+                button#send-button.black-background.white Send
+block AdditionalJS
