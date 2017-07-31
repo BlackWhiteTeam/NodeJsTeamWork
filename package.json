@@ -5,7 +5,7 @@
   "license": "MIT",
   "scripts": {
     "start": "node server.js",
-    "test": "./node_modules/.bin/mocha --recursive tests",
+    "test": "./node_modules/.bin/mocha --recursive tests/unit",
     "coverage-unit": "gulp tests:unit",
     "coverage-integration": "gulp tests:integration",
     "selenium": "gulp tests:browser"

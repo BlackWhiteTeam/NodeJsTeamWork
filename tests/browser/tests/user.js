@@ -125,7 +125,7 @@ describe('Users', () => {
                 return utils.waitSeconds(1);
             })
             .then(() => {
-                return utils.getText('#content > div > div:nth-child(1) > div > div > div > h3 > strong > a');
+                return utils.getText('#content > div > div:nth-child(2) > div > div > div > h3 > strong > a');
             })
             .then((name) => {
                 expect(name).to.equal('seleniumUser');
