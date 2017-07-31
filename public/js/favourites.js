@@ -2,8 +2,11 @@
 
 $(document).ready(function() {
     $('.add').click(function(ev) {
-        const id = $('.item.active').attr('data-post-id');
-        console.log(id);
+        let id = $('.item.active').attr('data-post-id');
+        if (!id) {
+            id = $(ev.target).siblings().eq(0)
+                .find('.float-right').attr('data-post-id');
+        }
         $.ajax({
             url: '/addToFavourites',
             type: 'POST',
@@ -18,8 +21,11 @@ $(document).ready(function() {
     });
 
     $('.delete').click(function(ev) {
-        const id = $('.item.active').attr('data-post-id');
-        console.log(id);
+        let id = $('.item.active').attr('data-post-id');
+        if (!id) {
+            id = $(ev.target).siblings().eq(0)
+                .find('.float-right').attr('data-post-id');
+        }
         $.ajax({
             url: '/deleteFromFavourites',
             type: 'POST',
