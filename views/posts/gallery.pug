@@ -5,6 +5,20 @@ block AdditionalCss
 
 block content
     .container
+        // Modal
+
+        if isMyPhotos
+            #myModal.modal.fade(role='dialog')
+                .modal-dialog
+                    // Modal content
+                    .modal-content
+                        .modal-header
+                            button.close(type='button', data-dismiss='modal') ×
+                            h4.modal-title Are you sure you want to delete this post
+                        .modal-body
+                            p Post cannot be restored
+                        .modal-footer
+                            button.btn.btn-default#confirm-delete(type='button', data-dismiss='modal') Ok
         each post in context
             .row
                 .col-md-6.col-md-offset-3
@@ -49,10 +63,13 @@ block content
                                 a.btn.btn-default.black-background.white.delete(style="display:none")
                                     span.glyphicon.glyphicon-minus
                                     |  Del from Favs
-                            a.btn.btn-default.black-background.white
-                                | Remove
-
+                            if isMyPhotos
+                                a.btn.btn-default.black-background.white.deletePost(type='button', data-toggle='modal', data-target='#myModal', data-post=post._id)
+                                    span.glyphicon.glyphicon-trash
+                                a.btn.btn-default.black-background.white.editPost
+                                    span.glyphicon.glyphicon-edit
 
 block AdditionalJS
     script(src="/js/favourites.js")
     script(src="/js/likes-btns.js")
+    script(src="/js/deleteAndEdit.js")

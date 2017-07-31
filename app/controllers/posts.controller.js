@@ -20,6 +20,7 @@ const postsController = (data, helpers) => {
                     helpers.getFavourites(posts, req);
                     return res.render('posts/gallery', {
                         context: posts.reverse(),
+                        isMyPhotos: true,
                     });
                 });
         },
@@ -63,6 +64,24 @@ const postsController = (data, helpers) => {
             helpers.uploadPicture(photo);
             lastPicture = photo.filename;
             return res.redirect('/createPost');
+        },
+        deletePost(req, res) {
+            if (!req.user) {
+                req.status().send('You are not authenticated');
+            }
+            const postId = req.body.postId;
+            return data.posts.getById(postId)
+                .then((post) => {
+                    if (post.author.name === req.user.name) {
+                        return data.posts.removePost(postId)
+                            .then(() => {
+                                return res.status(200).send({});
+                            });
+                    }
+                    return res.status(400).send('It is not your post!');
+                }).catch((err) => {
+                    return res.status(400).send(err);
+                });
         },
     };
 };

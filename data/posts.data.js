@@ -14,7 +14,7 @@ class PostsData extends BaseData {
         ).toArray();
     }
 
-    deletePost(postId) {
+    removePost(postId) {
         return this.collection.remove({ _id: ObjectId(postId) });
     }
 

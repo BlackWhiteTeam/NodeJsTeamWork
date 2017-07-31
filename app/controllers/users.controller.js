@@ -253,7 +253,6 @@ const usersController = (data, helpers) => {
                 return res.redirect('/login');
             }
             const postId = req.body.postId;
-            console.log(postId);
             return data.posts.getById(postId)
                 .then((post) => {
                     return Promise.all([

@@ -12,3 +12,7 @@
 strong {
     width: 17%;
 }
+
+.thumbnail > img, .thumbnail a > img {
+    max-height: 400px;
+}
