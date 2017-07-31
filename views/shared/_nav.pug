@@ -28,6 +28,10 @@ mixin nav()
                                 |  Gallery
                 ul.nav.navbar-nav.navbar-right
                     if loggedIn
+                        li
+                            a(href='/chat')
+                                span.glyphicon.glyphicon-envelope
+                                |  Chat
                         li.dropdown
                             a.dropdown-toggle(href='#', data-toggle='dropdown', role='button', aria-haspopup='true', aria-expanded='false')
                                 span#span-slipped.glyphicon.glyphicon-triangle-left
