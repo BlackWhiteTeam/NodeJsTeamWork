@@ -3,10 +3,16 @@ const { expect } = require('chai');
 const postsController =
     require('../../../../app/controllers/posts.controller');
 
-describe('getPostById', () => {
+describe('renderPostsOfUser', () => {
     let data = null;
     let controller = null;
     const helpers = {
+        getLikedAndDisliked: (posts, req) => {
+            return posts;
+        },
+        getFavourites: (posts, req) => {
+            return posts;
+        },
     };
 
     let req = null;

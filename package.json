@@ -6,7 +6,9 @@
   "scripts": {
     "start": "node server.js",
     "test": "./node_modules/.bin/mocha --recursive tests",
-    "coverage": "gulp tests:unit"
+    "coverage-unit": "gulp tests:unit",
+    "coverage-integration": "gulp tests:integration",
+    "selenium": "gulp tests:browser"
   },
   "dependencies": {
     "body-parser": "^1.17.2",
@@ -41,6 +43,7 @@
     "gulp-mocha": "3",
     "istanbul": "^0.4.5",
     "mocha": "^3.4.2",
+    "selenium-webdriver": "^3.5.0",
     "supertest": "^3.0.0"
   }
 }
