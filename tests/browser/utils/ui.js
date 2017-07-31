@@ -42,6 +42,12 @@ const getText = (selector) => {
         .then((element) => element.getText());
 };
 
+const getPlaceholder = (selector) => {
+    return Promise.resolve()
+        .then(() => waitFor(selector))
+        .then((element) => element.getAttribute("placeholder"));
+};
+
 const getTexts = (selector) => {
     return Promise.resolve()
         .then(() => waitForMany(selector))
@@ -91,5 +97,5 @@ module.exports = {
     setDriver(_driver) {
         driver = _driver;
     },
-    waitFor, getText, getTexts, getSelected, setValue, setValueClear, click,
+    waitSeconds, waitFor, getText, getTexts, getSelected, setValue, setValueClear, click, getPlaceholder,
 };
