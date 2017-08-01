@@ -6,11 +6,19 @@ const init = (app) => {
     const io = require('socket.io')(http);
 
     io.on('connection', (socket) => {
-        socket.on('chat message', (msg) => {
-            io.emit('chat message', msg);
+        socket.on('show-messages', () => {
+            return app.data.chats.getAll()
+                .then((messages) => {
+                    socket.emit('show-messages', messages);
+                });
+        });
+        socket.on('send-message', ({ user, message }) => {
+            return app.data.chats.create({ user, message })
+                .then((chat) => {
+                    io.emit('send-message', chat);
+                });
         });
     });
-
     return Promise.resolve(http);
 };
 

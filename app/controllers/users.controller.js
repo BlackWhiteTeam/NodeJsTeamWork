@@ -3,7 +3,6 @@ const passport = require('passport');
 const usersController = (data, helpers) => {
     return {
         renderAllUsers(req, res) {
-            console.log(res.locals.loggedIn);
             return data.users.getAll()
                 .then((users) => {
                     return res.render('users/all', {
