@@ -56,3 +56,15 @@ h1 {
     }
 }
 
+@media (max-width: 800px) {
+    #messenger {
+        width:80%;
+    }
+}
+
+@media (max-width: 400px) {
+    #messenger {
+        width:100%;
+    }
+}
+
