@@ -1,0 +1,5 @@
+/* globals $ */
+
+$(() => {
+    $('#page-loader').hide();
+});
