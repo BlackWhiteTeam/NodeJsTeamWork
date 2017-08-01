@@ -14,13 +14,11 @@ html(lang='en')
         block AdditionalCss
     body
         != messages('shared/_message', locals)
+        #page-loader
         block Navigation
             +nav()
-        #page-loader
         #content
             block content
-        block loader
-            div.modal
         block Footer
             +footer()
 
@@ -29,6 +27,7 @@ html(lang='en')
             script(src='/libs/bootstrap/dist/js/bootstrap.min.js')
             script(src='/js/messageEffects.js')
             script( src='/libs/toastr/build/toastr.min.js')
+            script( src='/js/loaders.js')
             if loggedIn
                 script(src='/socket.io/socket.io.js')
                 // script(src='/js/chat.js')
