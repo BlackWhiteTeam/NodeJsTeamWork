@@ -9,13 +9,9 @@ block content
             |CHAT ROOM WITH ONLINE USERS
         #messenger
             ul#messages
-                li
-                    |message
-                li
-                    |message
-                li
-                    |message
             form#message-form(action='')
                 input#message(autocomplete='off')
                 button#send-button.black-background.white Send
 block AdditionalJS
+    script(src='/socket.io/socket.io.js')
+    script(src='/js/chat.js')

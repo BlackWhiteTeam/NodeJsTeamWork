@@ -14,7 +14,7 @@ html(lang='en')
         block AdditionalCss
     body
         != messages('shared/_message', locals)
-        #page-loader
+        // #page-loader
         block Navigation
             +nav()
         #content
@@ -28,7 +28,4 @@ html(lang='en')
             script(src='/js/messageEffects.js')
             script( src='/libs/toastr/build/toastr.min.js')
             script( src='/js/loaders.js')
-            if loggedIn
-                script(src='/socket.io/socket.io.js')
-                // script(src='/js/chat.js')
         block AdditionalJS
