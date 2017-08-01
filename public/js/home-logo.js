@@ -1,4 +1,4 @@
-/* global $ */
+/* global $, TimelineMax, CSSPlugin, Power4 */
 
 $(document).ready(function() {
     // For the <p>-introduction opacity
@@ -29,6 +29,7 @@ $(document).ready(function() {
     const duration = 1.5;
 
     $.each($(path), function(i, el) {
+        // eslint-disable-next-line
         tl.set($(this), {
             x: '+=' + getRandom(-500, 500),
             y: '+=' + getRandom(-500, 500),
