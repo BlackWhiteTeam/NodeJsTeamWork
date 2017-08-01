@@ -154,10 +154,10 @@ describe('Users', () => {
                 return utils.waitSeconds(1);
             })
             .then(() => {
-                return utils.click('#navbar > ul.nav.navbar-nav.navbar-right > li > a');
+                return utils.click('#usrname');
             })
             .then(() => {
-                return utils.click('#navbar > ul.nav.navbar-nav.navbar-right > li > ul > li:nth-child(1) > a');
+                return utils.click('#navbar > ul.nav.navbar-nav.navbar-right > li.dropdown.open > ul > li:nth-child(1) > a');
             })
             .then(() => {
                 return utils.waitSeconds(1);
@@ -192,13 +192,13 @@ describe('Users', () => {
                 return utils.waitSeconds(1);
             })
             .then(() => {
-                return utils.click('#navbar > ul.nav.navbar-nav.navbar-right > li > a');
+                return utils.click('#usrname');
             })
             .then(() => {
                 return utils.waitSeconds(1);
             })
             .then(() => {
-                return utils.click('#navbar > ul.nav.navbar-nav.navbar-right > li > ul > li:nth-child(2) > a');
+                return utils.click('#navbar > ul.nav.navbar-nav.navbar-right > li.dropdown.open > ul > li:nth-child(2) > a');
             })
             .then(() => {
                 return utils.waitSeconds(1);
@@ -233,10 +233,10 @@ describe('Users', () => {
                 return utils.waitSeconds(1);
             })
             .then(() => {
-                return utils.click('#navbar > ul.nav.navbar-nav.navbar-right > li > a');
+                return utils.click('#usrname');
             })
             .then(() => {
-                return utils.click('#navbar > ul.nav.navbar-nav.navbar-right > li > ul > li:nth-child(2) > a');
+                return utils.click('#navbar > ul.nav.navbar-nav.navbar-right > li.dropdown.open > ul > li:nth-child(2) > a');
             })
             .then(() => {
                 return utils.waitSeconds(1);
@@ -245,10 +245,10 @@ describe('Users', () => {
                 return utils.click('#content > div > div > div > div > div > a.btn.btn-default.black-background.white.add');
             })
             .then(() => {
-                return utils.click('#navbar > ul.nav.navbar-nav.navbar-right > li > a');
+                return utils.click('#usrname');
             })
             .then(() => {
-                return utils.click('#navbar > ul.nav.navbar-nav.navbar-right > li > ul > li:nth-child(3) > a');
+                return utils.click('#navbar > ul.nav.navbar-nav.navbar-right > li.dropdown.open > ul > li:nth-child(3) > a');
             })
             .then(() => {
                 return utils.waitSeconds(1);
@@ -362,10 +362,10 @@ describe('Users', () => {
                 return utils.waitSeconds(1);
             })
             .then(() => {
-                return utils.click('#navbar > ul.nav.navbar-nav.navbar-right > li > a');
+                return utils.click('#usrname');
             })
             .then(() => {
-                return utils.click('#navbar > ul.nav.navbar-nav.navbar-right > li > ul > li:nth-child(5) > a');
+                return utils.click('#navbar > ul.nav.navbar-nav.navbar-right > li.dropdown.open > ul > li:nth-child(5) > a');
             })
             .then(() => {
                 return utils.waitSeconds(1);
