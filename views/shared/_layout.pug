@@ -14,7 +14,8 @@ html(lang='en')
         block AdditionalCss
     body
         != messages('shared/_message', locals)
-        // #page-loader
+        block loader
+            #page-loader
         block Navigation
             +nav()
         #content
