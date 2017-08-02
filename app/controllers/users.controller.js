@@ -110,6 +110,8 @@ const usersController = (data, helpers) => {
             return data.users.getAllUsersByMatchingString(input)
                 .then((users) => {
                     return res.render('users/all', {
+                        loggedIn: !!(req.user),
+                        user: req.user,
                         context: users,
                         lastInput: input,
                         canSeeProfiles: canSeeProfiles,
