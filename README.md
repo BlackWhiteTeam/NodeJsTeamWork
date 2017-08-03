@@ -1,25 +1,26 @@
-# Node.js Team Work
-## Black and White
+# Black and White
+## Discription
 
 This is an application about Black and White Photography mixed with The Social Network.
 We want to be people inspired again by the beauty of the black and white colors.
 SHARE, DISCOVER, EXPLORE and EXPRESS YOURSELF in our application!
 
-### Demo
+## Demo
 
 https://www.youtube.com/watch?v=2Cor70nuc5g&feature=youtu.be
 
-### Images
+## Images
 
+### Home page
 ![Home](/app-images/Home.jpg)
 <br><br>
-<br><br>
+### Users page
 ![Users](/app-images/Users.jpg)
 <br><br>
-<br><br>
+### Gallery page
 ![Gallery](/app-images/Gallery.jpg)
 <br><br>
-<br><br>
+### Profile page
 ![Profile](/app-images/Profile.jpg)
 
 ## Contributors
