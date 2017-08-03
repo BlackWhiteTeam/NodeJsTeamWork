@@ -12,8 +12,14 @@ https://www.youtube.com/watch?v=2Cor70nuc5g&feature=youtu.be
 ### Images
 
 ![Home](/app-images/Home.jpg)
+<br><br>
+<br><br>
 ![Users](/app-images/Users.jpg)
+<br><br>
+<br><br>
 ![Gallery](/app-images/Gallery.jpg)
+<br><br>
+<br><br>
 ![Profile](/app-images/Profile.jpg)
 
 ## Contributors
