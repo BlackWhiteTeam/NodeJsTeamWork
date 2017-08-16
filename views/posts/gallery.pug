@@ -23,8 +23,8 @@ block content
             .row
                 .col-md-6.col-md-offset-3
                     .thumbnail
-                        p= moment(parseInt(post.picture)).fromNow()
-                        img(src='/uploads/' + post.picture, alt='Profile picture')
+                        p= moment(parseInt(post.time)).fromNow()
+                        img(src=post.picture, alt='Post picture')
                         .caption
                             h3
                                 strong

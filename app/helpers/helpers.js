@@ -1,9 +1,10 @@
 const Jimp = require('jimp');
+const cloudinary = require('cloudinary');
 
 const makePictureBlack = (photo, path) => {
-    Jimp.read(path)
+    return Jimp.read(path)
         .then((img) => {
-            img.greyscale().write(path);
+            return img.greyscale().write(path);
         })
         .catch((err) => {
             console.error(err);
@@ -12,7 +13,12 @@ const makePictureBlack = (photo, path) => {
 
 const uploadPicture = (photo) => {
     const pathToSave = './public/uploads/' + photo.filename;
-    makePictureBlack(photo, pathToSave);
+    return makePictureBlack(photo, pathToSave)
+        .then(() => {
+            return cloudinary.uploader.upload(pathToSave, (result) => {
+                return result;
+            });
+    });
 };
 
 const getLikedAndDisliked = (posts, req) => {

@@ -89,7 +89,7 @@ class UsersData extends BaseData {
     updateProfilePicture(id, photo) {
         return this.collection.update({ _id: ObjectId(id) },
             {
-                $set: { stringProfilePicture: photo.filename },
+                $set: { profilePicture: photo },
             });
     }
 

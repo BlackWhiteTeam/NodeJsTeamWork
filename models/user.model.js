@@ -8,9 +8,7 @@ class User extends BaseModel {
             && typeof model.name === 'string'
             && model.password.match(constants.USER_PASSWORD_MATCH_PATTERN)
             && model.name.match(constants.USERNAME_MATCH_PATTERN)
-            && model.email.match(constants.USER_EMAIL_MATCH_PATTERN)
-            && model.stringProfilePicture
-            .match(constants.USER_PROFILE_PICTURE_MATCH_PATTERN));
+            && model.email.match(constants.USER_EMAIL_MATCH_PATTERN));
         return result;
     }
 }

@@ -18,7 +18,7 @@ const usersController = (data, helpers) => {
                 name: req.body.name,
                 email: req.body.email,
                 password: req.body.password,
-                stringProfilePicture: 'defaultpic.png',
+                profilePicture: { secure_url: 'https://res.cloudinary.com/ht9b0fahu/image/upload/v1502850162/defaultpic.png' },
                 favourites: [],
                 liked: [],
                 disliked: [],
@@ -83,6 +83,9 @@ const usersController = (data, helpers) => {
                 });
         },
         updateProfilePicture(req, res) {
+            if (!req.user) {
+                return res.redirect('/login');
+            }
             const id = req.params.id;
             return data.users.getByObjectName(req.user.name)
                 .then((user) => {
@@ -91,8 +94,11 @@ const usersController = (data, helpers) => {
                         return Promise.reject('It is not your profile');
                     }
                     const photo = req.file;
-                    helpers.uploadPicture(photo);
-                    return data.users.updateProfilePicture(id, photo);
+                    return helpers.uploadPicture(photo);
+                })
+                .then((photoData) => {
+                    return data.users.updateProfilePicture(id,
+                        photoData);
                 })
                 .then(() => {
                     req.flash('info', 'File upload successfully.');

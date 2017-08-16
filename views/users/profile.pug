@@ -7,7 +7,7 @@ block content
 
     .container
         .profile
-            img(src='/uploads/' + context.stringProfilePicture, alt='Profile picture')
+            img(src=context.profilePicture.secure_url, alt='Profile picture')
             p.photos-counter
                 |Photos:&nbsp;
                 =posts.length
@@ -42,7 +42,7 @@ block content
                         else
                             - state = ''
                         div(class="item " + state, data-post-id=post._id)
-                            img(src='/uploads/' + post.picture, alt=post.picture)
+                            img(src=post.picture, alt='Post picture')
                             if post.isAdded
                                 a.btn.black-background.white.add.favs(style='display:none')
                                     span.glyphicon.glyphicon-plus

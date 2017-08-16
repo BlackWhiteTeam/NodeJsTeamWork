@@ -3,6 +3,7 @@ const cookieParser = require('cookie-parser');
 const session = require('express-session');
 const MongoStore = require('connect-mongo')(session);
 const multer = require('multer');
+const cloudinary = require('cloudinary');
 const config = require('../../config');
 
 const attachTo = (app) => {
@@ -24,18 +25,26 @@ const attachTo = (app) => {
         res.locals.messages = require('express-messages')(req, res);
         next();
     });
+
     app.use(multer({
         storage: multer.diskStorage({
             destination: (req, file, cb) => {
                 cb(null, './public/uploads');
             },
             filename: (req, file, cb) => {
-                const filename = file.originalname.split('.');
-                cb(null, Date.now() + '.' + filename[filename.length - 1]);
+                cb(null, Date.now() + '.jpg');
             },
         }),
     }).single('imageupload'));
+
+    cloudinary.config({
+        cloud_name: 'ht9b0fahu',
+        api_key: '991577582747119',
+        api_secret: 'CfnE5syCQwYwtgudCtZHr8hAi6E',
+    });
+
     app.locals.moment = require('moment');
+    app.locals.cloudinary = cloudinary;
 };
 
 module.exports = { attachTo };

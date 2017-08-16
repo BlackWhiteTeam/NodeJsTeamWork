@@ -7,6 +7,9 @@ $(function() {
 
     $('#message-form').submit(function() {
         const message = $('#message').val();
+        if (message.length === 0) {
+            return false;
+        }
         const user = $('#usrname').text();
         socket.emit('send-message', { user, message });
         $('#message').val('');
