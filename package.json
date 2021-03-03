@@ -30,7 +30,7 @@
     "openurl": "^1.1.1",
     "passport": "^0.3.2",
     "passport-local": "^1.0.0",
-    "pug": "^2.0.0-rc.2",
+    "pug": "^3.0.1",
     "simple-encryptor": "^1.1.0",
     "sinon": "^2.4.1",
     "socket.io": "^2.0.3",
